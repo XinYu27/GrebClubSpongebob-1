@@ -14,7 +14,21 @@
         android:theme="@style/Theme.Greb"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".SignUp"
+            android:exported="false" />
+        <activity
+            android:name=".SignIn"
+            android:exported="false" />
+        <activity
+            android:name=".AuthLanding"
+            android:exported="false" />
+        <activity
+            android:name=".AdminLanding"
+            android:exported="false"
+            android:label="@string/title_activity_admin_landing"
+            android:theme="@style/Theme.Greb.NoActionBar" />
+        <activity
+            android:name=".Wrapper"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

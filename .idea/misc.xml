@@ -3,7 +3,26 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.30344202898550726" />
+        <entry key="app/src/main/res/layout/activity_admin_landing.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_auth.xml" value="0.16532258064516128" />
+        <entry key="app/src/main/res/layout/activity_auth_landing.xml" value="0.2265625" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.21422101449275363" />
+        <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.21422101449275363" />
+        <entry key="app/src/main/res/layout/activity_wrapper.xml" value="0.1828774062816616" />
+        <entry key="app/src/main/res/layout/content_admin_landing.xml" value="0.2105978260869565" />
+        <entry key="app/src/main/res/layout/content_auth.xml" value="0.271875" />
+        <entry key="app/src/main/res/layout/fragment_admin_landing.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_auth_landing.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_customers.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_drivers.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_first.xml" value="0.13221884498480244" />
+        <entry key="app/src/main/res/layout/fragment_first2.xml" value="0.2105978260869565" />
+        <entry key="app/src/main/res/layout/fragment_second.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_second2.xml" value="0.2105978260869565" />
+        <entry key="app/src/main/res/layout/fragment_sign_in.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_wrapper.xml" value="0.1828774062816616" />
+        <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
       </map>
     </option>
   </component>

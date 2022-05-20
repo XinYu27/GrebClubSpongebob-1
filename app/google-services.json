@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "49466202287",
+    "firebase_url": "https://greb-clubspongebob-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "greb-clubspongebob",
+    "storage_bucket": "greb-clubspongebob.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:49466202287:android:0f8ae827aedac95f98dc5a",
+        "android_client_info": {
+          "package_name": "com.clubSpongeBob.Greb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "49466202287-17ak443c2cd9j9ubrrn091altkejj3rh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBy3sJLIDLvdRhrIGYJ9zKHpOX9spM2Ni4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "49466202287-17ak443c2cd9j9ubrrn091altkejj3rh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
