@@ -6,6 +6,20 @@
         <entry key="app/src/main/res/drawable/arrived_pay_1.xml" value="0.106" />
         <entry key="app/src/main/res/drawable/circle_button.xml" value="0.184" />
         <entry key="app/src/main/res/drawable/rounded_corner.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.129" />
+        <entry key="app/src/main/res/drawable/ic_baseline_directions_car_24.xml" value="0.129" />
+        <entry key="app/src/main/res/drawable/ic_baseline_edit_24.xml" value="0.129" />
+        <entry key="app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.129" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.129" />
+        <entry key="app/src/main/res/layout/activity_admin_landing.xml" value="0.136" />
+        <entry key="app/src/main/res/layout/activity_auth_landing.xml" value="0.264" />
+        <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/activity_wrapper.xml" value="0.136" />
+        <entry key="app/src/main/res/layout/fragment_customers.xml" value="0.264" />
+        <entry key="app/src/main/res/layout/fragment_drivers.xml" value="0.11822916666666666" />
+        <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.264" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.129" />
         <entry key="app/src/main/res/layout/activity_admin_landing.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_arrived_pay.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_auth.xml" value="0.16532258064516128" />
