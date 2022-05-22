@@ -9,37 +9,52 @@
 
     <ImageView
         android:id="@+id/waitingBox"
-        android:layout_width="719dp"
-        android:layout_height="573dp"
-        app:srcCompat="@drawable/box"
-        tools:layout_editor_absoluteX="121dp"
-        tools:layout_editor_absoluteY="567dp" />
+        android:layout_width="324dp"
+        android:layout_height="263dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="234dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="234dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/box" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="221dp"
+        android:layout_height="208dp"
+        android:layout_marginTop="235dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/__210202084751_1_removebg_preview__1_" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="164dp"
+        android:layout_height="171dp"
+        android:layout_marginBottom="16dp"
+        android:rotationY="180"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.23"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/pngtree_smoke_white_cartoon_run_away_png_image_2300812_removebg_preview" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="128dp"
+        android:layout_marginBottom="30dp"
         android:text="Finding Driver ..."
         android:textColor="#164976"
-        android:textSize="48sp"
+        android:textSize="20sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="303dp"
-        tools:layout_editor_absoluteY="1000dp" />
-
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="413dp"
-        android:layout_height="291dp"
-        app:srcCompat="@drawable/__210202084751_1_removebg_preview__1_"
-        tools:layout_editor_absoluteX="383dp"
-        tools:layout_editor_absoluteY="648dp" />
-
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="285dp"
-        android:layout_height="325dp"
-        android:rotationY="180"
-        app:srcCompat="@drawable/pngtree_smoke_white_cartoon_run_away_png_image_2300812_removebg_preview"
-        tools:layout_editor_absoluteX="224dp"
-        tools:layout_editor_absoluteY="648dp" />
+        app:layout_constraintBottom_toBottomOf="@+id/waitingBox"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
