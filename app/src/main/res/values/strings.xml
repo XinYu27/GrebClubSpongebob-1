@@ -12,4 +12,9 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="title_activity_admin_landing">AdminLanding</string>
+    <string name="let_s_go">Let\'s Go !</string>
+    <string name="where_are_you_now">Where Are You Now</string>
+    <string name="your_destination">Your Destination</string>
+    <string name="estimated_arrival_time">Estimated Arrival Time</string>
+    <string name="number_of_passengers">Number of Passengers</string>
 </resources>
