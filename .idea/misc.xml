@@ -3,14 +3,22 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/arrived_pay_1.xml" value="0.106" />
+        <entry key="app/src/main/res/drawable/circle_button.xml" value="0.184" />
+        <entry key="app/src/main/res/drawable/rounded_corner.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_admin_landing.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_arrived_pay.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_auth.xml" value="0.16532258064516128" />
         <entry key="app/src/main/res/layout/activity_auth_landing.xml" value="0.2265625" />
+        <entry key="app/src/main/res/layout/activity_driver_coming.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_emergency.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.21422101449275363" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.21422101449275363" />
+        <entry key="app/src/main/res/layout/activity_thank_you.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_wrapper.xml" value="0.1828774062816616" />
         <entry key="app/src/main/res/layout/content_admin_landing.xml" value="0.2105978260869565" />
+        <entry key="app/src/main/res/layout/content_arrived_pay.xml" value="0.1" />
         <entry key="app/src/main/res/layout/content_auth.xml" value="0.271875" />
         <entry key="app/src/main/res/layout/fragment_admin_landing.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_auth_landing.xml" value="0.1" />
