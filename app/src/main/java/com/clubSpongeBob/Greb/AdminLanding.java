@@ -24,7 +24,7 @@ public class AdminLanding extends AppCompatActivity{
 
         binding = ActivityAdminLandingBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        replaceFragment(new DriversFragment());
+        replaceFragment(new CustomersFragment());
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()){
                 case R.id.driver:
