@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,6 +60,26 @@ public class CustomersFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_customers, container, false);
+        View view = inflater.inflate(R.layout.fragment_customers, container, false);
+        Button b = view.findViewById(R.id.button);
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseUtils.addDriver(view.getContext(), new Driver("helll","myvi", "ppp111", "yellow", 2, "111,11"));;
+            }
+        });
+
+        view.findViewById(R.id.button3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseUtils.getOneDriver(view.getContext(), "41073008-ec72-4baa-9d60-1309274db76b");
+
+//                Driver d = FirebaseUtils.getOneDriver(view.getContext(), "41073008-ec72-4baa-9d60-1309274db76b");
+//                System.out.println(d.getEat());
+//                System.out.println(d.getName());
+            }
+        });
+        return view;
     }
+
 }

@@ -1,9 +1,11 @@
 package com.clubSpongeBob.Greb;
 
+import android.view.View;
+
 public class Customer extends Person{
-    private String destination;
-    private String emergencyContact;
-    private String email;
+    private String destination="none";
+    private String emergencyContact="none";
+    private String email="none";
 
     Customer(String name, String location, int capacity, String destination, String emergency){
         super(name, 0);
@@ -14,6 +16,30 @@ public class Customer extends Person{
     Customer(String email, String name, String emergency){
         super(name, 0);
         this.emergencyContact = emergency;
+        this.email = email;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    public String getEmergencyContact() {
+        return emergencyContact;
+    }
+
+    public void setEmergencyContact(String emergencyContact) {
+        this.emergencyContact = emergencyContact;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
         this.email = email;
     }
 }
