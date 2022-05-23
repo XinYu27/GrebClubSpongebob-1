@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditDriver">
+
+    <TextView
+        android:id="@+id/car_Plate2"
+        android:layout_width="203dp"
+        android:layout_height="31dp"
+        android:text="Car Plate"
+        tools:layout_editor_absoluteX="98dp"
+        tools:layout_editor_absoluteY="371dp" />
+
+    <TextView
+        android:id="@+id/car_Capacity2"
+        android:layout_width="203dp"
+        android:layout_height="31dp"
+        android:text="Capacity"
+        tools:layout_editor_absoluteX="98dp"
+        tools:layout_editor_absoluteY="460dp" />
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        tools:layout_editor_absoluteX="98dp"
+        tools:layout_editor_absoluteY="553dp" />
+
+    <Button
+        android:id="@+id/deleteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete"
+        tools:layout_editor_absoluteX="213dp"
+        tools:layout_editor_absoluteY="553dp" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="70dp"
+        android:layout_height="67dp"
+        app:srcCompat="@drawable/driver_icon"
+        tools:layout_editor_absoluteX="98dp"
+        tools:layout_editor_absoluteY="191dp" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="244dp"
+        android:layout_height="50dp"
+        android:scaleX="0.45"
+        android:scaleY="0.45"
+        tools:layout_editor_absoluteX="118dp"
+        tools:layout_editor_absoluteY="208dp" />
+
+    <TextView
+        android:id="@+id/driver_Name2"
+        android:layout_width="203dp"
+        android:layout_height="31dp"
+        android:text="Name"
+        tools:layout_editor_absoluteX="98dp"
+        tools:layout_editor_absoluteY="277dp" />
+
+    <TextView
+        android:id="@+id/driver_Location2"
+        android:layout_width="203dp"
+        android:layout_height="31dp"
+        android:text="Location"
+        tools:layout_editor_absoluteX="98dp"
+        tools:layout_editor_absoluteY="504dp" />
+
+    <TextView
+        android:id="@+id/car_Model2"
+        android:layout_width="203dp"
+        android:layout_height="31dp"
+        android:text="Car Model"
+        tools:layout_editor_absoluteX="98dp"
+        tools:layout_editor_absoluteY="326dp" />
+
+    <TextView
+        android:id="@+id/car_Colour2"
+        android:layout_width="203dp"
+        android:layout_height="31dp"
+        android:text="Car Colour"
+        tools:layout_editor_absoluteX="98dp"
+        tools:layout_editor_absoluteY="417dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

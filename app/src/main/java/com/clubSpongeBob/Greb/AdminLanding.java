@@ -11,8 +11,12 @@ import android.view.View;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.clubSpongeBob.Greb.databinding.ActivityAdminLandingBinding;
+
+import java.util.ArrayList;
 
 public class AdminLanding extends AppCompatActivity{
 
@@ -36,12 +40,15 @@ public class AdminLanding extends AppCompatActivity{
             }
             return true;
         });
+
     }
 
-    private void replaceFragment(Fragment fragment){
+    private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frameLayout,fragment);
         fragmentTransaction.commit();
+
     }
+
 }

@@ -3,10 +3,14 @@ package com.clubSpongeBob.Greb;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +18,10 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class CustomersFragment extends Fragment {
+
+    ArrayList<customerListModel> customerListModels = new ArrayList<>();
+    int [] customerStatus = {R.drawable.ic_baseline_access_time_filled_24,R.drawable.ic_baseline_check_circle_24,
+            R.drawable.ic_baseline_emoji_transportation_24,R.drawable.ic_baseline_incomplete_circle_24};
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -49,10 +57,16 @@ public class CustomersFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        RecyclerView recyclerView = getView().findViewById(R.id.customerRecyclerView);
+        setUpcustomerListModels();
+        customerList_RecyclerAdapter adapter = new customerList_RecyclerAdapter(getContext(), customerListModels);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     @Override
@@ -60,5 +74,20 @@ public class CustomersFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_customers, container, false);
+    }
+
+    private void setUpcustomerListModels(){
+        String [] driverNames = getResources().getStringArray(R.array.driverName_txt);
+        String [] carColours = getResources().getStringArray(R.array.carColour_txt);
+        String [] carCapacities = getResources().getStringArray(R.array.carCapacity_txt);
+        String [] estimatedTime = getResources().getStringArray(R.array.eatTime_txt);
+        String [] startingPoints = getResources().getStringArray(R.array.startPoint_txt);
+        String [] destinations = getResources().getStringArray(R.array.destination_txt);
+
+        for(int i =0;i<driverNames.length;i++){
+            customerListModels.add(new customerListModel(driverNames[i],carColours[i],
+                    carCapacities[i],estimatedTime[i],startingPoints[i],destinations[i],customerStatus[i]));
+        }
+
     }
 }

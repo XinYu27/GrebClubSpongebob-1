@@ -9,42 +9,15 @@
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="167"
-        android:layout_height="52"
+        android:layout_width="167dp"
+        android:layout_height="52dp"
         android:text="LOGIN"
         tools:layout_editor_absoluteX="122dp"
-        tools:layout_editor_absoluteY="498dp" /><![CDATA[
-
-
-
-    ;
-        tools:layout_editor_absoluteX="109dp"
-        tools:layout_editor_absoluteY="375dp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    ]]>
-
+        tools:layout_editor_absoluteY="498dp" />
     <Button
         android:id="@+id/button3"
-        android:layout_width="167"
-        android:layout_height="52"
+        android:layout_width="167dp"
+        android:layout_height="52dp"
         android:text="SIGN UP"
         tools:layout_editor_absoluteX="122dp"
         tools:layout_editor_absoluteY="566dp" />
