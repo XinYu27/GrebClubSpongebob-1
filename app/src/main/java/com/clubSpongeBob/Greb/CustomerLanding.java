@@ -18,13 +18,14 @@ public class CustomerLanding extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.customer_landing);
+        setContentView(R.layout.activity_customer_landing);
 
         currentTime = findViewById(R.id.currentTime);
         Date currTime = Calendar.getInstance().getTime();
         String formatTime = DateFormat.getTimeInstance(TimeFormat.CLOCK_24H).format(currTime);
 
         currentTime.setText(formatTime);
+
 
     }
 }
