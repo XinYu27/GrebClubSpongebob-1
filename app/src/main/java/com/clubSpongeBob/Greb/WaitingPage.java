@@ -17,7 +17,7 @@ public class WaitingPage extends AppCompatActivity {
         mHandler.postDelayed(new Runnable(){
             @Override
             public void run(){
-                Intent intent=new Intent(WaitingPage.this, Driver.class);
+                Intent intent=new Intent(WaitingPage.this, DriverCustomerView.class);
                 startActivity(intent);
                 finish();
             }
