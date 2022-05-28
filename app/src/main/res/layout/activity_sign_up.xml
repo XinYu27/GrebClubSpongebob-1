@@ -85,7 +85,7 @@
     <Button
         android:id="@+id/button5"
         android:layout_width="99dp"
-        android:layout_height="39dp"
+        android:layout_height="48dp"
         android:backgroundTint="#FAF5D0"
         android:text="Sign In"
         app:layout_constraintEnd_toEndOf="parent"
