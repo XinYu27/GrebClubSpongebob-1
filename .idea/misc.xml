@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.129" />
         <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/drawable/ic_baseline_directions_car_24.xml" value="0.129" />
         <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/drawable/ic_baseline_edit_24.xml" value="0.129" />
@@ -68,6 +69,12 @@
         <entry key="app/src/main/res/layout/fragment_sign_in.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_wrapper.xml" value="0.1828774062816616" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
+=======
+        <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/layout/activity_main.xml" value="0.17708333333333334" />
+        <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.198" />
+        <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.198" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.30344202898550726" />
+>>>>>>> Stashed changes
       </map>
     </option>
   </component>
