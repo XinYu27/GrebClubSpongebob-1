@@ -10,80 +10,107 @@
         android:id="@+id/car_Plate2"
         android:layout_width="203dp"
         android:layout_height="31dp"
+        android:layout_marginTop="12dp"
         android:text="Car Plate"
-        tools:layout_editor_absoluteX="98dp"
-        tools:layout_editor_absoluteY="371dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/car_Model2" />
 
     <TextView
         android:id="@+id/car_Capacity2"
         android:layout_width="203dp"
         android:layout_height="31dp"
+        android:layout_marginTop="12dp"
         android:text="Capacity"
-        tools:layout_editor_absoluteX="98dp"
-        tools:layout_editor_absoluteY="460dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/car_Colour2" />
 
     <Button
         android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:text="Save"
-        tools:layout_editor_absoluteX="98dp"
-        tools:layout_editor_absoluteY="553dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/deleteButton"
+        app:layout_constraintHorizontal_bias="0.695"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/driver_Location2"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/deleteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="96dp"
         android:text="Delete"
-        tools:layout_editor_absoluteX="213dp"
-        tools:layout_editor_absoluteY="553dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/driver_Location2"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="70dp"
         android:layout_height="67dp"
-        app:srcCompat="@drawable/driver_icon"
-        tools:layout_editor_absoluteX="98dp"
-        tools:layout_editor_absoluteY="191dp" />
+        android:layout_marginTop="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.281"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/driver_icon" />
 
     <RatingBar
         android:id="@+id/ratingBar"
         android:layout_width="244dp"
         android:layout_height="50dp"
+        android:layout_marginTop="128dp"
         android:scaleX="0.45"
         android:scaleY="0.45"
-        tools:layout_editor_absoluteX="118dp"
-        tools:layout_editor_absoluteY="208dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.784"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/driver_Name2"
         android:layout_width="203dp"
         android:layout_height="31dp"
+        android:layout_marginTop="11dp"
         android:text="Name"
-        tools:layout_editor_absoluteX="98dp"
-        tools:layout_editor_absoluteY="277dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
 
     <TextView
         android:id="@+id/driver_Location2"
         android:layout_width="203dp"
         android:layout_height="31dp"
+        android:layout_marginTop="12dp"
         android:text="Location"
-        tools:layout_editor_absoluteX="98dp"
-        tools:layout_editor_absoluteY="504dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/car_Capacity2" />
 
     <TextView
         android:id="@+id/car_Model2"
         android:layout_width="203dp"
         android:layout_height="31dp"
+        android:layout_marginTop="12dp"
         android:text="Car Model"
-        tools:layout_editor_absoluteX="98dp"
-        tools:layout_editor_absoluteY="326dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/driver_Name2" />
 
     <TextView
         android:id="@+id/car_Colour2"
         android:layout_width="203dp"
         android:layout_height="31dp"
+        android:layout_marginTop="12dp"
         android:text="Car Colour"
-        tools:layout_editor_absoluteX="98dp"
-        tools:layout_editor_absoluteY="417dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/car_Plate2" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -23,36 +23,40 @@
         <item>Chin Ling Long</item>
         <item>Ang Ang Tan</item>
         <item>Pai Da Xing</item>
+        <item>Pai Da Xing</item>
+        <item>Pai Da Xing</item>
     </string-array>
     <string-array name="carCapacity_txt">
         <item>Capacity:</item>
         <item>Capacity:</item>
         <item>Capacity:</item>
         <item>Capacity:</item>
-    </string-array>
-    <string-array name="carColour_txt">
-        <item>Black Myvi PGG 1111</item>
-        <item>Black Myvi PGG 1111</item>
-        <item>Black Myvi PGG 1111</item>
-        <item>Black Myvi PGG 1111</item>
+        <item>Pai Da Xing</item>
+        <item>Pai Da Xing</item>
     </string-array>
     <string-array name="eatTime_txt">
         <item>Estimated Arrival Time:</item>
         <item>Estimated Arrival Time:</item>
         <item>Estimated Arrival Time:</item>
         <item>Estimated Arrival Time:</item>
+        <item>Pai Da Xing</item>
+        <item>Pai Da Xing</item>
     </string-array>
     <string-array name="startPoint_txt">
         <item>Starting Point:</item>
         <item>Starting Point:</item>
         <item>Starting Point:</item>
         <item>Starting Point:</item>
+        <item>Pai Da Xing</item>
+        <item>Pai Da Xing</item>
     </string-array>
     <string-array name="destination_txt">
         <item>Destination:</item>
         <item>Destination:</item>
         <item>Destination:</item>
         <item>Destination:</item>
+        <item>Pai Da Xing</item>
+        <item>Pai Da Xing</item>
     </string-array>
 
 </resources>

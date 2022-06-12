@@ -28,56 +28,71 @@
                 android:id="@+id/driverName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="Chan Ching Chong"
-                tools:layout_editor_absoluteX="20dp"
-                tools:layout_editor_absoluteY="6dp" />
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.072"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/startingPoint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:text="Starting Point :"
-                tools:layout_editor_absoluteX="20dp"
-                tools:layout_editor_absoluteY="82dp" />
-
-            <TextView
-                android:id="@+id/colour"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Black Myvi PGG 1111"
-                tools:layout_editor_absoluteX="20dp"
-                tools:layout_editor_absoluteY="25dp" />
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.06"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/eat" />
 
             <ImageView
                 android:id="@+id/customerStatus"
                 android:layout_width="42dp"
                 android:layout_height="47dp"
-                app:srcCompat="@drawable/ic_baseline_incomplete_circle_24"
-                tools:layout_editor_absoluteX="318dp"
-                tools:layout_editor_absoluteY="44dp" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.922"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.505"
+                app:srcCompat="@drawable/ic_baseline_incomplete_circle_24" />
 
             <TextView
                 android:id="@+id/eat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:text="Estimated Arrival Time: "
-                tools:layout_editor_absoluteX="20dp"
-                tools:layout_editor_absoluteY="63dp" />
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.072"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/capacity" />
 
             <TextView
                 android:id="@+id/destination"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:text="Destination :"
-                tools:layout_editor_absoluteX="20dp"
-                tools:layout_editor_absoluteY="101dp" />
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.058"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/startingPoint" />
 
             <TextView
                 android:id="@+id/capacity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Capacity:"
-                tools:layout_editor_absoluteX="20dp"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.055"
+                app:layout_constraintStart_toStartOf="parent"
                 tools:layout_editor_absoluteY="44dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

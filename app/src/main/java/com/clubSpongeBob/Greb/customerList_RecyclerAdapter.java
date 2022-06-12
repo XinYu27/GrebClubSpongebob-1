@@ -33,12 +33,11 @@ public class customerList_RecyclerAdapter extends RecyclerView.Adapter<customerL
     @Override
     public void onBindViewHolder(@NonNull customerList_RecyclerAdapter.MyViewHolder holder, int position) {
         holder.name.setText(list.get(position).getDriverName());
-        holder.colour.setText(list.get(position).getCarColour());
         holder.capacity.setText(list.get(position).getCarCapacity());
         holder.eat.setText(list.get(position).getEatTime());
         holder.start.setText(list.get(position).getStartingPoint());
         holder.destination.setText(list.get(position).getDestination());
-        holder.driverStatus.setImageResource(list.get(position).getDriverStatus());
+        holder.customerStatus.setImageResource(list.get(position).getDriverStatus());
     }
 
     @Override
@@ -47,13 +46,12 @@ public class customerList_RecyclerAdapter extends RecyclerView.Adapter<customerL
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        ImageView driverStatus;
-        TextView name,colour,capacity,eat,start,destination;
+        ImageView customerStatus;
+        TextView name,capacity,eat,start,destination;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            driverStatus = itemView.findViewById((R.id.customerStatus));
+            customerStatus = itemView.findViewById((R.id.customerStatus));
             name = itemView.findViewById((R.id.driverName));
-            colour = itemView.findViewById((R.id.colour));
             capacity= itemView.findViewById((R.id.capacity));
             eat = itemView.findViewById((R.id.eat));
             start = itemView.findViewById((R.id.startingPoint));

@@ -25,10 +25,9 @@ public class AdminLanding extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         binding = ActivityAdminLandingBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        replaceFragment(new DriversFragment());
+        replaceFragment(new CustomersFragment());
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()){
                 case R.id.driver:
@@ -46,7 +45,12 @@ public class AdminLanding extends AppCompatActivity{
     private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frameLayout,fragment);
+        if (fragment == new CustomersFragment()){
+            fragmentTransaction.replace(R.id.customerFragmentContainer,fragment);
+        }
+        else {
+            fragmentTransaction.replace(R.id.driverFragmentContainer,fragment);
+        }
         fragmentTransaction.commit();
 
     }
