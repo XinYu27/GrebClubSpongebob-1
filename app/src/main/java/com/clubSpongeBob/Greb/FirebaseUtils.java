@@ -1,7 +1,6 @@
 package com.clubSpongeBob.Greb;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -12,13 +11,20 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.UUID;
 
 public class FirebaseUtils {
@@ -141,6 +147,25 @@ public class FirebaseUtils {
             }
         });
     }
+    public static void addOrder(String currentLoc, String destination, int capacity, String EAT){
+        Map<String,Object> values=new HashMap<>();
+        values.put("location",currentLoc);
+        values.put("destination",destination);
+        values.put("capacity",capacity);
+        values.put("eat",EAT);
+        values.put("status",1);
+        customerRef.child(mAuth.getCurrentUser().getUid()).updateChildren(values).addOnCompleteListener(new OnCompleteListener(){
+            @Override
+            public void onComplete(@NonNull Task task){
+                if(task.isSuccessful()){
+                    Log.d(TAG,"Successfully add order: "+mAuth.getCurrentUser().getUid());
+                }
+                else{
+                    Log.e(TAG,"Unable to add order: "+mAuth.getCurrentUser().getUid());
+                }
+            }
+        });
+    }
 
     public static void getOneDriver(Context context, String uid){
 
@@ -162,6 +187,69 @@ public class FirebaseUtils {
 //                dataSnapshot.child("carModel").getValue().toString(), dataSnapshot.child("carColour").getValue().toString(),
 //                Integer.parseInt(dataSnapshot.child("rating").getValue().toString()), Integer.parseInt(dataSnapshot.child("numOfRating").getValue().toString()),
 //                Integer.parseInt(dataSnapshot.child("status").getValue().toString()), dataSnapshot.child("eat").getValue().toString());
+    }
+
+    public static void adminGetDriver(){
+        driverRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Query query=driverRef.orderByChild("status");
+                query.addValueEventListener(new ValueEventListener(){
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        List<Driver> dList = new ArrayList<>();
+                        for (DataSnapshot data : dataSnapshot.getChildren()) {
+                            Driver driver = data.getValue(Driver.class);
+                            dList.add(driver);
+                            System.out.println(driver.getName()); //for test
+                        }
+                        //do what you want to do with your list
+                        //Put in recyclerview (adapter)
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error){
+                        Log.d(TAG,"Unavailable to retrieve data");
+                    }
+                });
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d(TAG,"Unavailable to retrieve data");
+            }
+        });
+
+    }
+
+    public static void customerGetDriver(){
+        driverRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Query query=driverRef.orderByChild("status").startAt(1);
+                query.addValueEventListener(new ValueEventListener(){
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot){
+                        Queue<Driver>dQueue=new PriorityQueue<>();
+                        for(DataSnapshot data: dataSnapshot.getChildren()){
+                            Driver driver=data.getValue(Driver.class);
+                            dQueue.add(driver);
+                            System.out.println(driver.getName());//for test
+                        }
+                        //Do whatever
+                        //Put in recyclerview
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error){
+                        Log.d(TAG,"Unavailable to retrieve data");
+                    }
+                });
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error){
+                Log.d(TAG,"Unavailable to retrieve data");
+            }
+        });
     }
 
     public static void updateStatus(boolean customer, String uid, int status){
