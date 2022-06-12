@@ -61,8 +61,28 @@ public class FirebaseUtils {
 //
     }
 
+    public static Customer getOneUser(String uid){
+        final Customer[] c = new Customer[1];
+
+        customerRef
+                .child(uid)
+                .get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        if (!task.isSuccessful()){
+                            Log.e(TAG, "Error getting user data", task.getException());
+                        } else {
+                            c[0] = task.getResult().getValue(Customer.class);
+                            Log.d(TAG, "Successfully get data from user: " + c[0].getName());
+                        }
+                    }
+                });
+
+        return c[0];
+    }
+
     public static Customer loginUser(Context context, String email, String password){
-        Customer c = null;
+        final Customer[] c = new Customer[1];
 
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>(){
@@ -70,15 +90,15 @@ public class FirebaseUtils {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            Task<DataSnapshot> snapshot = customerRef
-                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                    .get();
+                            c[0] = getOneUser(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+
                         }else {
-                            Toast.makeText(context, "Failed to register", Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "Failed to login", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
-        return c;
+        return c[0];
     }
 
     public static boolean isLogin(Context context){

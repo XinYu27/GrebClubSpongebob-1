@@ -6,6 +6,11 @@ public class Customer extends Person{
     private String destination="none";
     private String emergencyContact="none";
     private String email="none";
+    private boolean admin = false;
+
+    Customer(){
+        super();
+    }
 
     Customer(String name, String location, int capacity, String destination, String emergency){
         super(name, 0);
@@ -17,6 +22,14 @@ public class Customer extends Person{
         super(name, 0);
         this.emergencyContact = emergency;
         this.email = email;
+    }
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
     }
 
     public String getDestination() {
