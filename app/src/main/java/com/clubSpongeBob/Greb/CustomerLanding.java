@@ -2,8 +2,6 @@ package com.clubSpongeBob.Greb;
 
 
 import static com.clubSpongeBob.Greb.FirebaseUtils.addOrder;
-import static com.clubSpongeBob.Greb.FirebaseUtils.adminGetDriver;
-import static com.clubSpongeBob.Greb.FirebaseUtils.customerGetDriver;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -11,12 +9,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.view.View.OnClickListener;
+
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.timepicker.TimeFormat;
 import java.text.DateFormat;
-import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -29,7 +26,7 @@ public class CustomerLanding extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_landing);
 
-        currentTime = findViewById(R.id.currentTime);
+        currentTime = findViewById(R.id.currentTimeHour);
         Date currTime = Calendar.getInstance().getTime();
         String formatTime = DateFormat.getTimeInstance(TimeFormat.CLOCK_24H).format(currTime);
 
