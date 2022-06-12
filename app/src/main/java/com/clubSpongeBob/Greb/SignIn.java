@@ -9,6 +9,10 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.progressindicator.CircularProgressIndicator;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+
 public class SignIn extends AppCompatActivity {
     String TAG = "Sign In";
 
@@ -27,10 +31,21 @@ public class SignIn extends AppCompatActivity {
     public void signIn(View v){
         TextView editTextEmail = this.findViewById(R.id.editTextEmail);
         TextView editTextPassword = this.findViewById(R.id.editTextPassword);
+        CircularProgressIndicator circularProgressIndicator = this.findViewById(R.id.circularIndicator);
 
         String password = editTextPassword.getText().toString();
         String email = editTextEmail.getText().toString().trim();
         String errorMessage="";
+
+        Thread thread = new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                FirebaseUtils.loginUser(email, password);
+            }
+        };
+
+        circularProgressIndicator.setVisibility(View.VISIBLE);
 
         if (!CommonUtils.emailValidation(email))
             errorMessage = "Invalid email Address!";
@@ -41,23 +56,11 @@ public class SignIn extends AppCompatActivity {
         }
 
         if (errorMessage.isEmpty()){
-            Customer c = FirebaseUtils.loginUser(this, email,password);
-
-            Intent intent;
-            if (c != null){
-                if(c.isAdmin()){
-                    intent = new Intent(getApplication(), AdminLanding.class);
-                    Log.i(TAG, "User is admin");
-                } else{
-                    intent = new Intent(getApplication(), CustomerLanding.class);
-                    Log.i(TAG, "User is customer");
-                }
-                startActivity(intent);
-            }
+            thread.start();
         } else{
             Log.w(TAG, "No user found");
             Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show();
         }
-
+        circularProgressIndicator.setVisibility(View.INVISIBLE);
     }
 }

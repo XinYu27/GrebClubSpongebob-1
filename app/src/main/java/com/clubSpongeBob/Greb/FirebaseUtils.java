@@ -1,6 +1,7 @@
 package com.clubSpongeBob.Greb;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -15,6 +16,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -81,52 +83,64 @@ public class FirebaseUtils {
         return c[0];
     }
 
-    public static Customer loginUser(Context context, String email, String password){
-        final Customer[] c = new Customer[1];
-
+    public static void loginUser(String email, String password){
+        Context context = Wrapper.getSContext();
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>(){
 
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            c[0] = getOneUser(FirebaseAuth.getInstance().getCurrentUser().getUid());
-
-
+                            customerRef
+                                    .child(mAuth.getCurrentUser().getUid())
+                                    .get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                            if (!task.isSuccessful()){
+                                                Log.e(TAG, "Error getting user data", task.getException());
+                                            } else {
+                                                Customer c = task.getResult().getValue(Customer.class);
+                                                Log.d(TAG, "Successfully get data from user: " + c.getName());
+                                                if(c.isAdmin())
+                                                    context.startActivity(new Intent(Wrapper.getsApplication(), AdminLanding.class));
+                                                context.startActivity(new Intent(Wrapper.getsApplication(), CustomerLanding.class));
+                                            }
+                                        }
+                                    });
                         }else {
                             Toast.makeText(context, "Failed to login", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
-        return c[0];
     }
 
-    public static boolean isLogin(Context context){
+
+    public static boolean isLogin(){
         FirebaseUser user = mAuth.getCurrentUser();
         if (user == null) return false;
-        Toast.makeText(context, "Welcome "+ user.getDisplayName(), Toast.LENGTH_LONG);
+        Toast.makeText(Wrapper.getSContext(), "Welcome "+ user.getDisplayName(), Toast.LENGTH_LONG);
         return true;
     }
 
-    public static void signOutUser(Context context){
+    public static void signOutUser(){
         mAuth.signOut();
-        Toast.makeText(context, "Sign out", Toast.LENGTH_LONG).show();
+        Toast.makeText(Wrapper.getSContext(), "Sign out", Toast.LENGTH_LONG).show();
     }
 
     public static String createUID(){
         return UUID.randomUUID().toString();
     }
 
-    public static void addDriver(Context context, Driver driver){
+    public static void addDriver(Driver driver){
         DatabaseReference ref = driverRef.child(createUID());
         ref.setValue(driver).addOnCompleteListener(new OnCompleteListener<Void>(){
 
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
-                    Toast.makeText(context, "Added new driver", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Wrapper.getSContext(), "Added new driver", Toast.LENGTH_LONG).show();
                 }else{
-                    Toast.makeText(context, "Failed to add new driver", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Wrapper.getSContext(), "Failed to add new driver", Toast.LENGTH_LONG).show();
                 }
             }
         });
