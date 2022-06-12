@@ -3,8 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
         <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.129" />
         <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/drawable/ic_baseline_directions_car_24.xml" value="0.129" />
         <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/drawable/ic_baseline_edit_24.xml" value="0.129" />
@@ -19,8 +17,22 @@
         <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/layout/fragment_drivers.xml" value="0.11822916666666666" />
         <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/menu/bottom_nav_menu.xml" value="0.264" />
         <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.129" />
-=======
-          =======
+        <entry key="..\:/Users/shiao/Documents/GitHub/GrebClubSpongebob/app/src/main/res/drawable/ic_baseline_access_time_filled_24.xml" value="0.1" />
+        <entry key="..\:/Users/shiao/Documents/GitHub/GrebClubSpongebob/app/src/main/res/layout/activity_add_driver.xml" value="0.4" />
+        <entry key="..\:/Users/shiao/Documents/GitHub/GrebClubSpongebob/app/src/main/res/layout/activity_admin_landing.xml" value="0.256140350877193" />
+        <entry key="..\:/Users/shiao/Documents/GitHub/GrebClubSpongebob/app/src/main/res/layout/activity_auth_landing.xml" value="0.22509057971014493" />
+        <entry key="..\:/Users/shiao/Documents/GitHub/GrebClubSpongebob/app/src/main/res/layout/activity_edit_driver.xml" value="0.264" />
+        <entry key="..\:/Users/shiao/Documents/GitHub/GrebClubSpongebob/app/src/main/res/layout/activity_sign_in.xml" value="0.10989583333333333" />
+        <entry key="..\:/Users/shiao/Documents/GitHub/GrebClubSpongebob/app/src/main/res/layout/activity_sign_up.xml" value="0.25" />
+        <entry key="..\:/Users/shiao/Documents/GitHub/GrebClubSpongebob/app/src/main/res/layout/activity_wrapper.xml" value="0.10989583333333333" />
+        <entry key="..\:/Users/shiao/Documents/GitHub/GrebClubSpongebob/app/src/main/res/layout/customer_landing.xml" value="0.10989583333333333" />
+        <entry key="..\:/Users/shiao/Documents/GitHub/GrebClubSpongebob/app/src/main/res/layout/customer_list.xml" value="0.4" />
+        <entry key="..\:/Users/shiao/Documents/GitHub/GrebClubSpongebob/app/src/main/res/layout/driver_customerview.xml" value="0.10989583333333333" />
+        <entry key="..\:/Users/shiao/Documents/GitHub/GrebClubSpongebob/app/src/main/res/layout/driver_list.xml" value="0.2677165354330709" />
+        <entry key="..\:/Users/shiao/Documents/GitHub/GrebClubSpongebob/app/src/main/res/layout/fragment_customers.xml" value="0.264" />
+        <entry key="..\:/Users/shiao/Documents/GitHub/GrebClubSpongebob/app/src/main/res/layout/fragment_drivers.xml" value="0.264" />
+        <entry key="..\:/Users/shiao/Documents/GitHub/GrebClubSpongebob/app/src/main/res/layout/waiting_page.xml" value="0.10989583333333333" />
+        <entry key="..\:/Users/shiao/Documents/GitHub/GrebClubSpongebob/app/src/main/res/menu/bottom_nav_menu.xml" value="0.24635416666666668" />
           <entry key="app/src/main/res/drawable/arrived_pay_1.xml" value="0.106" />
           <entry key="app/src/main/res/drawable/circle_button.xml" value="0.184" />
           <entry key="app/src/main/res/drawable/rounded_corner.xml" value="0.1" />
@@ -38,7 +50,6 @@
           <entry key="app/src/main/res/layout/fragment_drivers.xml" value="0.11822916666666666" />
           <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.264" />
           <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.129" />
-          >>>>>>> cd080b09023d59fe0a24632a84f9c000b5fe3e3a
         <entry key="..\:/xycheok/Documents/GitHub/GrebClubSpongebob-1/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.173" />
         <entry key="..\:/xycheok/Documents/GitHub/GrebClubSpongebob-1/app/src/main/res/drawable/ic_baseline_directions_car_24.xml" value="0.173" />
         <entry key="..\:/xycheok/Documents/GitHub/GrebClubSpongebob-1/app/src/main/res/drawable/ic_baseline_edit_24.xml" value="0.173" />
@@ -48,7 +59,6 @@
         <entry key="..\:/xycheok/Documents/GitHub/GrebClubSpongebob-1/app/src/main/res/layout/activity_sign_in.xml" value="0.22282608695652173" />
         <entry key="..\:/xycheok/Documents/GitHub/GrebClubSpongebob-1/app/src/main/res/layout/customer_landing.xml" value="0.4" />
         <entry key="..\:/xycheok/Documents/GitHub/GrebClubSpongebob-1/app/src/main/res/layout/fragment_customers.xml" value="0.2" />
->>>>>>> Stashed changes
         <entry key="app/src/main/res/layout/activity_admin_landing.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_auth.xml" value="0.16532258064516128" />
         <entry key="app/src/main/res/layout/activity_auth_landing.xml" value="0.2265625" />
@@ -69,12 +79,10 @@
         <entry key="app/src/main/res/layout/fragment_sign_in.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_wrapper.xml" value="0.1828774062816616" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
-=======
         <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/layout/activity_main.xml" value="0.17708333333333334" />
         <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.198" />
         <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.198" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.30344202898550726" />
->>>>>>> Stashed changes
       </map>
     </option>
   </component>
