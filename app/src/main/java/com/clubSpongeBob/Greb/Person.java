@@ -7,6 +7,8 @@ public class Person {
     private int status=0;
     private String eat="none";
 
+    Person(){}
+
     Person(String name, int status){
         this.name = name;
         this.status = status;

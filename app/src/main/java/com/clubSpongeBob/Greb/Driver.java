@@ -5,6 +5,9 @@ public class Driver extends Person{
     private int rating, numOfRating;
     // status 0: unavailable, 1: available
 
+    Driver(){
+        super();
+    }
     Driver(String name, String location, int capacity, String carPlate, String carModel, String carColour, int rating, int numOfRating, int status, String eat){
         super(name, status, capacity, location);
         this.carPlate = carPlate;

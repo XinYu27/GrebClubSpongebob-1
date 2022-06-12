@@ -1,6 +1,7 @@
 package com.clubSpongeBob.Greb;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -11,12 +12,20 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.UUID;
 
 public class FirebaseUtils {
@@ -26,7 +35,7 @@ public class FirebaseUtils {
     private static DatabaseReference driverRef = db.getReference("drivers");
     private static String TAG = "firebase utils";
 
-    public static void registerUser(Context context, String email, String name, String password, String emergency){
+    public static void registerUser(String email, String name, String password, String emergency){
         // Assuming all input is validated
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>(){
@@ -40,73 +49,120 @@ public class FirebaseUtils {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if(task.isSuccessful()){
-                                                Toast.makeText(context,"User has been registered successfully!", Toast.LENGTH_LONG).show();
+                                                Toast.makeText(Wrapper.getSContext(),"User has been registered successfully!", Toast.LENGTH_LONG).show();
+                                                Wrapper.getSContext().startActivity(new Intent(Wrapper.getsApplication(), CustomerLanding.class));
+                                                Log.i(TAG, "Successfully register user: " + mAuth.getCurrentUser().getUid());
                                             }else{
-                                                Toast.makeText(context,"Failed to register! Try again!", Toast.LENGTH_LONG).show();
+                                                Toast.makeText(Wrapper.getSContext(),"Failed to register! Try again!", Toast.LENGTH_LONG).show();
+                                                Log.e(TAG, "Failed to register user: " + mAuth.getCurrentUser().getUid());
                                             }
                                         }
                                     });
                         }else {
-                            Toast.makeText(context, "Failed to register", Toast.LENGTH_LONG).show();
+                            Toast.makeText(Wrapper.getSContext(), "Failed to register", Toast.LENGTH_LONG).show();
                         }
                     }
         });
 
-//        String[] errorCodes = new String[3];
-//        email = email.trim();
-
-//        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-//            errorCodes[0] = "Please provide valid email";
-//        }
-//
     }
 
-    public static Customer loginUser(Context context, String email, String password){
-        Customer c = null;
+    public static Customer getOneUser(String uid){
+        final Customer[] c = new Customer[1];
 
+        customerRef
+                .child(uid)
+                .get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        if (!task.isSuccessful()){
+                            Log.e(TAG, "Error getting user data", task.getException());
+                        } else {
+                            c[0] = task.getResult().getValue(Customer.class);
+                            Log.d(TAG, "Successfully get data from user: " + c[0].getName());
+                        }
+                    }
+                });
+
+        return c[0];
+    }
+
+    public static void loginUser(String email, String password){
+        Context context = Wrapper.getSContext();
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>(){
 
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            Task<DataSnapshot> snapshot = customerRef
-                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                    .get();
+                            customerRef
+                                    .child(mAuth.getCurrentUser().getUid())
+                                    .get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                            if (!task.isSuccessful()){
+                                                Log.e(TAG, "Error getting user data", task.getException());
+                                            } else {
+                                                Customer c = task.getResult().getValue(Customer.class);
+                                                Log.d(TAG, "Successfully get data from user: " + c.getName());
+                                                if(c.isAdmin())
+                                                    context.startActivity(new Intent(Wrapper.getsApplication(), AdminLanding.class));
+                                                context.startActivity(new Intent(Wrapper.getsApplication(), CustomerLanding.class));
+                                            }
+                                        }
+                                    });
                         }else {
-                            Toast.makeText(context, "Failed to register", Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "Failed to login", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
-        return c;
     }
 
-    public static boolean isLogin(Context context){
+
+    public static boolean isLogin(){
         FirebaseUser user = mAuth.getCurrentUser();
         if (user == null) return false;
-        Toast.makeText(context, "Welcome "+ user.getDisplayName(), Toast.LENGTH_LONG);
+        Toast.makeText(Wrapper.getSContext(), "Welcome "+ user.getDisplayName(), Toast.LENGTH_LONG);
         return true;
     }
 
-    public static void signOutUser(Context context){
+    public static void signOutUser(){
         mAuth.signOut();
-        Toast.makeText(context, "Sign out", Toast.LENGTH_LONG).show();
+        Toast.makeText(Wrapper.getSContext(), "Sign out", Toast.LENGTH_LONG).show();
     }
 
     public static String createUID(){
         return UUID.randomUUID().toString();
     }
 
-    public static void addDriver(Context context, Driver driver){
+    public static void addDriver(Driver driver){
         DatabaseReference ref = driverRef.child(createUID());
         ref.setValue(driver).addOnCompleteListener(new OnCompleteListener<Void>(){
 
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
-                    Toast.makeText(context, "Added new driver", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Wrapper.getSContext(), "Added new driver", Toast.LENGTH_LONG).show();
                 }else{
-                    Toast.makeText(context, "Failed to add new driver", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Wrapper.getSContext(), "Failed to add new driver", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+    public static void addOrder(String currentLoc, String destination, int capacity, String EAT){
+        Map<String,Object> values=new HashMap<>();
+        values.put("location",currentLoc);
+        values.put("destination",destination);
+        values.put("capacity",capacity);
+        values.put("eat",EAT);
+        values.put("status",1);
+        customerRef.child(mAuth.getCurrentUser().getUid()).updateChildren(values).addOnCompleteListener(new OnCompleteListener(){
+            @Override
+            public void onComplete(@NonNull Task task){
+                if(task.isSuccessful()){
+                    Log.d(TAG,"Successfully add order: "+mAuth.getCurrentUser().getUid());
+                }
+                else{
+                    Log.e(TAG,"Unable to add order: "+mAuth.getCurrentUser().getUid());
                 }
             }
         });
@@ -132,6 +188,69 @@ public class FirebaseUtils {
 //                dataSnapshot.child("carModel").getValue().toString(), dataSnapshot.child("carColour").getValue().toString(),
 //                Integer.parseInt(dataSnapshot.child("rating").getValue().toString()), Integer.parseInt(dataSnapshot.child("numOfRating").getValue().toString()),
 //                Integer.parseInt(dataSnapshot.child("status").getValue().toString()), dataSnapshot.child("eat").getValue().toString());
+    }
+
+    public static void adminGetDriver(){
+        driverRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Query query=driverRef.orderByChild("status");
+                query.addValueEventListener(new ValueEventListener(){
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        List<Driver> dList = new ArrayList<>();
+                        for (DataSnapshot data : dataSnapshot.getChildren()) {
+                            Driver driver = data.getValue(Driver.class);
+                            dList.add(driver);
+                            System.out.println(driver.getName()); //for test
+                        }
+                        //do what you want to do with your list
+                        //Put in recyclerview (adapter)
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error){
+                        Log.d(TAG,"Unavailable to retrieve data");
+                    }
+                });
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d(TAG,"Unavailable to retrieve data");
+            }
+        });
+
+    }
+
+    public static void customerGetDriver(){
+        driverRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Query query=driverRef.orderByChild("status").startAt(1);
+                query.addValueEventListener(new ValueEventListener(){
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot){
+                        Queue<Driver>dQueue=new PriorityQueue<>();
+                        for(DataSnapshot data: dataSnapshot.getChildren()){
+                            Driver driver=data.getValue(Driver.class);
+                            dQueue.add(driver);
+                            System.out.println(driver.getName());//for test
+                        }
+                        //Do whatever
+                        //Put in recyclerview
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error){
+                        Log.d(TAG,"Unavailable to retrieve data");
+                    }
+                });
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error){
+                Log.d(TAG,"Unavailable to retrieve data");
+            }
+        });
     }
 
     public static void updateStatus(boolean customer, String uid, int status){

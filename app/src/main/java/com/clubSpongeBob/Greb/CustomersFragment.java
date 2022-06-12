@@ -65,7 +65,7 @@ public class CustomersFragment extends Fragment {
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseUtils.addDriver(view.getContext(), new Driver("helll","myvi", "ppp111", "yellow", 2, "111,11"));;
+                FirebaseUtils.addDriver(new Driver("helll","myvi", "ppp111", "yellow", 2, "111,11"));;
             }
         });
 
