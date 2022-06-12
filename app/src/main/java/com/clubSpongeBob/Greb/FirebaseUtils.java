@@ -28,7 +28,7 @@ public class FirebaseUtils {
     private static DatabaseReference driverRef = db.getReference("drivers");
     private static String TAG = "firebase utils";
 
-    public static void registerUser(Context context, String email, String name, String password, String emergency){
+    public static void registerUser(String email, String name, String password, String emergency){
         // Assuming all input is validated
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>(){
@@ -42,25 +42,21 @@ public class FirebaseUtils {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if(task.isSuccessful()){
-                                                Toast.makeText(context,"User has been registered successfully!", Toast.LENGTH_LONG).show();
+                                                Toast.makeText(Wrapper.getSContext(),"User has been registered successfully!", Toast.LENGTH_LONG).show();
+                                                Wrapper.getSContext().startActivity(new Intent(Wrapper.getsApplication(), CustomerLanding.class));
+                                                Log.i(TAG, "Successfully register user: " + mAuth.getCurrentUser().getUid());
                                             }else{
-                                                Toast.makeText(context,"Failed to register! Try again!", Toast.LENGTH_LONG).show();
+                                                Toast.makeText(Wrapper.getSContext(),"Failed to register! Try again!", Toast.LENGTH_LONG).show();
+                                                Log.e(TAG, "Failed to register user: " + mAuth.getCurrentUser().getUid());
                                             }
                                         }
                                     });
                         }else {
-                            Toast.makeText(context, "Failed to register", Toast.LENGTH_LONG).show();
+                            Toast.makeText(Wrapper.getSContext(), "Failed to register", Toast.LENGTH_LONG).show();
                         }
                     }
         });
 
-//        String[] errorCodes = new String[3];
-//        email = email.trim();
-
-//        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-//            errorCodes[0] = "Please provide valid email";
-//        }
-//
     }
 
     public static Customer getOneUser(String uid){

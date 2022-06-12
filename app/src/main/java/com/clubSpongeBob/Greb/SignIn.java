@@ -10,8 +10,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.progressindicator.CircularProgressIndicator;
-import com.google.common.util.concurrent.Futures;
-import com.google.common.util.concurrent.ListenableFuture;
 
 public class SignIn extends AppCompatActivity {
     String TAG = "Sign In";
@@ -20,10 +18,16 @@ public class SignIn extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
-        this.findViewById(R.id.loginBtn).setOnClickListener(new View.OnClickListener() {
+        this.findViewById(R.id.signInBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 signIn(view);
+            }
+        });
+        this.findViewById(R.id.signUpBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplication(), SignUp.class));
             }
         });
     }
