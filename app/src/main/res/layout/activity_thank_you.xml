@@ -8,16 +8,16 @@
     tools:context=".ThankYou">
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/homeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_marginTop="12dp"
         android:text="HOME"
         app:circularflow_radiusInDP="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rateBtn" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/thankYouCard"
@@ -49,6 +49,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView5"
         android:layout_width="300dp"
         android:layout_height="200dp"
         android:layout_marginTop="200dp"
@@ -62,75 +63,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"></LinearLayout>
-
-            <ImageView
-                android:id="@+id/RatingImg1"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="43dp"
-                android:layout_marginBottom="24dp"
-                android:adjustViewBounds="true"
-                android:contentDescription="rating star 1"
-                android:scaleType="fitCenter"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@drawable/ic_baseline_star_outline_24" />
-
-            <ImageView
-                android:id="@+id/RatingImg2"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginBottom="24dp"
-                android:adjustViewBounds="true"
-                android:contentDescription="rating star 2"
-                android:scaleType="fitCenter"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/RatingImg1"
-                app:srcCompat="@drawable/ic_baseline_star_outline_24" />
-
-            <ImageView
-                android:id="@+id/RatingImg3"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginBottom="24dp"
-                android:adjustViewBounds="true"
-                android:contentDescription="rating star 3"
-                android:scaleType="fitCenter"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/RatingImg2"
-                app:srcCompat="@drawable/ic_baseline_star_outline_24" />
-
-            <ImageView
-                android:id="@+id/RatingImg4"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="24dp"
-                android:adjustViewBounds="true"
-                android:contentDescription="rating star 4"
-                android:scaleType="fitCenter"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/RatingImg5"
-                app:srcCompat="@drawable/ic_baseline_star_outline_24" />
-
-            <ImageView
-                android:id="@+id/RatingImg5"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginEnd="43dp"
-                android:layout_marginBottom="24dp"
-                android:adjustViewBounds="true"
-                android:contentDescription="rating star 5"
-                android:scaleType="fitCenter"
-                app:layout_constraintBottom_toBottomOf="parent"
+            <RatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:srcCompat="@drawable/ic_baseline_star_outline_24" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/driverStatusCard" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/driverStatusCard"
@@ -194,4 +134,16 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/rateBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Rate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView5" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
