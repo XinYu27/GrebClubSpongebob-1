@@ -34,7 +34,7 @@
                 app:srcCompat="@drawable/emergency" />
 
             <Button
-                android:id="@+id/sendButton"
+                android:id="@+id/sendBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="28dp"
@@ -107,7 +107,7 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/destinationEmergency"
+                android:id="@+id/destinationText"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
