@@ -36,7 +36,7 @@
             android:exported="false" />
         <activity
             android:name=".AddDriver"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".SignUp"
             android:exported="false" />
