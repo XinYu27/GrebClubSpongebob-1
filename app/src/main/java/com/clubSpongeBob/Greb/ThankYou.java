@@ -13,7 +13,7 @@ import android.widget.TextView;
 public class ThankYou extends AppCompatActivity {
     final private String TAG = "ThankYouActivity";
     RatingBar ratingBar;
-    Driver driver = CommonUtils.getSelectedDriver();
+    final private Driver driver = CommonUtils.getSelectedDriver();
     TextView driverNameText;
     TextView carPlateText;
     TextView carModelText;
@@ -44,7 +44,8 @@ public class ThankYou extends AppCompatActivity {
             public void onClick(View view) {
                 try{
                     if(CommonUtils.orderIsEmpty()) throw new Exception("Driver is not set in CommonUtils");
-                    FirebaseUtils.updateRating(CommonUtils.getSelectedDriver(), ratingBar.getNumStars());
+                    FirebaseUtils.updateRating(CommonUtils.getSelectedDriver(), (int)ratingBar.getRating());
+                    CommonUtils.reset();
                 } catch (Exception e){
                     Log.e(TAG, e.getMessage());
                 }
