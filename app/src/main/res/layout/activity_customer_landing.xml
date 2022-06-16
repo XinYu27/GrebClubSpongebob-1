@@ -7,20 +7,7 @@
     android:background="#EDF6FE">
 
 
-    <EditText
-        android:id="@+id/currentTime"
-        android:layout_width="190dp"
-        android:layout_height="78dp"
-        android:layout_marginStart="110dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="110dp"
-        android:editable="false"
-        android:ems="10"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
@@ -179,5 +166,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/mgid_arc_imageassetref_nick_removebg_preview"
         tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/currentTime"
+        android:layout_width="194dp"
+        android:layout_height="67dp"
+        android:layout_marginStart="108dp"
+        android:layout_marginTop="36dp"
+        android:ems="20"
+        android:gravity="center"
+        android:text="10:00PM"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#164976"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
