@@ -3,8 +3,10 @@ package com.clubSpongeBob.Greb;
 
 import static com.clubSpongeBob.Greb.FirebaseUtils.addOrder;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +25,9 @@ import java.util.Date;
 
 public class CustomerLanding extends AppCompatActivity {
     TextView currentTime;
+    private Handler mHandler= new Handler();
+    public static int noOfPassenger;
+    public static String eat;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -84,23 +89,36 @@ public class CustomerLanding extends AppCompatActivity {
 
 //                EditText mPassenger=(EditText)findViewById(R.id.numPassengers);
                 String passN=mPassenger.getText().toString();
-                int noOfPassenger= Integer.parseInt(passN);
+                noOfPassenger= Integer.parseInt(passN);
 
 //                EditText mTime=(EditText) findViewById(R.id.inputEAT);
-                String currTime=mTime.getText().toString();
+                eat=mTime.getText().toString();
 //                LocalTime time=LocalTime.parse(currTime);
 
-                addOrder(cLocation,dLocation,noOfPassenger,currTime);
+                addOrder(cLocation,dLocation,noOfPassenger,eat);
 
+                mHandler.postDelayed(new Runnable(){
+                    @Override
+                    public void run(){
+                        Intent intent=new Intent(CustomerLanding.this,WaitingPage.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                },1000);
             }
         });
 
 
     }
+    public static int getCapacity(){
+        return noOfPassenger;
+    }
+    public static String getEat(){
+        return eat;
+    }
+
     public void updateTime(){
         Date currTime = Calendar.getInstance().getTime();
-//        String formatTime = DateFormat.getTimeInstance(TimeFormat.CLOCK_24H).format(currTime);
-//        formatTime = formatTime.substring(0, 11);
         String time="hh:mm:ss aa";
         currentTime.setText(DateFormat.format(time,currTime));
     }
