@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="EMAIL">grebspongebob@yahoo.com</string>
-    <string name="EMAIL_API_KEY">dehdavbigbvbmcpq</string>
+    <string name="EMAIL">your_email</string>
+    <string name="EMAIL_API_KEY">your_key</string>
 </resources>
