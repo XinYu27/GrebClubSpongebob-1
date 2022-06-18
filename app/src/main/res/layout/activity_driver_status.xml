@@ -7,16 +7,112 @@
     android:background="#EEF7FF"
     tools:context=".driver_status">
 
-  <androidx.recyclerview.widget.RecyclerView
-      android:id="@+id/rv"
-      android:layout_width="409dp"
-      android:layout_height="729dp"
-      android:layout_marginStart="1dp"
-      android:layout_marginTop="1dp"
-      android:layout_marginEnd="1dp"
-      android:layout_marginBottom="1dp"
-      app:layout_constraintBottom_toBottomOf="parent"
+  <Button
+      android:id="@+id/button10"
+      android:layout_width="354dp"
+      android:layout_height="166dp"
+      android:backgroundTint="#FFFFFF"
+      android:shadowColor="#000000"
+      app:cornerRadius="20dp"
+      tools:layout_editor_absoluteX="28dp"
+      tools:layout_editor_absoluteY="462dp" />
+
+  <Button
+      android:id="@+id/button8"
+      android:layout_width="354dp"
+      android:layout_height="166dp"
+      android:layout_marginTop="80dp"
+      android:backgroundTint="#FFFFFF"
+      android:shadowColor="#000000"
+      android:shadowDx="5"
+      android:shadowDy="5"
+      app:circularflow_radiusInDP="10"
+      app:cornerRadius="20dp"
       app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.491"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
+
+  <Button
+      android:id="@+id/button9"
+      android:layout_width="354dp"
+      android:layout_height="166dp"
+      android:backgroundTint="#FFFFFF"
+      android:shadowColor="#000000"
+      app:cornerRadius="20dp"
+      tools:layout_editor_absoluteX="28dp"
+      tools:layout_editor_absoluteY="264dp" />
+
+  <TextView
+      android:id="@+id/textView10"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      android:elevation="5dp"
+      android:text="Chong Ching Chong"
+      android:textColor="#000000"
+      app:layout_constraintEnd_toEndOf="@+id/button8"
+      app:layout_constraintHorizontal_bias="0.099"
+      app:layout_constraintStart_toStartOf="@+id/button8"
+      app:layout_constraintTop_toTopOf="@+id/button8" />
+
+  <TextView
+      android:id="@+id/textView9"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="32dp"
+      android:layout_marginTop="12dp"
+      android:elevation="5dp"
+      android:text="Customer : John"
+      app:layout_constraintStart_toStartOf="@+id/button8"
+      app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+  <TextView
+      android:id="@+id/textView11"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:elevation="5dp"
+      android:text="Capacity : 5"
+      app:layout_constraintEnd_toEndOf="@+id/button8"
+      app:layout_constraintHorizontal_bias="0.113"
+      app:layout_constraintStart_toStartOf="@+id/button8"
+      app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+  <TextView
+      android:id="@+id/textView12"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:elevation="5dp"
+      android:text="Location : 1.11,2.11"
+      app:layout_constraintEnd_toEndOf="@+id/button8"
+      app:layout_constraintHorizontal_bias="0.138"
+      app:layout_constraintStart_toStartOf="@+id/button8"
+      app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+  <TextView
+      android:id="@+id/textView14"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:editable="false"
+      android:elevation="5dp"
+      android:text="Black Myvi PGG 1111"
+      android:textStyle="italic"
+      app:layout_constraintEnd_toEndOf="@+id/button8"
+      app:layout_constraintHorizontal_bias="0.102"
+      app:layout_constraintStart_toStartOf="@+id/button8"
+      tools:layout_editor_absoluteY="116dp" />
+
+  <ImageView
+      android:id="@+id/imageView7"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="52dp"
+      android:elevation="5dp"
+      app:layout_constraintEnd_toEndOf="@+id/button8"
+      app:layout_constraintHorizontal_bias="0.91"
+      app:layout_constraintStart_toStartOf="@+id/button8"
+      app:layout_constraintTop_toTopOf="@+id/button8"
+      app:srcCompat="@drawable/customeron" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
