@@ -17,46 +17,4 @@
     <string name="your_destination">Your Destination</string>
     <string name="estimated_arrival_time">Estimated Arrival Time</string>
     <string name="number_of_passengers">Number of Passengers</string>
-
-    <string-array name="driverName_txt">
-        <item>Chan Ching Chong</item>
-        <item>Chin Ling Long</item>
-        <item>Ang Ang Tan</item>
-        <item>Pai Da Xing</item>
-        <item>Pai Da Xing</item>
-        <item>Pai Da Xing</item>
-    </string-array>
-    <string-array name="carCapacity_txt">
-        <item>Capacity:</item>
-        <item>Capacity:</item>
-        <item>Capacity:</item>
-        <item>Capacity:</item>
-        <item>Pai Da Xing</item>
-        <item>Pai Da Xing</item>
-    </string-array>
-    <string-array name="eatTime_txt">
-        <item>Estimated Arrival Time:</item>
-        <item>Estimated Arrival Time:</item>
-        <item>Estimated Arrival Time:</item>
-        <item>Estimated Arrival Time:</item>
-        <item>Pai Da Xing</item>
-        <item>Pai Da Xing</item>
-    </string-array>
-    <string-array name="startPoint_txt">
-        <item>Starting Point:</item>
-        <item>Starting Point:</item>
-        <item>Starting Point:</item>
-        <item>Starting Point:</item>
-        <item>Pai Da Xing</item>
-        <item>Pai Da Xing</item>
-    </string-array>
-    <string-array name="destination_txt">
-        <item>Destination:</item>
-        <item>Destination:</item>
-        <item>Destination:</item>
-        <item>Destination:</item>
-        <item>Pai Da Xing</item>
-        <item>Pai Da Xing</item>
-    </string-array>
-
 </resources>
