@@ -9,10 +9,14 @@ import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -28,7 +32,17 @@ public class CustomerLanding extends AppCompatActivity {
 
         currentTime = findViewById(R.id.currentTime);
 
+        this.getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setCustomView(R.layout.custom_action_bar);
 
+        View view = getSupportActionBar().getCustomView();
+        ImageView imageView = view.findViewById(R.id.backNavigation);
+
+        imageView.setVisibility(View.GONE);
+
+        TextView name = view.findViewById(R.id.name);
+        name.setText("Customer");
 
         Thread thread = new Thread() {
             @Override
