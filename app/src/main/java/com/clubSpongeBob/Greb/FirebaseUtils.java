@@ -12,7 +12,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,7 +25,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
-import java.util.UUID;
 
 public class FirebaseUtils {
     private static FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -220,7 +218,7 @@ public class FirebaseUtils {
 
     }
 
-    public static void customerGetDriver(){
+    public static void customerGetDriver(int capacity,String EAT){
         driverRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -229,10 +227,14 @@ public class FirebaseUtils {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot){
                         Queue<Driver>dQueue=new PriorityQueue<>();
-                        for(DataSnapshot data: dataSnapshot.getChildren()){
-                            Driver driver=data.getValue(Driver.class);
-                            dQueue.add(driver);
-                            System.out.println(driver.getName());//for test
+                        for(DataSnapshot data: dataSnapshot.getChildren()) {
+                            Driver driver = data.getValue(Driver.class);
+                            int cuseat=Integer.parseInt(EAT);
+                            int drieat=Integer.parseInt(driver.getEat());
+                            if (driver.getCapacity() <capacity && drieat>=cuseat) {
+                                dQueue.add(driver);
+                                System.out.println(driver.getName());//for test
+                            }
                         }
                         //Do whatever
                         //Put in recyclerview
@@ -245,6 +247,37 @@ public class FirebaseUtils {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error){
+                Log.d(TAG,"Unavailable to retrieve data");
+            }
+        });
+    }
+
+    public static void getOrder(){
+        customerRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Query query=customerRef.orderByChild("status");
+                query.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        List<Customer> cList=new ArrayList<>();
+                        for(DataSnapshot data: snapshot.getChildren()){
+                            Customer customer=data.getValue(Customer.class);
+                            cList.add(customer);
+                        }
+                        //Do here
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Log.d(TAG,"Unavailable to retrieve data");
+                    }
+                });
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
                 Log.d(TAG,"Unavailable to retrieve data");
             }
         });

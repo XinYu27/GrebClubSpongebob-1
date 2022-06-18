@@ -175,7 +175,6 @@
         android:layout_marginTop="36dp"
         android:ems="20"
         android:gravity="center"
-        android:text="10:00PM"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="#164976"
         app:layout_constraintStart_toStartOf="parent"
