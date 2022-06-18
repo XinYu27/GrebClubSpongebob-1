@@ -80,18 +80,6 @@
                         app:layout_constraintStart_toEndOf="@+id/carPlateText"
                         app:layout_constraintTop_toBottomOf="@+id/driverNameText" />
 
-                    <RatingBar
-                        android:id="@+id/ratingBar"
-                        style="?android:attr/ratingBarStyleSmall"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:numStars="5"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.132"
-                        app:layout_constraintStart_toEndOf="@+id/imageView"
-                        app:layout_constraintTop_toBottomOf="@+id/carPlateText" />
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
@@ -108,7 +96,7 @@
                 app:srcCompat="@drawable/driver_coming" />
 
             <TextView
-                android:id="@+id/currentLocationText"
+                android:id="@+id/currentLocationDriverComing"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -126,7 +114,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/driverStatusCard" />
 
             <TextView
-                android:id="@+id/destinationText"
+                android:id="@+id/destinationDriverComing"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -141,7 +129,7 @@
                 android:translationZ="2dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/currentLocationText" />
+                app:layout_constraintTop_toBottomOf="@+id/currentLocationDriverComing" />
 
             <TextView
                 android:id="@+id/textView6"
@@ -153,7 +141,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/destinationText" />
+                app:layout_constraintTop_toBottomOf="@+id/destinationDriverComing" />
 
             <TextView
                 android:id="@+id/eatDriverComing"
@@ -190,7 +178,7 @@
         app:layout_constraintTop_toBottomOf="@+id/cardView4" />
 
     <Button
-        android:id="@+id/emergencyDriverComingBtn"
+        android:id="@+id/emergencyDriverComing"
         android:layout_width="67dp"
         android:layout_height="67dp"
         android:layout_marginBottom="16dp"
