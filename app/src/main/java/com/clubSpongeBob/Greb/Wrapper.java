@@ -23,6 +23,7 @@ public class Wrapper extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         CommonUtils.setsApplication(getApplication());
+        new EmailService();
         setContentView(R.layout.activity_wrapper);
 
         final Intent intent;

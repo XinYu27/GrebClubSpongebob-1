@@ -31,6 +31,8 @@ android {
 }
 
 dependencies {
+    implementation 'com.sun.mail:android-mail:1.6.0'
+    implementation 'com.sun.mail:android-activation:1.6.0'
     implementation 'joda-time:joda-time:2.9.4'
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.6.0'
