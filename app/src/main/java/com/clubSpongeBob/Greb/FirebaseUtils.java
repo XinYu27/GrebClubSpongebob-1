@@ -12,7 +12,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,7 +25,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
-import java.util.UUID;
 
 public class FirebaseUtils {
     private static FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -49,17 +47,17 @@ public class FirebaseUtils {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if(task.isSuccessful()){
-                                                Toast.makeText(Wrapper.getSContext(),"User has been registered successfully!", Toast.LENGTH_LONG).show();
-                                                Wrapper.getSContext().startActivity(new Intent(Wrapper.getsApplication(), CustomerLanding.class));
+                                                Toast.makeText(CommonUtils.getSContext(),"User has been registered successfully!", Toast.LENGTH_LONG).show();
+                                                CommonUtils.getSContext().startActivity(new Intent(CommonUtils.getsApplication(), CustomerLanding.class));
                                                 Log.i(TAG, "Successfully register user: " + mAuth.getCurrentUser().getUid());
                                             }else{
-                                                Toast.makeText(Wrapper.getSContext(),"Failed to register! Try again!", Toast.LENGTH_LONG).show();
+                                                Toast.makeText(CommonUtils.getSContext(),"Failed to register! Try again!", Toast.LENGTH_LONG).show();
                                                 Log.e(TAG, "Failed to register user: " + mAuth.getCurrentUser().getUid());
                                             }
                                         }
                                     });
                         }else {
-                            Toast.makeText(Wrapper.getSContext(), "Failed to register", Toast.LENGTH_LONG).show();
+                            Toast.makeText(CommonUtils.getSContext(), "Failed to register", Toast.LENGTH_LONG).show();
                         }
                     }
         });
@@ -87,7 +85,7 @@ public class FirebaseUtils {
     }
 
     public static void loginUser(String email, String password){
-        Context context = Wrapper.getSContext();
+        Context context = CommonUtils.getSContext();
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>(){
 
@@ -105,8 +103,8 @@ public class FirebaseUtils {
                                                 Customer c = task.getResult().getValue(Customer.class);
                                                 Log.d(TAG, "Successfully get data from user: " + c.getName());
                                                 if(c.isAdmin())
-                                                    context.startActivity(new Intent(Wrapper.getsApplication(), AdminLanding.class));
-                                                context.startActivity(new Intent(Wrapper.getsApplication(), CustomerLanding.class));
+                                                    context.startActivity(new Intent(CommonUtils.getsApplication(), AdminLanding.class));
+                                                context.startActivity(new Intent(CommonUtils.getsApplication(), CustomerLanding.class));
                                             }
                                         }
                                     });
@@ -121,29 +119,26 @@ public class FirebaseUtils {
     public static boolean isLogin(){
         FirebaseUser user = mAuth.getCurrentUser();
         if (user == null) return false;
-        Toast.makeText(Wrapper.getSContext(), "Welcome "+ user.getDisplayName(), Toast.LENGTH_LONG);
+        Toast.makeText(CommonUtils.getSContext(), "Welcome "+ user.getDisplayName(), Toast.LENGTH_LONG);
         return true;
     }
 
     public static void signOutUser(){
         mAuth.signOut();
-        Toast.makeText(Wrapper.getSContext(), "Sign out", Toast.LENGTH_LONG).show();
+        Toast.makeText(CommonUtils.getSContext(), "Sign out", Toast.LENGTH_LONG).show();
     }
 
-    public static String createUID(){
-        return UUID.randomUUID().toString();
-    }
 
     public static void addDriver(Driver driver){
-        DatabaseReference ref = driverRef.child(createUID());
+        DatabaseReference ref = driverRef.child(driver.getUid());
         ref.setValue(driver).addOnCompleteListener(new OnCompleteListener<Void>(){
 
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
-                    Toast.makeText(Wrapper.getSContext(), "Added new driver", Toast.LENGTH_LONG).show();
+                    Toast.makeText(CommonUtils.getSContext(), "Added new driver", Toast.LENGTH_LONG).show();
                 }else{
-                    Toast.makeText(Wrapper.getSContext(), "Failed to add new driver", Toast.LENGTH_LONG).show();
+                    Toast.makeText(CommonUtils.getSContext(), "Failed to add new driver", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -223,7 +218,7 @@ public class FirebaseUtils {
 
     }
 
-    public static void customerGetDriver(){
+    public static void customerGetDriver(int capacity,String EAT){
         driverRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -232,10 +227,14 @@ public class FirebaseUtils {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot){
                         Queue<Driver>dQueue=new PriorityQueue<>();
-                        for(DataSnapshot data: dataSnapshot.getChildren()){
-                            Driver driver=data.getValue(Driver.class);
-                            dQueue.add(driver);
-                            System.out.println(driver.getName());//for test
+                        for(DataSnapshot data: dataSnapshot.getChildren()) {
+                            Driver driver = data.getValue(Driver.class);
+                            int cuseat=Integer.parseInt(EAT);
+                            int drieat=Integer.parseInt(driver.getEat());
+                            if (driver.getCapacity() <capacity && drieat>=cuseat) {
+                                dQueue.add(driver);
+                                System.out.println(driver.getName());//for test
+                            }
                         }
                         //Do whatever
                         //Put in recyclerview
@@ -248,6 +247,37 @@ public class FirebaseUtils {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error){
+                Log.d(TAG,"Unavailable to retrieve data");
+            }
+        });
+    }
+
+    public static void getOrder(){
+        customerRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Query query=customerRef.orderByChild("status");
+                query.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        List<Customer> cList=new ArrayList<>();
+                        for(DataSnapshot data: snapshot.getChildren()){
+                            Customer customer=data.getValue(Customer.class);
+                            cList.add(customer);
+                        }
+                        //Do here
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Log.d(TAG,"Unavailable to retrieve data");
+                    }
+                });
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
                 Log.d(TAG,"Unavailable to retrieve data");
             }
         });
@@ -273,17 +303,17 @@ public class FirebaseUtils {
 
     }
 
-    public static void updateRating(String uid, int rate, int numOfRating){
+    public static void updateRating(Driver driver, int rate){
         Map<String, Object> values = new HashMap<>();
-        values.put("rating", rate);
-        values.put("numOfRating", numOfRating);
-        driverRef.child(uid).updateChildren(values).addOnCompleteListener(new OnCompleteListener(){
+        values.put("rating", (rate + driver.getRating()) / (driver.getNumOfRating() + 1));
+        values.put("numOfRating", driver.getNumOfRating()+1);
+        driverRef.child(driver.getUid()).updateChildren(values).addOnCompleteListener(new OnCompleteListener(){
             @Override
             public void onComplete(@NonNull Task task) {
                 if(task.isSuccessful()){
-                    Log.d(TAG, "Successfully update rating: " + uid);
+                    Log.d(TAG, "Successfully update rating: " + driver.getUid());
                 }else {
-                    Log.e(TAG,"Unable to update rating: " + uid);
+                    Log.e(TAG,"Unable to update rating: " + driver.getUid());
                 }
             }
         });
