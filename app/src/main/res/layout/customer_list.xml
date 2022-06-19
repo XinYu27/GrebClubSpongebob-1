@@ -93,7 +93,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.055"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:layout_editor_absoluteY="44dp" />
+                app:layout_constraintTop_toBottomOf="@+id/driverName" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
