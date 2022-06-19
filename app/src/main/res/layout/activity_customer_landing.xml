@@ -7,53 +7,7 @@
     android:background="#EDF6FE">
 
 
-    <EditText
-        android:id="@+id/currentTimeHour"
-        android:layout_width="67dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="110dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="110dp"
-        android:editable="false"
-        android:ems="10"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textColor="#164976"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/currentTimeHour2"
-        android:layout_width="67dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="110dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="110dp"
-        android:editable="false"
-        android:ems="10"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textColor="#164976"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.701"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/currentTimeHour3"
-        android:layout_width="42dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="110dp"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="90dp"
-        android:editable="false"
-        android:ems="10"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textColor="#164976"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.911"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
@@ -68,7 +22,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/currentTimeHour"
+        app:layout_constraintTop_toBottomOf="@+id/currentTime"
         app:layout_constraintVertical_bias="0.0"
         tools:ignore="MissingConstraints">
 
@@ -214,12 +168,17 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=":"
+        android:id="@+id/currentTime"
+        android:layout_width="194dp"
+        android:layout_height="67dp"
+        android:layout_marginStart="108dp"
+        android:layout_marginTop="36dp"
+        android:ems="20"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="#164976"
-        android:textSize="34sp"
-        tools:layout_editor_absoluteX="184dp"
-        tools:layout_editor_absoluteY="52dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

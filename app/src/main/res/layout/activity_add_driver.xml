@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".AddDriver">
 
+    <EditText
+        android:id="@+id/car_Colour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="320dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Car Colour"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.303"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/driver_Name" />
+
     <ImageView
         android:id="@+id/imageView6"
         android:layout_width="70dp"

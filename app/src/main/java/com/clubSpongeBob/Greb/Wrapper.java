@@ -19,20 +19,11 @@ import com.google.firebase.auth.FirebaseAuth;
 public class Wrapper extends AppCompatActivity{
     final String TAG = "Wrapper";
 
-    private static Application sApplication;
-
-    public static Application getsApplication(){
-        return sApplication;
-    }
-
-    public static Context getSContext(){
-        return getsApplication().getApplicationContext();
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sApplication = getApplication();
+        CommonUtils.setsApplication(getApplication());
+        new EmailService();
         setContentView(R.layout.activity_wrapper);
 
         final Intent intent;

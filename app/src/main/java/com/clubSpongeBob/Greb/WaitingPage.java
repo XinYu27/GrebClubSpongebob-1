@@ -22,6 +22,14 @@ public class WaitingPage extends AppCompatActivity {
                 finish();
             }
         },3000);
+
+        Thread thread = new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                FirebaseUtils.customerGetDriver(CustomerLanding.getCapacity(),CustomerLanding.getEat());
+            }
+        };
     }
 }
 

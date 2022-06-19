@@ -24,14 +24,14 @@ public class customerList_RecyclerAdapter extends RecyclerView.Adapter<customerL
     }
     @NonNull
     @Override
-    public customerList_RecyclerAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.customer_list,parent,false);
-        return new customerList_RecyclerAdapter.MyViewHolder(view) ;
+        return new MyViewHolder(view) ;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull customerList_RecyclerAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.name.setText(list.get(position).getDriverName());
         holder.capacity.setText(list.get(position).getCarCapacity());
         holder.eat.setText(list.get(position).getEatTime());
