@@ -11,16 +11,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class CustomersFragment extends Fragment {
 
@@ -58,6 +54,7 @@ public class CustomersFragment extends Fragment {
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                customerList.clear();
                 for(DataSnapshot snapshot:dataSnapshot.getChildren()){
                     System.out.println(snapshot);
                     Customer customer = snapshot.getValue(Customer.class);
@@ -75,40 +72,4 @@ public class CustomersFragment extends Fragment {
 
 
     }
-
-
-//    public void getOrder(){
-//        List<Customer> cList=new ArrayList<>();
-//        //ArrayList<customerListModel> customerListModels = new ArrayList<>();
-//        customerRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                Query query=customerRef.orderByChild("status");
-//                query.addValueEventListener(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                        for(DataSnapshot data: snapshot.getChildren()){
-//                            Customer customer=data.getValue(Customer.class);
-//                            cList.add(customer);
-//                        }
-//                        for (int i=0;i<cList.size();i++){
-//                            customerList.add(new customerListModel(cList.get(i).getName()
-//                                    ,cList.get(i).getCapacity(),cList.get(i).getEat()
-//                                    ,cList.get(i).getLocation(),cList.get(i).getDestination()
-//                                    ,cList.get(i).getStatus()));
-//                        }
-//                    }
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError error) {
-//                        System.out.println("db error");
-//                    }
-//                });
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                System.out.println("db error");
-//            }
-//        });
-
 }

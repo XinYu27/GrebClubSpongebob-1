@@ -39,6 +39,11 @@ public class FirebaseUtils {
     public static DatabaseReference getCustomerRef(){
         return customerRef;
     }
+
+    public static FirebaseAuth getmAuth() {
+        return mAuth;
+    }
+
     public static void registerUser(String email, String name, String password, String emergency){
         // Assuming all input is validated
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -291,9 +296,5 @@ public class FirebaseUtils {
                 }
             }
         });
-    }
-
-    public static DatabaseReference getDriverRef() {
-        return driverRef;
     }
 }
