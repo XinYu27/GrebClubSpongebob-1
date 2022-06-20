@@ -5,7 +5,7 @@ import java.util.UUID;
 public class Driver extends Person implements Comparable<Driver>{
     private String carPlate, carModel, carColour;
     private int rating, numOfRating;
-    private String uid;
+    private String uid, customer;
     // status 0: unavailable, 1: available
 
     Driver(){
@@ -32,6 +32,14 @@ public class Driver extends Person implements Comparable<Driver>{
         this.rating = 3;
         this.numOfRating = 0;
         setUid();
+    }
+
+    public String getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(String customer) {
+        this.customer = customer;
     }
 
     public String getUid() {
