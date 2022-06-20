@@ -53,7 +53,6 @@ public class CustomersFragment extends Fragment {
     }
 
 
-
     private void getCustomer() {
         Query query = FirebaseUtils.customerRef;
         query.addValueEventListener(new ValueEventListener() {
