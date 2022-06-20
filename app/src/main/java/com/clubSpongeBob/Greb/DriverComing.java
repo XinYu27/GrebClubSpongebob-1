@@ -53,7 +53,8 @@ public class DriverComing extends AppCompatActivity {
     }
 
     public void sendEmergency(View v){
-        System.out.println("emergency button");
+        Customer self = CommonUtils.getSelf();
+        EmailService.sendEmail(self.getEmergencyContact(),self.getLocation(), self.getDestination());
     }
 
     public void cancel(View v){
