@@ -2,18 +2,19 @@ package com.clubSpongeBob.Greb;
 
 import java.util.UUID;
 
-public class Driver extends Person implements Comparable<Driver>{
+public class Driver extends Person implements Comparable<Driver> {
     private String carPlate, carModel, carColour;
     private int rating, numOfRating;
-    private String uid;
     private String[] eatArr;
+    private String uid, customer;
     // status 0: unavailable, 1: available
 
-    Driver(){
+    Driver() {
         super();
     }
 
-    Driver(String name, String location, int capacity, String carPlate, String carModel, String carColour, int rating, int numOfRating, int status, String eat){
+    Driver(String name, String location, int capacity, String carPlate, String carModel, String carColour, int rating,
+            int numOfRating, int status, String eat) {
         super(name, status, capacity, location);
         this.carPlate = carPlate;
         this.carModel = carModel;
@@ -24,7 +25,7 @@ public class Driver extends Person implements Comparable<Driver>{
         setUid();
     }
 
-    Driver(String name, String carModel, String carPlate, String carColour, int capacity, String location){
+    Driver(String name, String carModel, String carPlate, String carColour, int capacity, String location) {
         // Creating new driver
         super(name, 0, capacity, location);
         this.carPlate = carPlate;
@@ -35,11 +36,19 @@ public class Driver extends Person implements Comparable<Driver>{
         setUid();
     }
 
+    public String getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(String customer) {
+        this.customer = customer;
+    }
+
     public String getUid() {
         return uid;
     }
 
-    private void setUid(){
+    private void setUid() {
         uid = createUID();
     }
 
@@ -47,7 +56,7 @@ public class Driver extends Person implements Comparable<Driver>{
         this.uid = uid;
     }
 
-    private String createUID(){
+    private String createUID() {
         return UUID.randomUUID().toString();
     }
 
@@ -105,7 +114,7 @@ public class Driver extends Person implements Comparable<Driver>{
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return String.format("Driver: %s %s,Location: %s", this.uid, this.getName(), this.getLocation());
     }
 }
