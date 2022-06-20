@@ -46,6 +46,9 @@
             android:name=".DriverCustomerView"
             android:exported="false" />
         <activity
+            android:name=".AddDriver"
+            android:exported="false" />
+        <activity
             android:name=".CustomerLanding"
             android:exported="true" />
         <activity

@@ -1,6 +1,7 @@
 package com.clubSpongeBob.Greb;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import java.util.List;
 public class driverList_RecyclerAdapter extends RecyclerView.Adapter<driverList_RecyclerAdapter.MyViewHolder> {
     private Context context;
     private ArrayList<Driver> drivList ;
+
+    int index = -1;
 
     public driverList_RecyclerAdapter(Context context, ArrayList<Driver> drivList){
         this.context = context;
@@ -37,11 +40,10 @@ public class driverList_RecyclerAdapter extends RecyclerView.Adapter<driverList_
         Driver model = drivList.get(position);
         holder.name.setText(model.getName());
         holder.capacity.setText("Capacity: "+String.valueOf(model.getCapacity()));
-        //holder.customer.setText("Customer: "+model);
+        //holder.customer.setText("Customer: "+m);
         holder.location.setText("Location: "+model.getLocation());
         holder.carinfo.setText(model.getCarColour()+" "+model.getCarModel()+" "+model.getCarPlate());
         int status = model.getStatus();
-
         switch(status){
             case 1:
                 holder.driverStatus.setImageResource(R.drawable.ic_baseline_person_24_green);
@@ -51,6 +53,13 @@ public class driverList_RecyclerAdapter extends RecyclerView.Adapter<driverList_
                 break;
             default:
         }
+
+        String cust = model.getCustomer();
+        if (cust==null){
+            holder.customer.setText("Customer: -");
+        }
+        else
+            holder.customer.setText("Customer: "+cust);
     }
 
     @Override

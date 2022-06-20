@@ -1,5 +1,6 @@
 package com.clubSpongeBob.Greb;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -43,6 +45,17 @@ public class DriversFragment extends Fragment {
         driverList = new ArrayList<>();
         drivAdapter = new driverList_RecyclerAdapter(this.getContext(), driverList);
         recyclerView.setAdapter(drivAdapter);
+
+        Button rtn=(Button)view.findViewById(R.id.addDriverBtn);
+        rtn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(v.getContext(),AddDriver.class);
+                startActivity(intent);
+            }
+        });
+
 
         getDriver();
         return view;
