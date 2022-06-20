@@ -1,50 +1,72 @@
 package com.clubSpongeBob.Greb;
 
-import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.client.HttpClient;
+import android.util.Log;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
+import com.squareup.okhttp.MediaType;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
+import com.squareup.okhttp.Response;
 
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
+import org.json.JSONObject;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class MapService {
+    private static ExecutorService executor
+            = Executors.newFixedThreadPool(6);
     private static final String API_KEY = CommonUtils.getSContext().getString(R.string.MAP_API_KEY);
+    private static final String TAG = "Map Service";
 
     //downloading the data
-    public static String getData(String source, String destination) throws Exception {
+    public static String getData(String source, String destination) throws Exception{
+        String url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + source.replace(" ","") + "&destinations=" + destination.replace(" ","") + "&key=" + API_KEY;
 
-        var url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + source.replace(" ","") + "&destinations=" + destination.replace(" ","") + "&key=" + API_KEY;
-        var request = HttpRequest.newBuilder().GET().uri(URI.create(url)).build();
-        var client = HttpClient.newBuilder().build();
-        var response = client.send(request, HttpResponse.BodyHandlers.ofString()).body();
-        return response;
+        Log.i(TAG, "Source: "+source);
+        Log.i(TAG, "Destination: "+destination);
+        Log.i(TAG, "Url: "+url);
+
+        OkHttpClient client = new OkHttpClient();
+        MediaType mediaType = MediaType.parse("text/plain");
+        RequestBody body = RequestBody.create(mediaType,"");
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+        Response response = client.newCall(request).execute();
+
+        return response.body().string();
     }
 
     //need to pass the data from the textview
-    public static long[] getdistancentimesssss(String source, String destination) throws Exception {
+    public static Future<long[]> getDistanceTime(String source, String destination){
 
-        long distance = 0;
-        long time = 0;
+        return executor.submit(()->{
+            long distance = 0;
+            long time = 0;
+            try{
+                JSONObject jsonRespRouteDistance = new JSONObject(getData(source, destination))
+                        .getJSONArray("rows")
+                        .getJSONObject(0)
+                        .getJSONArray ("elements")
+                        .getJSONObject(0);
 
-        //parsing json data and updating data
-        JSONParser jp = new JSONParser();
-        JSONObject jo = (JSONObject) jp.parse(getData(source, destination));
-        JSONArray ja = (JSONArray) jo.get("rows");
-        jo = (JSONObject) ja.get(0);
-        ja = (JSONArray) jo.get("elements");
-        jo = (JSONObject) ja.get(0);
-        JSONObject je = (JSONObject) jo.get("distance");
-        JSONObject jf = (JSONObject) jo.get("duration");
-        distance = (long) je.get("value");
-        time = (long) jf.get("value");
+                //parsing json data and updating data
+                JSONObject je = jsonRespRouteDistance.getJSONObject("distance");
+                JSONObject jf = jsonRespRouteDistance.getJSONObject("duration");
+                distance = je.getLong("value");
+                time = jf.getLong("value");
 
-        return new long[] {distance,time};
+                Log.i(TAG, "Distance: "+ distance);
+                Log.i(TAG, "Time: " + time);
 
+            } catch (Exception e){
+                System.out.println("Error in Matrix API");
+                e.printStackTrace();
+            }
+            return new long[] {distance,time};
+        });
     }
-
 
 }

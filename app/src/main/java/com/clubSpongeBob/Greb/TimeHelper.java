@@ -1,12 +1,18 @@
 package com.clubSpongeBob.Greb;
 
+import android.util.Log;
+
 import org.joda.time.DateTime;
+import org.joda.time.Duration;
+import org.joda.time.format.DateTimeFormat;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 public class TimeHelper {
+    private static String TAG = "TimeHelper";
+
     public static DateTime convertSystemTimeToRequired(DateTime time){
 //        input system time and output required time
         int minutes = time.getMinuteOfHour() % 24;
@@ -19,25 +25,13 @@ public class TimeHelper {
         return convertSystemTimeToRequired(DateTime.now());
     }
 
-    public static Map<String, String> getCurrentRequiredTimeMap(){
-        return convertSystemTimeToHoursMinutes(getCurrentRequiredTime());
-    }
-
-    public static Map<String, String> convertSecondsToRequired(int seconds){
+    public static int calculateEAT(long durationInSec, boolean addMinutes){
         DateTime now = DateTime.now();
-        DateTime newDateTime = new DateTime(now.getYear(), now.getMonthOfYear(), now.getDayOfMonth(), now.getMinuteOfHour(), seconds);
-        return convertSystemTimeToHoursMinutes(newDateTime);
+        now = now.plusSeconds((int) durationInSec + (addMinutes? 5*60: 0));
+        int time = now.getHourOfDay() * 100;
+        Log.i(TAG, "CalculatedEAT: "+ String.format("%04d",time + now.getMinuteOfHour()));
+        return time + now.getMinuteOfHour();
     }
 
-    public static Map<String, String> convertSystemTimeToHoursMinutes(DateTime time){
-        Map<String, String> m = new HashMap<>();
-        DateTime requiredTime = convertSystemTimeToRequired(time);
-        int hours = requiredTime.getHourOfDay();
-        m.put("hours", Integer.toString(hours % 12));
-        m.put("minutes", Integer.toString(requiredTime.getMinuteOfHour()));
-        m.put("zone", hours >= 12?"PM":"AM");
-
-        return m;
-    }
 
 }

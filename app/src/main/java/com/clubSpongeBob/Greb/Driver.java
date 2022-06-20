@@ -2,7 +2,7 @@ package com.clubSpongeBob.Greb;
 
 import java.util.UUID;
 
-public class Driver extends Person{
+public class Driver extends Person implements Comparable<Driver>{
     private String carPlate, carModel, carColour;
     private int rating, numOfRating;
     private String uid;
@@ -40,6 +40,10 @@ public class Driver extends Person{
 
     private void setUid(){
         uid = createUID();
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     private String createUID(){
@@ -86,5 +90,13 @@ public class Driver extends Person{
         this.numOfRating = numOfRating;
     }
 
+    @Override
+    public int compareTo(Driver driver) {
+        return this.getEat().compareTo(driver.getEat());
+    }
 
+    @Override
+    public String toString(){
+        return String.format("Driver: %s %s,Location: %s", this.uid, this.getName(), this.getLocation());
+    }
 }

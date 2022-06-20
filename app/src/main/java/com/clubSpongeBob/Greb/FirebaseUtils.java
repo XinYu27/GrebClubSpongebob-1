@@ -19,12 +19,17 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class FirebaseUtils {
     private static FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -32,7 +37,16 @@ public class FirebaseUtils {
     private static DatabaseReference customerRef = db.getReference("customers");
     private static DatabaseReference driverRef = db.getReference("drivers");
     private static String TAG = "firebase utils";
+    private static ExecutorService executor
+            = Executors.newFixedThreadPool(10);
 
+    public static DatabaseReference getDriverRef(){
+        return driverRef;
+    }
+
+    public static DatabaseReference getCustomerRef(){
+        return customerRef;
+    }
     public static void registerUser(String email, String name, String password, String emergency){
         // Assuming all input is validated
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -101,6 +115,7 @@ public class FirebaseUtils {
                                                 Log.e(TAG, "Error getting user data", task.getException());
                                             } else {
                                                 Customer c = task.getResult().getValue(Customer.class);
+                                                CommonUtils.setSelf(c);
                                                 Log.d(TAG, "Successfully get data from user: " + c.getName());
                                                 if(c.isAdmin())
                                                     context.startActivity(new Intent(CommonUtils.getsApplication(), AdminLanding.class));
@@ -218,38 +233,76 @@ public class FirebaseUtils {
 
     }
 
-    public static void customerGetDriver(int capacity,String EAT){
-        driverRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Query query=driverRef.orderByChild("status").startAt(1);
-                query.addValueEventListener(new ValueEventListener(){
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot){
-                        Queue<Driver>dQueue=new PriorityQueue<>();
-                        for(DataSnapshot data: dataSnapshot.getChildren()) {
-                            Driver driver = data.getValue(Driver.class);
-                            int cuseat=Integer.parseInt(EAT);
-                            int drieat=Integer.parseInt(driver.getEat());
-                            if (driver.getCapacity() <capacity && drieat>=cuseat) {
-                                dQueue.add(driver);
-                                System.out.println(driver.getName());//for test
+
+    public static Future<Queue<Driver>> customerGetDriver(int noOfPassenger,String EAT, String origin, String destination){
+        Queue<Driver> dQueue = new PriorityQueue<>();
+
+        return executor.submit(()->{
+            System.out.println("Enter here1");
+            driverRef.orderByChild("status").startAt(1).addValueEventListener(new ValueEventListener(){
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot){
+                    System.out.println("Enter here2");
+                    for(DataSnapshot data: dataSnapshot.getChildren()) {
+                        Driver driver = data.getValue(Driver.class);
+                        Log.i(TAG, driver.toString());
+
+                        if (driver.getCapacity() > noOfPassenger) {
+                            try {
+                                long[] distance = new long[3];
+                                long[] time = new long[3];
+                                long[] durations = new long[2];
+                                long totalDuration = 0;
+
+                                Future<long[]> driverToCus = MapService.getDistanceTime(driver.getLocation(), origin);
+                                Future<long[]> cusToDest = MapService.getDistanceTime(origin, destination);
+
+                                try {
+                                    distance[0] = driverToCus.get()[0];
+                                    durations[0] = driverToCus.get()[1];
+                                    totalDuration += driverToCus.get()[1];
+                                    if (driverToCus.isDone()){
+                                        time[0] = TimeHelper.calculateEAT(durations[0], false);
+                                    }
+
+                                    distance[1] = cusToDest.get()[0];
+                                    durations[1] = cusToDest.get()[1];
+                                    totalDuration += cusToDest.get()[1];
+
+                                    if (cusToDest.isDone()){
+                                        time[1] = TimeHelper.calculateEAT(durations[0], false);
+                                    }
+
+                                    if (driverToCus.isDone() && cusToDest.isDone()){
+                                        Log.i(TAG, "TotalDuration: "+ totalDuration);
+                                        time[2] = TimeHelper.calculateEAT(totalDuration, true);
+                                        Log.i(TAG, "Time[2]: "+String.format("%04d", time[2]));
+                                        Log.i(TAG, "EAT: "+ Long.parseLong(EAT));
+                                        if (time[2] >= Long.parseLong(EAT)) return;
+                                        driver.setEat(String.format("%04d", time[2]));
+                                        dQueue.add(driver);
+                                        System.out.println("Queue size: "+ dQueue.size());
+                                    }
+
+                                } catch (ExecutionException | InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+
+                            } catch (Exception e) {
+                                Log.e(TAG, e.getMessage());
                             }
                         }
-                        //Do whatever
-                        //Put in recyclerview
                     }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error){
-                        Log.d(TAG,"Unavailable to retrieve data");
-                    }
-                });
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error){
-                Log.d(TAG,"Unavailable to retrieve data");
-            }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error){
+                    Log.d(TAG,"Unavailable to retrieve data");
+                }
+            });
+            System.out.println("Enter here3");
+            return dQueue;
         });
+
     }
 
     public static void getOrder(){

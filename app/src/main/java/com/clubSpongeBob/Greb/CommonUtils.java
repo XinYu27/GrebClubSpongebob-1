@@ -9,6 +9,7 @@ public class CommonUtils {
     private static Application sApplication;
     private static Driver selectedDriver;
     private static DateTime eat;
+    private static Customer self;
 
     public static Application getsApplication() {
         return sApplication;
@@ -37,6 +38,14 @@ public class CommonUtils {
 
     public static boolean orderIsEmpty(){
         return  CommonUtils.selectedDriver == null;
+    }
+
+    public static Customer getSelf() {
+        return self;
+    }
+
+    public static void setSelf(Customer self) {
+        CommonUtils.self = self;
     }
 
     public static boolean emailValidation(String email){

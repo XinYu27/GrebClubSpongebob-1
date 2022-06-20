@@ -20,14 +20,16 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import org.joda.time.DateTime;
+
 import java.util.Calendar;
 import java.util.Date;
 
 public class CustomerLanding extends AppCompatActivity {
     TextView currentTime;
     private Handler mHandler= new Handler();
-    public static int noOfPassenger;
-    public static String eat;
+    private int noOfPassenger;
+    private String eat;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -101,6 +103,10 @@ public class CustomerLanding extends AppCompatActivity {
                     @Override
                     public void run(){
                         Intent intent=new Intent(CustomerLanding.this,WaitingPage.class);
+                        intent.putExtra("eat", eat);
+                        intent.putExtra("noOfPassenger", noOfPassenger);
+                        intent.putExtra("origin", cLocation);
+                        intent.putExtra("destination",dLocation);
                         startActivity(intent);
                         finish();
                     }
@@ -110,15 +116,9 @@ public class CustomerLanding extends AppCompatActivity {
 
 
     }
-    public static int getCapacity(){
-        return noOfPassenger;
-    }
-    public static String getEat(){
-        return eat;
-    }
 
     public void updateTime(){
-        Date currTime = Calendar.getInstance().getTime();
+        Date currTime = DateTime.now().toDate();
         String time="hh:mm:ss aa";
         currentTime.setText(DateFormat.format(time,currTime));
     }

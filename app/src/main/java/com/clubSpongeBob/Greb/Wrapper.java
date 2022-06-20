@@ -28,7 +28,7 @@ public class Wrapper extends AppCompatActivity{
 
         final Intent intent;
         if(FirebaseUtils.isLogin()){
-            intent = new Intent(getApplication(), AdminLanding.class);
+            intent = new Intent(getApplication(), CustomerLanding.class);
             Log.i(TAG, "Authenticated");
         } else{
             intent = new Intent(getApplication(), AuthLanding.class);
