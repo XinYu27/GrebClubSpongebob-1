@@ -1,13 +1,10 @@
 package com.clubSpongeBob.Greb;
+
 import android.app.Application;
 import android.content.Context;
 import android.util.Patterns;
 
-import org.joda.time.DateTime;
-
 import java.util.ArrayList;
-import java.util.PriorityQueue;
-import java.util.Queue;
 
 public class CommonUtils {
     private static Application sApplication;
@@ -72,6 +69,7 @@ public class CommonUtils {
 
     public static void setDriverArrayList(ArrayList<Driver> driverArrayList) {
         CommonUtils.driverArrayList = driverArrayList;
+
     }
 
     public static void resetArrayList(){
