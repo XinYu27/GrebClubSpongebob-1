@@ -5,11 +5,15 @@ import android.util.Patterns;
 
 import org.joda.time.DateTime;
 
+import java.util.PriorityQueue;
+import java.util.Queue;
+
 public class CommonUtils {
     private static Application sApplication;
     private static Driver selectedDriver;
     private static DateTime eat;
     private static Customer self;
+    private static Queue<Driver> queue;
 
     public static Application getsApplication() {
         return sApplication;
@@ -59,5 +63,17 @@ public class CommonUtils {
         if (password.length() < 6)
             return false;
         return true;
+    }
+
+    public static Queue<Driver> getQueue() {
+        return queue;
+    }
+
+    public static void setQueue(Queue<Driver> queue) {
+        CommonUtils.queue = queue;
+    }
+
+    public static void resetQueue(){
+        CommonUtils.queue = new PriorityQueue<>();
     }
 }

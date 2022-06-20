@@ -89,7 +89,6 @@ public class WaitingPage extends AppCompatActivity {
                                         if (time[2] >= Long.parseLong(eat)) return;
                                         driver.setEat(String.format("%04d", time[2]));
                                         dQueue.add(driver);
-
                                     }
 
                                 } catch (ExecutionException | InterruptedException e) {
@@ -111,9 +110,9 @@ public class WaitingPage extends AppCompatActivity {
                         }
                         if (isFinish) {
                             System.out.println("Queue size: "+ dQueue.size());
+                            CommonUtils.setQueue(dQueue);
                             Intent intent=new Intent(WaitingPage.this, DriverCustomerView.class);
                             startActivity(intent);
-                            finish();
                             break;
                         }
                     }
