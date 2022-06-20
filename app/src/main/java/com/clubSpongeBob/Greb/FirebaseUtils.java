@@ -293,6 +293,7 @@ public class FirebaseUtils {
         });
     }
 
-
-
+    public static DatabaseReference getDriverRef() {
+        return driverRef;
+    }
 }
