@@ -2,7 +2,6 @@ package com.clubSpongeBob.Greb;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -49,6 +48,7 @@ public class WaitingPage extends AppCompatActivity {
             FirebaseUtils.getDriverRef().orderByChild("status").startAt(1).addValueEventListener(new ValueEventListener(){
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot){
+                    listDriver.clear();
                     dQueue = new PriorityQueue<>();
                     System.out.println("Enter here2");
                     for(DataSnapshot data: dataSnapshot.getChildren()) {
@@ -122,7 +122,14 @@ public class WaitingPage extends AppCompatActivity {
                             }
                             CommonUtils.resetArrayList();
                             CommonUtils.setDriverArrayList(listDriver);
+                            try{
+                                DriverCustomerView.myAdapter.notifyDataSetChanged();
+                            } catch (Exception e){
+                                System.out.println("next");
+                            }
+                            System.out.println("list driver size: "+CommonUtils.getDriverArrayList().size());
                             Intent intent=new Intent(WaitingPage.this, DriverCustomerView.class);
+                            intent.putExtra("eat", noOfPassenger);
                             startActivity(intent);
                             break;
                         }

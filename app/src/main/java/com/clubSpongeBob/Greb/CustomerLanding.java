@@ -13,16 +13,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import org.joda.time.DateTime;
 
-import java.util.Calendar;
 import java.util.Date;
 
 public class CustomerLanding extends AppCompatActivity {
@@ -99,18 +96,15 @@ public class CustomerLanding extends AppCompatActivity {
 
                 addOrder(cLocation,dLocation,noOfPassenger,eat);
 
-                mHandler.postDelayed(new Runnable(){
-                    @Override
-                    public void run(){
-                        Intent intent=new Intent(CustomerLanding.this,WaitingPage.class);
-                        intent.putExtra("eat", eat);
-                        intent.putExtra("noOfPassenger", noOfPassenger);
-                        intent.putExtra("origin", cLocation);
-                        intent.putExtra("destination",dLocation);
-                        startActivity(intent);
-                        finish();
-                    }
-                },1000);
+
+                Intent intent=new Intent(CustomerLanding.this,WaitingPage.class);
+                intent.putExtra("eat", eat);
+                intent.putExtra("noOfPassenger", noOfPassenger);
+                intent.putExtra("origin", cLocation);
+                intent.putExtra("destination",dLocation);
+                startActivity(intent);
+
+
             }
         });
 
