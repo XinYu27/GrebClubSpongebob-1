@@ -8,14 +8,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.jar.JarOutputStream;
 
 //public class customerList_RecyclerAdapter extends FirebaseRecyclerAdapter<Customer, customerList_RecyclerAdapter.MyViewHolder> {
 //    private Context context;
@@ -110,7 +106,7 @@ public class customerList_RecyclerAdapter extends RecyclerView.Adapter<customerL
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Customer model = cusList.get(position);
-        holder.name.setText("Name: " +model.getName());
+        holder.name.setText(model.getName());
         holder.capacity.setText("Capacity: "+String.valueOf(model.getCapacity()));
         holder.eat.setText("Estimated Arrival Time: "+model.getEat());
         holder.start.setText("Starting point: "+model.getLocation());
@@ -136,7 +132,7 @@ public class customerList_RecyclerAdapter extends RecyclerView.Adapter<customerL
 
     @Override
     public int getItemCount() {
-        System.out.println(cusList.size()+" hifaobaobocabfoa");
+        System.out.println(cusList.size());
         return cusList.size();
     }
 
@@ -156,7 +152,7 @@ class MyViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
 
         customerStatus = itemView.findViewById((R.id.customerStatus));
-        name = itemView.findViewById((R.id.driverName));
+        name = itemView.findViewById((R.id.customerName));
         capacity= itemView.findViewById((R.id.capacity));
         eat = itemView.findViewById((R.id.eat));
         start = itemView.findViewById((R.id.startingPoint));
