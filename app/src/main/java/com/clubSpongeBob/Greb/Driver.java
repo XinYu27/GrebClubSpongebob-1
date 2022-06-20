@@ -6,6 +6,7 @@ public class Driver extends Person implements Comparable<Driver>{
     private String carPlate, carModel, carColour;
     private int rating, numOfRating;
     private String uid;
+    private String[] eatArr;
     // status 0: unavailable, 1: available
 
     Driver(){
@@ -88,6 +89,14 @@ public class Driver extends Person implements Comparable<Driver>{
 
     public void setNumOfRating(int numOfRating) {
         this.numOfRating = numOfRating;
+    }
+
+    public String[] getEatArr() {
+        return eatArr;
+    }
+
+    public void setEatArr(String[] eatArr) {
+        this.eatArr = eatArr;
     }
 
     @Override

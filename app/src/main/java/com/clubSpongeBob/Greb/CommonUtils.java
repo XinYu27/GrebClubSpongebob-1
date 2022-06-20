@@ -5,15 +5,16 @@ import android.util.Patterns;
 
 import org.joda.time.DateTime;
 
+import java.util.ArrayList;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class CommonUtils {
     private static Application sApplication;
     private static Driver selectedDriver;
-    private static DateTime eat;
+    private static int eat;
     private static Customer self;
-    private static Queue<Driver> queue;
+    private static ArrayList<Driver> driverArrayList;
 
     public static Application getsApplication() {
         return sApplication;
@@ -37,7 +38,7 @@ public class CommonUtils {
 
     public static void reset(){
         CommonUtils.selectedDriver = null;
-        CommonUtils.eat = null;
+        CommonUtils.eat = 0;
     }
 
     public static boolean orderIsEmpty(){
@@ -65,15 +66,15 @@ public class CommonUtils {
         return true;
     }
 
-    public static Queue<Driver> getQueue() {
-        return queue;
+    public static ArrayList<Driver> getDriverArrayList() {
+        return driverArrayList;
     }
 
-    public static void setQueue(Queue<Driver> queue) {
-        CommonUtils.queue = queue;
+    public static void setDriverArrayList(ArrayList<Driver> driverArrayList) {
+        CommonUtils.driverArrayList = driverArrayList;
     }
 
-    public static void resetQueue(){
-        CommonUtils.queue = new PriorityQueue<>();
+    public static void resetArrayList(){
+        CommonUtils.driverArrayList = new ArrayList<>();
     }
 }

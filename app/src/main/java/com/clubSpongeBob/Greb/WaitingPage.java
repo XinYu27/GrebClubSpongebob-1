@@ -26,7 +26,8 @@ public class WaitingPage extends AppCompatActivity {
     private String origin;
     private String destination;
     private final String TAG = "WaitingPage";
-    Queue<Driver> dQueue=new PriorityQueue<>();
+    Queue<Driver> dQueue;
+    ArrayList<Driver> listDriver = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -48,6 +49,7 @@ public class WaitingPage extends AppCompatActivity {
             FirebaseUtils.getDriverRef().orderByChild("status").startAt(1).addValueEventListener(new ValueEventListener(){
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot){
+                    dQueue = new PriorityQueue<>();
                     System.out.println("Enter here2");
                     for(DataSnapshot data: dataSnapshot.getChildren()) {
 
@@ -58,8 +60,8 @@ public class WaitingPage extends AppCompatActivity {
                             try {
                                 long[] distance = new long[3];
                                 long[] time = new long[3];
-                                long[] durations = new long[2];
-                                long totalDuration = 0;
+                                long[] durations = new long[3];
+                                durations[2] = 0;
 
                                 Future<long[]> driverToCus = MapService.getDistanceTime(driver.getLocation(), origin);
                                 Future<long[]> cusToDest = MapService.getDistanceTime(origin, destination);
@@ -68,26 +70,31 @@ public class WaitingPage extends AppCompatActivity {
                                 try {
                                     distance[0] = driverToCus.get()[0];
                                     durations[0] = driverToCus.get()[1];
-                                    totalDuration += driverToCus.get()[1];
+                                    durations[2] += driverToCus.get()[1];
                                     if (driverToCus.isDone()){
                                         time[0] = TimeHelper.calculateEAT(durations[0], false);
                                     }
 
                                     distance[1] = cusToDest.get()[0];
                                     durations[1] = cusToDest.get()[1];
-                                    totalDuration += cusToDest.get()[1];
+                                    durations[2] += cusToDest.get()[1];
 
                                     if (cusToDest.isDone()){
                                         time[1] = TimeHelper.calculateEAT(durations[0], false);
                                     }
 
                                     if (driverToCus.isDone() && cusToDest.isDone()){
-                                        Log.i(TAG, "TotalDuration: "+ totalDuration);
-                                        time[2] = TimeHelper.calculateEAT(totalDuration, true);
+                                        Log.i(TAG, "TotalDuration: "+  durations[2]);
+                                        time[2] = TimeHelper.calculateEAT( durations[2], true);
                                         Log.i(TAG, "Time[2]: "+String.format("%04d", time[2]));
                                         Log.i(TAG, "EAT: "+ Long.parseLong(eat));
                                         if (time[2] >= Long.parseLong(eat)) return;
                                         driver.setEat(String.format("%04d", time[2]));
+                                        String[] temp = new String[3];
+                                        for (int i = 0; i<temp.length; i++){
+                                            temp[i] = String.format("%04d", time[i]);
+                                        }
+                                        driver.setEatArr(temp);
                                         dQueue.add(driver);
                                     }
 
@@ -110,7 +117,11 @@ public class WaitingPage extends AppCompatActivity {
                         }
                         if (isFinish) {
                             System.out.println("Queue size: "+ dQueue.size());
-                            CommonUtils.setQueue(dQueue);
+                            while (!dQueue.isEmpty()){
+                                listDriver.add(dQueue.poll());
+                            }
+                            CommonUtils.resetArrayList();
+                            CommonUtils.setDriverArrayList(listDriver);
                             Intent intent=new Intent(WaitingPage.this, DriverCustomerView.class);
                             startActivity(intent);
                             break;
