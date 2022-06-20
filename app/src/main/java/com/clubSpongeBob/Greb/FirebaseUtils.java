@@ -28,9 +28,9 @@ import java.util.Queue;
 
 public class FirebaseUtils {
     private static FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    private static FirebaseDatabase db = FirebaseDatabase.getInstance();
-    private static DatabaseReference customerRef = db.getReference("customers");
-    private static DatabaseReference driverRef = db.getReference("drivers");
+    public static FirebaseDatabase db = FirebaseDatabase.getInstance();
+    public static DatabaseReference customerRef = db.getReference("customers");
+    public static DatabaseReference driverRef = db.getReference("drivers");
     private static String TAG = "firebase utils";
 
     public static void registerUser(String email, String name, String password, String emergency){
@@ -253,6 +253,8 @@ public class FirebaseUtils {
     }
 
     public static void getOrder(){
+        List<Customer> cList=new ArrayList<>();
+        //ArrayList<customerListModel> customerListModels = new ArrayList<>();
         customerRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -260,20 +262,17 @@ public class FirebaseUtils {
                 query.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        List<Customer> cList=new ArrayList<>();
                         for(DataSnapshot data: snapshot.getChildren()){
                             Customer customer=data.getValue(Customer.class);
                             cList.add(customer);
                         }
-                        //Do here
-                    }
 
+                    }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
                         Log.d(TAG,"Unavailable to retrieve data");
                     }
                 });
-
             }
 
             @Override
