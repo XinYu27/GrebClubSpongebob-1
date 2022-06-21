@@ -81,6 +81,7 @@ public class DriversFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 driverList.clear();
+                Log.i(TAG, "Reload Driver List");
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Driver driver = snapshot.getValue(Driver.class);
                     driverList.add(driver);
