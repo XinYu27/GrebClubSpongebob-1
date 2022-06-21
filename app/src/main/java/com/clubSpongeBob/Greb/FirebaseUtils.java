@@ -114,9 +114,9 @@ public class FirebaseUtils {
                                                 Customer c = task.getResult().getValue(Customer.class);
                                                 CommonUtils.setSelf(c);
                                                 Log.d(TAG, "Successfully get data from user: " + c.getName());
-                                                if(c.isAdmin())
+                                                if(c.isAdmin()){
                                                     context.startActivity(new Intent(CommonUtils.getsApplication(), AdminLanding.class));
-                                                context.startActivity(new Intent(CommonUtils.getsApplication(), CustomerLanding.class));
+                                                } else context.startActivity(new Intent(CommonUtils.getsApplication(), CustomerLanding.class));
                                             }
                                         }
                                     });
@@ -159,6 +159,21 @@ public class FirebaseUtils {
     public static void updateDriver(Driver driver){
         DatabaseReference ref = driverRef.child(driver.getUid());
         ref.setValue(driver).addOnCompleteListener(new OnCompleteListener<Void>(){
+
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    Toast.makeText(CommonUtils.getSContext(), "Updated Driver", Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(CommonUtils.getSContext(), "Failed to update driver", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
+    public static void updateCustomer(Customer customer){
+        DatabaseReference ref = customerRef.child(mAuth.getUid());
+        ref.setValue(customer).addOnCompleteListener(new OnCompleteListener<Void>(){
 
             @Override
             public void onComplete(@NonNull Task<Void> task) {
