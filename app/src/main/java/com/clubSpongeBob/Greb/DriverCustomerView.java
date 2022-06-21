@@ -77,6 +77,7 @@ public class DriverCustomerView extends AppCompatActivity {
                 driver.setCustomer(customer.getName());
                 driver.setStatus(0);
                 customer.setStatus(2);
+                customer.setEat(driver.getEat());
                 CommonUtils.setSelectedDriver(driver);
                 FirebaseUtils.updateCustomer(customer);
                 FirebaseUtils.updateDriver(driver);

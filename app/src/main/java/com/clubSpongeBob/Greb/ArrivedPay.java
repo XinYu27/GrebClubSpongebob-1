@@ -34,7 +34,7 @@ public class ArrivedPay extends AppCompatActivity {
         }
 
         TextView amountView = this.findViewById(R.id.amountTextView);
-        amountView.setText(String.format("RM%.2f", CommonUtils.getSelectedDriver().getTotalDistance()/1000 * 0.5 ));
+        amountView.setText(String.format("RM%.2f", 5 + CommonUtils.getSelectedDriver().getTotalDistance()/1000 ));
 
         this.findViewById(R.id.payButton).setOnClickListener(new View.OnClickListener() {
             @Override

@@ -78,6 +78,7 @@ public class WaitingPage extends AppCompatActivity {
                                 try {
                                     distance[0] = driverToCus.get()[0];
                                     durations[0] = driverToCus.get()[1];
+                                    distance[2] += driverToCus.get()[0];
                                     durations[2] += driverToCus.get()[1];
                                     if (driverToCus.isDone()){
                                         time[0] = TimeHelper.calculateEAT(durations[0], false);
@@ -85,6 +86,7 @@ public class WaitingPage extends AppCompatActivity {
 
                                     distance[1] = cusToDest.get()[0];
                                     durations[1] = cusToDest.get()[1];
+                                    distance[2] += cusToDest.get()[0];
                                     durations[2] += cusToDest.get()[1];
 
                                     if (cusToDest.isDone()){

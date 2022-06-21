@@ -1,13 +1,15 @@
 package com.clubSpongeBob.Greb;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -47,6 +49,21 @@ public class EditDriver extends AppCompatActivity {
         driver_Location2.setText(selectedDriver.getLocation());
         ratingBar.setRating(selectedDriver.getRating());
 
+        this.getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setCustomView(R.layout.custom_action_bar);
+
+        TextView name = this.findViewById(R.id.name);
+        name.setText("Edit Driver");
+        View view = getSupportActionBar().getCustomView();
+        ImageView imageView = view.findViewById(R.id.backNavigation);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,7 +99,7 @@ public class EditDriver extends AppCompatActivity {
         selectedDriver.setCarPlate(carplate);
         selectedDriver.setLocation(driverlocation);
         selectedDriver.setCapacity(carr_capacity);
-        selectedDriver.setRating((int) rating);
+        selectedDriver.setRating(rating);
 
         FirebaseUtils.getDriverRef().child(id).setValue(selectedDriver)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
