@@ -56,6 +56,7 @@ public class Customer extends Person{
         this.setDestination("");
         this.setLocation("");
         this.setEat("");
+        this.setCapacity(1);
         this.setStatus(0);
     }
 }

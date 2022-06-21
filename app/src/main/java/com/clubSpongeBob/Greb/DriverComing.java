@@ -38,6 +38,7 @@ public class DriverComing extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_coming);
         CommonUtils.setWaitingPageListening(false);
+
         this.getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setCustomView(R.layout.custom_action_bar);
@@ -90,6 +91,8 @@ public class DriverComing extends AppCompatActivity {
                                         eatDriverComing.setText(driver.getEatArr().get(idx));
                                         currentLocationText.setText(CommonUtils.getSelf().getLocation());
                                         destinationText.setText(CommonUtils.getSelf().getDestination());
+                                        name.setText("On the Way");
+
                                         customer.setStatus(3);
                                         FirebaseUtils.updateCustomer(customer);
 
