@@ -103,6 +103,7 @@ public class WaitingPage extends AppCompatActivity {
                                         for (int i = 0; i<time.length; i++){
                                             temp.add(String.format("%04d", time[i]));
                                         }
+                                        driver.setTotalDuration(durations[2]);
                                         driver.setEatArr(temp);
                                         dQueue.add(driver);
                                     }
