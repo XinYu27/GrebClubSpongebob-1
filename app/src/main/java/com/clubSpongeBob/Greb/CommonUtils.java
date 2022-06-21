@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import android.util.Patterns;
 
+import org.joda.time.DateTimeZone;
+
 import java.util.ArrayList;
 
 public class CommonUtils {
@@ -13,9 +15,14 @@ public class CommonUtils {
     private static ArrayList<Driver> driverArrayList = new ArrayList<>();
     private static boolean waitingPageListening = true;
     private static boolean firstTimeWaiting = true;
-
+    private static DateTimeZone dateTimeZone = DateTimeZone.forID("Asia/Singapore");
     public static boolean isFirstTimeWaiting() {
         return firstTimeWaiting;
+    }
+
+
+    public static DateTimeZone getDateTimeZone() {
+        return dateTimeZone;
     }
 
     public static void setFirstTimeWaiting(boolean firstTimeWaiting) {

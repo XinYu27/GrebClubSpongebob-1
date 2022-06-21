@@ -75,26 +75,6 @@ public class FirebaseUtils {
 
     }
 
-    public static Customer getOneUser(String uid){
-        final Customer[] c = new Customer[1];
-
-        customerRef
-                .child(uid)
-                .get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DataSnapshot> task) {
-                        if (!task.isSuccessful()){
-                            Log.e(TAG, "Error getting user data", task.getException());
-                        } else {
-                            c[0] = task.getResult().getValue(Customer.class);
-                            Log.d(TAG, "Successfully get data from user: " + c[0].getName());
-                        }
-                    }
-                });
-
-        return c[0];
-    }
-
     public static void loginUser(String email, String password){
         Context context = CommonUtils.getSContext();
         mAuth.signInWithEmailAndPassword(email, password)
@@ -115,8 +95,10 @@ public class FirebaseUtils {
                                                 CommonUtils.setSelf(c);
                                                 Log.d(TAG, "Successfully get data from user: " + c.getName());
                                                 if(c.isAdmin()){
-                                                    context.startActivity(new Intent(CommonUtils.getsApplication(), AdminLanding.class));
-                                                } else context.startActivity(new Intent(CommonUtils.getsApplication(), CustomerLanding.class));
+                                                    context.startActivity(new Intent(CommonUtils.getsApplication(), AdminLanding.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                                                } else {
+                                                    context.startActivity(new Intent(CommonUtils.getsApplication(), CustomerLanding.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                                                }
                                             }
                                         }
                                     });
@@ -138,22 +120,6 @@ public class FirebaseUtils {
     public static void signOutUser(){
         mAuth.signOut();
         Toast.makeText(CommonUtils.getSContext(), "Sign out", Toast.LENGTH_LONG).show();
-    }
-
-
-    public static void addDriver(Driver driver){
-        DatabaseReference ref = driverRef.child(driver.getUid());
-        ref.setValue(driver).addOnCompleteListener(new OnCompleteListener<Void>(){
-
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(CommonUtils.getSContext(), "Added new driver", Toast.LENGTH_LONG).show();
-                }else{
-                    Toast.makeText(CommonUtils.getSContext(), "Failed to add new driver", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
     }
 
     public static void updateDriver(Driver driver){
@@ -204,101 +170,6 @@ public class FirebaseUtils {
                 }
             }
         });
-    }
-
-
-    //Admin Landing get driver list
-    public static void adminGetDriver(){
-        driverRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Query query=driverRef.orderByChild("status");
-                query.addValueEventListener(new ValueEventListener(){
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        List<Driver> dList = new ArrayList<>();
-                        for (DataSnapshot data : dataSnapshot.getChildren()) {
-                            Driver driver = data.getValue(Driver.class);
-                            dList.add(driver);
-                            System.out.println(driver.getName()); //for test
-                        }
-                        //do what you want to do with your list
-                        //Put in recyclerview (adapter)
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error){
-                        Log.d(TAG,"Unavailable to retrieve data");
-                    }
-                });
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.d(TAG,"Unavailable to retrieve data");
-            }
-        });
-    }
-
-
-
-    //Get customer order from Admin Landing
-    public static void getOrder(){
-        List<Customer> cList=new ArrayList<>();
-        //ArrayList<customerListModel> customerListModels = new ArrayList<>();
-        customerRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Query query=customerRef.orderByChild("status");
-                query.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for(DataSnapshot data: snapshot.getChildren()){
-                            Customer customer=data.getValue(Customer.class);
-                            cList.add(customer);
-                        }
-
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        Log.d(TAG,"Unavailable to retrieve data");
-                    }
-                });
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.d(TAG,"Unavailable to retrieve data");
-            }
-        });
-    }
-
-    public static void updateStatus(boolean customer, Object o, int status){
-        DatabaseReference ref;
-        String uid = mAuth.getCurrentUser().getUid();
-
-        if (customer){
-            ref = customerRef;
-            o = (Customer) o;
-            ((Customer) o).setStatus(status);
-        } else {
-            ref = driverRef;
-            o = (Driver) o;
-            ((Driver) o).setStatus(status);
-            uid = CommonUtils.getSelectedDriver().getUid();
-        }
-        Log.i(TAG, "UID: "+uid);
-        ref.child(uid).setValue(o).addOnCompleteListener(new OnCompleteListener(){
-            @Override
-            public void onComplete(@NonNull Task task) {
-                if(task.isSuccessful()){
-                    Log.d(TAG, "Successfully update status: ");
-                }else {
-                    Log.e(TAG,"Unable to update status: ");
-                }
-            }
-        });
-
     }
 
     public static void resetCustomer(){

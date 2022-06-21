@@ -3,6 +3,7 @@ package com.clubSpongeBob.Greb;
 import android.util.Log;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.joda.time.Duration;
 import org.joda.time.format.DateTimeFormat;
 
@@ -14,18 +15,18 @@ public class TimeHelper {
     private static String TAG = "TimeHelper";
 
     public static int getCurrentTime(){
-        DateTime now = DateTime.now();
-        return now.getHourOfDay()*100 + now.getMinuteOfHour();
+        DateTime now = DateTime.now().withZone(CommonUtils.getDateTimeZone());
+        return Integer.parseInt(now.toString("HHmm"));
     }
 
     public static int calculateEAT(long durationInSec, boolean addMinutes){
-        DateTime now = DateTime.now();
+        DateTime now = DateTime.now().withZone(CommonUtils.getDateTimeZone());
         now = now.plusSeconds((int) durationInSec + (addMinutes? 5*60: 0));
         return Integer.parseInt(now.toString("HHmm"));
     }
 
     public static boolean isReachable(long durationInSec, String eat){
-        DateTime eatDateTime = DateTime.now();
+        DateTime eatDateTime = DateTime.now().withZone(CommonUtils.getDateTimeZone());
         eat = eatDateTime.getDayOfMonth() + "-" + eatDateTime.getMonthOfYear() +"-"+eatDateTime.getYear()+","+eat;
         eatDateTime = eatDateTime.plusSeconds((int)durationInSec);
         DateTime customerEAT = DateTime.parse(eat, DateTimeFormat.forPattern("dd-MM-yyyy,HHmm"));

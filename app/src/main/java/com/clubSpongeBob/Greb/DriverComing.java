@@ -73,7 +73,7 @@ public class DriverComing extends AppCompatActivity {
             public void run() {
                 try {
                     while (!isInterrupted()) {
-                        Thread.sleep(1000*30);
+                        Thread.sleep(1000*10);
                         int now = TimeHelper.getCurrentTime();
 
                         if (now > Integer.parseInt(driver.getEatArr().get(idx))) {

@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -113,7 +114,7 @@ public class CustomerLanding extends AppCompatActivity {
     }
 
     public void updateTime(){
-        Date currTime = DateTime.now().toDate();
+        Date currTime = DateTime.now().withZone(CommonUtils.getDateTimeZone()).toDate();
         String time="hh:mm:ss aa";
         currentTime.setText(DateFormat.format(time,currTime));
     }

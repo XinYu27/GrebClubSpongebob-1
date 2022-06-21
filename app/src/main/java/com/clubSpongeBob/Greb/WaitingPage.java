@@ -3,6 +3,7 @@ package com.clubSpongeBob.Greb;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,10 +14,10 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.Timer;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
@@ -100,7 +101,7 @@ public class WaitingPage extends AppCompatActivity {
                                         Log.i(TAG, "EAT: "+ Long.parseLong(eat));
                                         if (TimeHelper.isReachable(durations[2], eat)){
                                             driver.setEat(String.format("%04d", time[2]));
-                                            List<String> temp = new LinkedList<>();
+                                            List<String> temp = new ArrayList<>();
 
                                             for (int i = 0; i<time.length; i++){
                                                 temp.add(String.format("%04d", time[i]));
@@ -162,6 +163,16 @@ public class WaitingPage extends AppCompatActivity {
             }
         };
         thread1.start();
+        Timer timer = new Timer();
+        TimeOutTask timeOutTask = new TimeOutTask(thread1, timer);
+        timer.schedule(timeOutTask, 5000);
+
+        if (listDriver.isEmpty()){
+            Toast.makeText(this, "Unable to find driver",Toast.LENGTH_LONG).show();
+            query.removeEventListener(valueEventListener);
+            finish();
+        }
+
     }
 
 }
