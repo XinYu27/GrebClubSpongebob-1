@@ -56,6 +56,7 @@ public class customerList_RecyclerAdapter extends RecyclerView.Adapter<customerL
                 holder.customerStatus.setImageResource(R.drawable.ic_baseline_check_circle_24);
                 break;
             default:
+                holder.customerStatus.setImageResource(R.drawable.ic_baseline_bedtime_24);
         }
     }
 
