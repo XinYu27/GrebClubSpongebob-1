@@ -79,23 +79,19 @@ public class CustomerLanding extends AppCompatActivity {
         //Get input value from customer
         rtn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
-//                customerGetDriver();
-//                EditText currentLoc=(EditText)findViewById(R.id.currentLocation);
                 String cLocation=currentLoc.getText().toString();
 
-//                EditText destination=(EditText)findViewById(R.id.destLocation);
                 String dLocation=destination.getText().toString();
 
-//                EditText mPassenger=(EditText)findViewById(R.id.numPassengers);
                 String passN=mPassenger.getText().toString();
                 noOfPassenger= Integer.parseInt(passN);
 
-//                EditText mTime=(EditText) findViewById(R.id.inputEAT);
                 eat=mTime.getText().toString();
-//                LocalTime time=LocalTime.parse(currTime);
 
                 addOrder(cLocation,dLocation,noOfPassenger,eat);
 
+                CommonUtils.setWaitingPageListening(true);
+                CommonUtils.setFirstTimeWaiting(true);
 
                 Intent intent=new Intent(CustomerLanding.this,WaitingPage.class);
                 intent.putExtra("eat", eat);

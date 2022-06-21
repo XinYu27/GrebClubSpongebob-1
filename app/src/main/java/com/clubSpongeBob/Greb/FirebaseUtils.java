@@ -286,6 +286,21 @@ public class FirebaseUtils {
 
     }
 
+    public static void resetCustomer(){
+        Customer c = CommonUtils.getSelf();
+        customerRef.child(mAuth.getCurrentUser().getUid()).setValue(c).addOnCompleteListener(new OnCompleteListener(){
+            @Override
+            public void onComplete(@NonNull Task task) {
+                if(task.isSuccessful()){
+                    Log.d(TAG, "Successfully update status: " + c.getName());
+                }else {
+                    Log.e(TAG,"Unable to update status: " + c.getName());
+                }
+            }
+        });
+
+    }
+
     public static void updateRating(Driver driver, int rate){
         Map<String, Object> values = new HashMap<>();
         values.put("rating", (rate + driver.getRating()) / (driver.getNumOfRating() + 1));
