@@ -171,6 +171,21 @@ public class FirebaseUtils {
         });
     }
 
+    public static void updateCustomer(Customer customer){
+        DatabaseReference ref = customerRef.child(mAuth.getUid());
+        ref.setValue(customer).addOnCompleteListener(new OnCompleteListener<Void>(){
+
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    Toast.makeText(CommonUtils.getSContext(), "Updated Driver", Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(CommonUtils.getSContext(), "Failed to update driver", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
     public static void addOrder(String currentLoc, String destination, int capacity, String EAT){
         Map<String,Object> values=new HashMap<>();
         values.put("location",currentLoc);
