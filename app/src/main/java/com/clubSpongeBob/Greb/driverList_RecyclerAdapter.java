@@ -48,11 +48,11 @@ public class driverList_RecyclerAdapter extends RecyclerView.Adapter<driverList_
         holder.location.setText("Location: "+model.getLocation());
         holder.carinfo.setText(model.getCarColour()+" "+model.getCarModel()+" "+model.getCarPlate());
         int status = model.getStatus();
-        switch(status){
-            case 1:
+        switch (status){
+            case 0:
                 holder.driverStatus.setImageResource(R.drawable.ic_baseline_person_24_green);
                 break;
-            case 2:
+            case 1:
                 holder.driverStatus.setImageResource(R.drawable.ic_baseline_person_off_24);
                 break;
             default:
