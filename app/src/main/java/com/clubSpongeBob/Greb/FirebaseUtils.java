@@ -155,6 +155,22 @@ public class FirebaseUtils {
             }
         });
     }
+
+    public static void updateDriver(Driver driver){
+        DatabaseReference ref = driverRef.child(driver.getUid());
+        ref.setValue(driver).addOnCompleteListener(new OnCompleteListener<Void>(){
+
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    Toast.makeText(CommonUtils.getSContext(), "Updated Driver", Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(CommonUtils.getSContext(), "Failed to update driver", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
     public static void addOrder(String currentLoc, String destination, int capacity, String EAT){
         Map<String,Object> values=new HashMap<>();
         values.put("location",currentLoc);
@@ -175,27 +191,7 @@ public class FirebaseUtils {
         });
     }
 
-    public static void getOneDriver(Context context, String uid){
 
-        Task<DataSnapshot> dataSnapshotTask = driverRef.child(uid).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if (!task.isSuccessful()) {
-                    Log.e("firebase", "Error getting data", task.getException());
-                }
-                else {
-                    Log.d("firebase", String.valueOf(task.getResult().getValue()));
-
-                }}
-            });
-//        DataSnapshot dataSnapshot = dataSnapshotTask.getResult();
-//        if (dataSnapshot == null) return null;
-//        return new Driver(dataSnapshot.child("name").getValue().toString(), dataSnapshot.child("location").getValue().toString(),
-//                Integer.parseInt(dataSnapshot.child("capacity").getValue().toString()), dataSnapshot.child("carPlate").getValue().toString(),
-//                dataSnapshot.child("carModel").getValue().toString(), dataSnapshot.child("carColour").getValue().toString(),
-//                Integer.parseInt(dataSnapshot.child("rating").getValue().toString()), Integer.parseInt(dataSnapshot.child("numOfRating").getValue().toString()),
-//                Integer.parseInt(dataSnapshot.child("status").getValue().toString()), dataSnapshot.child("eat").getValue().toString());
-    }
     //Admin Landing get driver list
     public static void adminGetDriver(){
         driverRef.addValueEventListener(new ValueEventListener() {
@@ -262,20 +258,28 @@ public class FirebaseUtils {
         });
     }
 
-    public static void updateStatus(boolean customer, String uid, int status){
+    public static void updateStatus(boolean customer, Object o, int status){
         DatabaseReference ref;
+        String uid = mAuth.getCurrentUser().getUid();
+
         if (customer){
             ref = customerRef;
+            o = (Customer) o;
+            ((Customer) o).setStatus(status);
         } else {
             ref = driverRef;
+            o = (Driver) o;
+            ((Driver) o).setStatus(status);
+            uid = CommonUtils.getSelectedDriver().getUid();
         }
-        ref.child(uid).child("status").setValue(status).addOnCompleteListener(new OnCompleteListener(){
+        Log.i(TAG, "UID: "+uid);
+        ref.child(uid).setValue(o).addOnCompleteListener(new OnCompleteListener(){
             @Override
             public void onComplete(@NonNull Task task) {
                 if(task.isSuccessful()){
-                    Log.d(TAG, "Successfully update status: " + uid);
+                    Log.d(TAG, "Successfully update status: ");
                 }else {
-                    Log.e(TAG,"Unable to update status: " + uid);
+                    Log.e(TAG,"Unable to update status: ");
                 }
             }
         });

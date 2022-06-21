@@ -13,7 +13,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.EventListener;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -98,9 +98,10 @@ public class WaitingPage extends AppCompatActivity {
                                         Log.i(TAG, "EAT: "+ Long.parseLong(eat));
                                         if (time[2] >= Long.parseLong(eat)) return;
                                         driver.setEat(String.format("%04d", time[2]));
-                                        String[] temp = new String[3];
-                                        for (int i = 0; i<temp.length; i++){
-                                            temp[i] = String.format("%04d", time[i]);
+                                        List<String> temp = new LinkedList<>();
+
+                                        for (int i = 0; i<time.length; i++){
+                                            temp.add(String.format("%04d", time[i]));
                                         }
                                         driver.setEatArr(temp);
                                         dQueue.add(driver);

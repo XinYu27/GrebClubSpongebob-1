@@ -52,7 +52,19 @@ public class DriverCustomerView extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setNestedScrollingEnabled(false);
-        myAdapter=new customerdriverlist_RecyclerAdapter(this,dList);
+
+        myAdapter=new customerdriverlist_RecyclerAdapter(this, dList, new customerdriverlist_RecyclerAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Driver driver = dList.get(position);
+                Log.i(TAG, "Clicked: "+driver.getName());
+                driver.setCustomer(CommonUtils.getSelf().getName());
+                driver.setStatus(0);
+                CommonUtils.setSelectedDriver(driver);
+                FirebaseUtils.updateDriver(driver);
+                startActivity(new Intent(context, DriverComing.class));
+            }
+        });
         recyclerView.setAdapter(myAdapter);
     }
 }
