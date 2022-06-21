@@ -14,6 +14,7 @@ public class CommonUtils {
     private static ArrayList<Driver> driverArrayList;
 
     public static Application getsApplication() {
+        assert sApplication != null : "Application in Common Utils is null";
         return sApplication;
     }
 

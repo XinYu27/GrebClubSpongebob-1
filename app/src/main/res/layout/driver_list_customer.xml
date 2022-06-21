@@ -3,36 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#EDF6FE">
-
-    <Button
-        android:id="@+id/chooseDriver"
-        android:layout_width="354dp"
-        android:layout_height="166dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="28dp"
-        android:backgroundTint="#FFFFFF"
-        android:drawableTint="#000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/driverName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:elevation="10dp"
-        android:text="Chan Ching Chong"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@+id/imageView9"
-        app:layout_constraintTop_toTopOf="@+id/chooseDriver" />
+    android:layout_height="wrap_content"
+    android:background="#EDF6FE"
+    android:paddingBottom="10dp">
 
     <TextView
         android:id="@+id/driverPlate"
@@ -44,42 +17,31 @@
         android:text="PPP 1111"
         android:textColor="#000000"
         app:layout_constraintStart_toEndOf="@+id/imageView9"
-        app:layout_constraintTop_toTopOf="@+id/chooseDriver" />
+        app:layout_constraintTop_toTopOf="@+id/cardView6" />
 
     <TextView
         android:id="@+id/driverCar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginEnd="55dp"
         android:elevation="10dp"
         android:text="Black Myvi"
         android:textColor="#000000"
-        app:layout_constraintEnd_toEndOf="@+id/chooseDriver"
-        app:layout_constraintTop_toTopOf="@+id/chooseDriver" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/cardView6" />
 
     <TextView
         android:id="@+id/driverEat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="128dp"
-        android:layout_marginEnd="52dp"
+        android:layout_marginEnd="35dp"
         android:elevation="5dp"
         android:text="Estimated Arrival Time: 2359"
         android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/chooseDriver"
-        app:layout_constraintTop_toTopOf="@+id/chooseDriver" />
-
-    <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="122dp"
-        android:layout_height="119dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="25dp"
-        android:elevation="10dp"
-        app:layout_constraintStart_toStartOf="@+id/chooseDriver"
-        app:layout_constraintTop_toTopOf="@+id/chooseDriver"
-        app:srcCompat="@drawable/yellowbox" />
+        app:layout_constraintEnd_toEndOf="@+id/driverRating"
+        app:layout_constraintTop_toTopOf="@+id/cardView6" />
 
     <ImageView
         android:id="@+id/imageView10"
@@ -97,12 +59,49 @@
         android:layout_width="242dp"
         android:layout_height="46dp"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="48dp"
+        android:layout_marginEnd="40dp"
         android:elevation="10dp"
         android:numStars="5"
         android:scaleX="0.55"
         android:scaleY="0.55"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/driverCar" />
+        app:layout_constraintTop_toBottomOf="@+id/driverCar"
+        android:clickable="false"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView6"
+        android:layout_width="354dp"
+        android:layout_height="166dp"
+        android:layout_marginTop="20dp"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="122dp"
+        android:layout_height="119dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="248dp"
+        android:elevation="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/cardView6"
+        app:srcCompat="@drawable/yellowbox" />
+
+    <TextView
+        android:id="@+id/driverName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:elevation="10dp"
+        android:text="Chan Ching Chong"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/imageView9"
+        app:layout_constraintTop_toTopOf="@+id/cardView6" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
