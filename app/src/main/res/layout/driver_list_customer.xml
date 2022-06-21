@@ -62,21 +62,28 @@
         android:layout_height="46dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="40dp"
+        android:clickable="true"
         android:elevation="10dp"
+        android:isIndicator="true"
         android:numStars="5"
         android:scaleX="0.55"
         android:scaleY="0.55"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/driverCar"
-        android:clickable="false"/>
+        app:layout_constraintTop_toBottomOf="@+id/driverCar" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView6"
         android:layout_width="354dp"
+<<<<<<< Updated upstream
         android:layout_height="168dp"
         android:layout_marginTop="20dp"
+=======
+        android:layout_height="166dp"
+        android:layout_marginTop="16dp"
+>>>>>>> Stashed changes
         app:cardCornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
