@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
-import java.util.Timer;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
@@ -149,6 +148,13 @@ public class WaitingPage extends AppCompatActivity {
                                 DriverCustomerView.myAdapter.notifyDataSetChanged();
                             }
 
+
+                            if (listDriver.isEmpty()){
+                                Toast.makeText(getApplicationContext(), "Unable to find driver",Toast.LENGTH_LONG).show();
+                                query.removeEventListener(valueEventListener);
+                                finish();
+                                startActivity(new Intent(WaitingPage.this, CustomerLanding.class));
+                            }
                             break;
                         }
                     }
@@ -163,16 +169,6 @@ public class WaitingPage extends AppCompatActivity {
             }
         };
         thread1.start();
-        Timer timer = new Timer();
-        TimeOutTask timeOutTask = new TimeOutTask(thread1, timer);
-        timer.schedule(timeOutTask, 5000);
-
-        if (listDriver.isEmpty()){
-            Toast.makeText(this, "Unable to find driver",Toast.LENGTH_LONG).show();
-            query.removeEventListener(valueEventListener);
-            finish();
-        }
-
     }
 
 }
