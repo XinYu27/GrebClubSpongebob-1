@@ -96,13 +96,14 @@ public class WaitingPage extends AppCompatActivity {
                                         time[2] = TimeHelper.calculateEAT( durations[2], true);
                                         Log.i(TAG, "Time[2]: "+String.format("%04d", time[2]));
                                         Log.i(TAG, "EAT: "+ Long.parseLong(eat));
-                                        if (!(time[2] >= Long.parseLong(eat))){
+                                        if (TimeHelper.isReachable(durations[2], eat)){
                                             driver.setEat(String.format("%04d", time[2]));
                                             List<String> temp = new LinkedList<>();
 
                                             for (int i = 0; i<time.length; i++){
                                                 temp.add(String.format("%04d", time[i]));
                                             }
+                                            driver.setTotalDistance(distance[2]);
                                             driver.setEatArr(temp);
                                             dQueue.add(driver);
                                         }
