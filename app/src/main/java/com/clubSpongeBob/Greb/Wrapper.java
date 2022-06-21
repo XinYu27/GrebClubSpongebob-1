@@ -36,7 +36,7 @@ public class Wrapper extends AppCompatActivity{
                                     finish();
                                 }
                                 else{
-                                    startActivity(new Intent(getApplication(), AuthLanding.class));
+                                    startActivity(new Intent(getApplication(), Customer.class));
                                     finish();
                                 }
 
