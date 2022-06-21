@@ -15,15 +15,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class EditDriver extends AppCompatActivity {
 
-    private DatabaseReference mDatabase;
-    // creating a variable for
-    // our Firebase Database.
-    FirebaseDatabase firebaseDatabase;
-
-    // creating a variable for our
-    // Database Reference for Firebase.
-    DatabaseReference databaseReference;
-
     // variable for Edittext view.
     private EditText driver_Name2,car_Model2,car_Plate2,car_Colour2,car_Capacity2,driver_Location2;
     private Driver selectedDriver = CommonUtils.getSelectedDriver();
@@ -34,7 +25,6 @@ public class EditDriver extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_driver);
-
 
         // initializing our object class variable.
         driver_Name2 = findViewById(R.id.driver_Name2);
@@ -50,7 +40,7 @@ public class EditDriver extends AppCompatActivity {
         car_Model2.setText(selectedDriver.getCarModel());
         car_Plate2.setText(selectedDriver.getCarPlate());
         car_Colour2.setText(selectedDriver.getCarColour());
-        car_Capacity2.setText(selectedDriver.getCapacity());
+        car_Capacity2.setText(String.valueOf(selectedDriver.getCapacity()));
         car_Model2.setText(selectedDriver.getLocation());
 
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -65,7 +55,6 @@ public class EditDriver extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 deletethedriver();
-
             }
         });
     }
@@ -95,33 +84,21 @@ public class EditDriver extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()) {
                             Toast.makeText(EditDriver.this, "Driver have been updated", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(EditDriver.this,EditDriver.class);
-                            startActivity(intent);
+                            finish();
                         }
                     }
                 });
     }
 
     private void deletethedriver(){
-        String drivername = driver_Name2.getText().toString();
-        String carmodal = car_Model2.getText().toString();
-        String carcapacity = car_Capacity2.getText().toString();
-        String carplate = car_Plate2.getText().toString();
-        String driverlocation = driver_Location2.getText().toString();
-        String carcolour = car_Colour2.getText().toString();
         String id = selectedDriver.getUid();
 
-        int carr_capacity = Integer.parseInt(carcapacity);
-
-        Driver driver = new Driver(drivername,carmodal,carplate,carcolour,carr_capacity,driverlocation);
         FirebaseUtils.getDriverRef().child(id).removeValue()
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()) {
-                            Toast.makeText(EditDriver.this, "Driver have been deleted", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(EditDriver.this,EditDriver.class);
-                            startActivity(intent);
+                            Toast.makeText(EditDriver.this, "Driver " + selectedDriver.getName() +" have been deleted", Toast.LENGTH_SHORT).show();
                             finish();
                         }
                     }

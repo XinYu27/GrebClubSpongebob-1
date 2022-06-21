@@ -55,6 +55,9 @@
             android:name=".WaitingPage"
             android:exported="false" />
         <activity
+            android:name=".EditDriver"
+            android:exported="false" />
+        <activity
             android:name=".Wrapper"
             android:exported="true" >
             <intent-filter>

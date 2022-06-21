@@ -62,8 +62,7 @@ public class AddDriver extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()) {
                             Toast.makeText(AddDriver.this, "Driver have been inserted", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(AddDriver.this,AddDriver.class);
-                            startActivity(intent);
+                            finish();
                         }
                     }
                 });
