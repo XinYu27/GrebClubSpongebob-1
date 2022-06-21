@@ -106,8 +106,8 @@ public class WaitingPage extends AppCompatActivity {
                                             driver.setTotalDistance(distance[2]);
                                             driver.setEatArr(temp);
                                             dQueue.add(driver);
+                                            driver.setTotalDuration(durations[2]);
                                         }
-
                                     }
 
                                 } catch (ExecutionException | InterruptedException e) {

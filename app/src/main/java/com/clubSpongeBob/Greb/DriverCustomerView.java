@@ -8,14 +8,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 
 public class DriverCustomerView extends AppCompatActivity {
-    private static String TAG = "firebase utils";
+    private static String TAG = "DriverCustomerView";
     private ArrayList<Driver> dList=CommonUtils.getDriverArrayList();
     public static customerdriverlist_RecyclerAdapter myAdapter;
     RecyclerView recyclerView;
@@ -72,7 +72,46 @@ public class DriverCustomerView extends AppCompatActivity {
             }
         });
         recyclerView.setAdapter(myAdapter);
+        long[] i = {0};
+
+        Thread thread2 = new Thread() {
+            @Override
+            public void run() {
+                while (!isInterrupted()) {
+                    try {
+                        Thread.sleep(1000*60);
+                        i[0] += 1;
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            for(Driver driver:dList){
+                                Thread thread1= new Thread(){
+                                    @Override
+                                    public void run(){
+                                        Log.i(TAG, "Total Duration: "+String.valueOf(driver.getTotalDuration()));
+                                        Log.i(TAG, "Passed: "+String.valueOf(i[0]));
+                                        long time=TimeHelper.calculateEAT(driver.getTotalDuration()+i[0]*60,true);
+                                        driver.setEat(String.format("%04d", time));
+//                                        tempList.add(driver);
+//                                        dList=tempList;
+                                    }
+                                };
+                                thread1.start();
+                            }
+                            myAdapter.notifyDataSetChanged();
+                        }
+                    });
+                }
+            }
+        };
+        thread2.start();
+
     }
+
+
 }
 
 
