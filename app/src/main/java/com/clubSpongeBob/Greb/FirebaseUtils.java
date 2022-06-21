@@ -114,9 +114,9 @@ public class FirebaseUtils {
                                                 Customer c = task.getResult().getValue(Customer.class);
                                                 CommonUtils.setSelf(c);
                                                 Log.d(TAG, "Successfully get data from user: " + c.getName());
-                                                if(c.isAdmin())
+                                                if(c.isAdmin()){
                                                     context.startActivity(new Intent(CommonUtils.getsApplication(), AdminLanding.class));
-                                                context.startActivity(new Intent(CommonUtils.getsApplication(), CustomerLanding.class));
+                                                } else context.startActivity(new Intent(CommonUtils.getsApplication(), CustomerLanding.class));
                                             }
                                         }
                                     });

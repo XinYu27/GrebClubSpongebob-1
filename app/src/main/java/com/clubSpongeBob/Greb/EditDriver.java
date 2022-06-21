@@ -44,7 +44,7 @@ public class EditDriver extends AppCompatActivity {
         car_Plate2.setText(selectedDriver.getCarPlate());
         car_Colour2.setText(selectedDriver.getCarColour());
         car_Capacity2.setText(String.valueOf(selectedDriver.getCapacity()));
-        car_Model2.setText(selectedDriver.getLocation());
+        driver_Location2.setText(selectedDriver.getLocation());
         ratingBar.setRating(selectedDriver.getRating());
 
         saveButton.setOnClickListener(new View.OnClickListener() {
