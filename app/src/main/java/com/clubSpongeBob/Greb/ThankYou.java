@@ -35,7 +35,8 @@ public class ThankYou extends AppCompatActivity {
         this.findViewById(R.id.homeButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplication(), CustomerLanding.class));
+                startActivity(new Intent(getApplication(), CustomerLanding.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                CommonUtils.reset();
                 finish();
             }
         });
@@ -46,6 +47,7 @@ public class ThankYou extends AppCompatActivity {
                     if(CommonUtils.orderIsEmpty()) throw new Exception("Driver is not set in CommonUtils");
                     FirebaseUtils.updateRating(CommonUtils.getSelectedDriver(), (int)ratingBar.getRating());
                     CommonUtils.reset();
+                    startActivity(new Intent(getApplication(), CustomerLanding.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 } catch (Exception e){
                     Log.e(TAG, e.getMessage());
                 }

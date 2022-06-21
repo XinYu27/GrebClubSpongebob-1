@@ -3,7 +3,11 @@ package com.clubSpongeBob.Greb;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -12,17 +16,22 @@ import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class DriverComing extends AppCompatActivity {
-    String location;
-    String destination;
-    String eat;
-    final private Driver driver = CommonUtils.getSelectedDriver();
+import org.joda.time.DateTime;
 
-    TextView driverNameText;
-    TextView carPlateText;
-    TextView carModelText, currentLocationText, destinationText;
-    RatingBar ratingBar;
-    FloatingActionButton emergencyDriverComingBtn;
+import java.util.ArrayList;
+
+public class DriverComing extends AppCompatActivity {
+    final String TAG = "DriverComing";
+    final private Driver driver = CommonUtils.getSelectedDriver();
+    final private Customer customer = CommonUtils.getSelf();
+    private int idx = 0;
+
+    private TextView driverNameText;
+    private TextView carPlateText;
+    private TextView carModelText, currentLocationText, destinationText;
+    private TextView eatDriverComing;
+    private RatingBar ratingBar;
+    private FloatingActionButton emergencyDriverComingBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +57,7 @@ public class DriverComing extends AppCompatActivity {
         destinationText = this.findViewById(R.id.destinationText);
         ratingBar = this.findViewById(R.id.ratingBar);
         emergencyDriverComingBtn = this.findViewById(R.id.emergencyDriverComingBtn);
+        eatDriverComing = this.findViewById(R.id.eatDriverComing);
 
         driverNameText.setText(driver.getName());
         carPlateText.setText(driver.getCarPlate());
@@ -55,22 +65,63 @@ public class DriverComing extends AppCompatActivity {
         currentLocationText.setText(driver.getLocation());
         destinationText.setText(CommonUtils.getSelf().getLocation());
         ratingBar.setRating(driver.getRating());
+        eatDriverComing.setText(driver.getEatArr().get(idx));
 
+        Thread thread = new Thread(){
+            @Override
+            public void run() {
+                try {
+                    while (!isInterrupted()) {
+                        Thread.sleep(1000*30);
+                        int now = TimeHelper.getCurrentTime();
 
+                        if (now > Integer.parseInt(driver.getEatArr().get(idx))) {
+                            idx += 1;
+
+                            if (idx == 2) {
+                                throw new InterruptedException("Reached");
+                            }
+
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    eatDriverComing.setText(driver.getEatArr().get(idx));
+                                    if (idx == 1) {
+                                        eatDriverComing.setText(driver.getEatArr().get(idx));
+                                        currentLocationText.setText(CommonUtils.getSelf().getLocation());
+                                        destinationText.setText(CommonUtils.getSelf().getDestination());
+                                        customer.setStatus(3);
+                                        FirebaseUtils.updateCustomer(customer);
+
+                                        driver.setLocation(CommonUtils.getSelf().getLocation());
+                                        FirebaseUtils.updateDriver(driver);
+                                    }
+                                }
+                            });
+                        }
+                }
+
+            } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    Log.i(TAG, "REACHED");
+
+                    customer.setStatus(4);
+                    FirebaseUtils.updateCustomer(customer);
+
+                    driver.resetOrder();
+                    driver.setLocation(customer.getDestination());
+                    FirebaseUtils.updateDriver(driver);
+                    startActivity(new Intent(getApplicationContext(), ArrivedPay.class));
+                    finish();
+                }
+            }
+        };
+        thread.start();
     }
 
     public void sendEmergency(View v){
         Customer self = CommonUtils.getSelf();
-        EmailService.sendEmail(self.getEmergencyContact(),self.getLocation(), self.getDestination());
+        EmailService.sendEmail(self.getEmergencyContact(),self.getLocation(), self.getDestination(), CommonUtils.getSelectedDriver());
     }
 
-    private void setLocationDestinationEat(String location, String destination, String eat){
-        final TextView currentLocationText = findViewById(R.id.currentLocationText);
-        final TextView destinationText = findViewById(R.id.destinationText);
-        final TextView eatText = findViewById(R.id.eatDriverComing);
-
-        currentLocationText.setText(location);
-        destinationText.setText(destination);
-        eatText.setText(eat);
-    }
 }

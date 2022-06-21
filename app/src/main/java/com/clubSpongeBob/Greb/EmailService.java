@@ -30,7 +30,7 @@ public class EmailService {
 
     }
 
-    public static void sendEmail(String emergencyContact, String location, String destination) {
+    public static void sendEmail(String emergencyContact, String location, String destination, Driver driver) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         Properties props = new Properties();
@@ -50,7 +50,8 @@ public class EmailService {
             message.setFrom(new InternetAddress(sender));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(emergencyContact));
             message.setSubject("SOS from Greb");
-            message.setText("Help, I am heading from "+location+" to "+destination+". I am in danger!");
+            message.setText(String.format("Help, I am heading from %s to %s. I am in danger! The driver details as below:\nName: %s\nCar Model: %s\nCar Colour: %s\nCar Plate: %s",
+                    location, destination,driver.getName(),driver.getCarModel(), driver.getCarColour(), driver.getCarPlate()));
             Transport.send(message);
             Log.i(TAG, "Email is sent successfully");
         } catch (MessagingException e) {

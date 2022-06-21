@@ -9,9 +9,8 @@ import java.util.ArrayList;
 public class CommonUtils {
     private static Application sApplication;
     private static Driver selectedDriver;
-    private static int eat;
     private static Customer self;
-    private static ArrayList<Driver> driverArrayList;
+    private static ArrayList<Driver> driverArrayList = new ArrayList<>();
     private static boolean waitingPageListening = true;
     private static boolean firstTimeWaiting = true;
 
@@ -54,7 +53,9 @@ public class CommonUtils {
 
     public static void reset(){
         CommonUtils.selectedDriver = null;
-        CommonUtils.eat = 0;
+        CommonUtils.driverArrayList.clear();
+        CommonUtils.waitingPageListening = true;
+        CommonUtils.firstTimeWaiting = true;
     }
 
     public static boolean orderIsEmpty(){
@@ -92,6 +93,6 @@ public class CommonUtils {
     }
 
     public static void resetArrayList(){
-        CommonUtils.driverArrayList = new ArrayList<>();
+        CommonUtils.driverArrayList.clear();
     }
 }

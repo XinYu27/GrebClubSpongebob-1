@@ -1,20 +1,23 @@
 package com.clubSpongeBob.Greb;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 public class Driver extends Person implements Comparable<Driver> {
     private String carPlate, carModel, carColour;
-    private int rating, numOfRating;
-    private List<String> eatArr;
+    private int numOfRating;
+    private float rating;
+    private List<String> eatArr = new ArrayList<>();
     private String uid, customer;
+    private long totalDistance = 0;
     // status 0: unavailable, 1: available
 
     Driver() {
         super();
     }
 
-    Driver(String name, String location, int capacity, String carPlate, String carModel, String carColour, int rating,
+    Driver(String name, String location, int capacity, String carPlate, String carModel, String carColour, float rating,
             int numOfRating, int status, String eat) {
         super(name, status, capacity, location);
         this.carPlate = carPlate;
@@ -33,9 +36,17 @@ public class Driver extends Person implements Comparable<Driver> {
         this.carModel = carModel;
         this.carColour = carColour;
         this.rating = 3;
-        this.numOfRating = 0;
+        this.numOfRating = 1;
         this.setStatus(1);
         setUid();
+    }
+
+    public long getTotalDistance() {
+        return totalDistance;
+    }
+
+    public void setTotalDistance(long totalDistance) {
+        this.totalDistance = totalDistance;
     }
 
     public String getCustomer() {
@@ -86,11 +97,11 @@ public class Driver extends Person implements Comparable<Driver> {
         this.carColour = carColour;
     }
 
-    public int getRating() {
+    public float getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(float rating) {
         this.rating = rating;
     }
 
@@ -108,6 +119,12 @@ public class Driver extends Person implements Comparable<Driver> {
 
     public void setEatArr(List<String> eatArr) {
         this.eatArr = eatArr;
+    }
+
+    public void resetOrder(){
+        eatArr.clear();
+        customer = null;
+        setStatus(1);
     }
 
     @Override

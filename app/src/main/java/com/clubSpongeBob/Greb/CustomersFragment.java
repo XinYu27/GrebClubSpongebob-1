@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -45,6 +46,19 @@ public class CustomersFragment extends Fragment {
 
         getCustomer();
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        recyclerView = view.findViewById(R.id.customerRecyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+
+        customerList = new ArrayList<>();
+        cusAdapter = new customerList_RecyclerAdapter(this.getContext(), customerList);
+        recyclerView.setAdapter(cusAdapter);
+
+        getCustomer();
     }
 
 

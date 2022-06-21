@@ -28,10 +28,6 @@ public class Customer extends Person{
         return admin;
     }
 
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
-    }
-
     public String getDestination() {
         return destination;
     }

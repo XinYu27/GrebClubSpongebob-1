@@ -27,7 +27,6 @@ public class CustomerLanding extends AppCompatActivity {
     private Handler mHandler= new Handler();
     private int noOfPassenger;
     private String eat;
-    Customer customer = CommonUtils.getSelf();
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -107,8 +106,6 @@ public class CustomerLanding extends AppCompatActivity {
                 intent.putExtra("origin", cLocation);
                 intent.putExtra("destination",dLocation);
                 startActivity(intent);
-
-
             }
         });
 

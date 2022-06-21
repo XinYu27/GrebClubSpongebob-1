@@ -68,6 +68,7 @@ public class DriverCustomerView extends AppCompatActivity {
                 FirebaseUtils.updateCustomer(customer);
                 FirebaseUtils.updateDriver(driver);
                 startActivity(new Intent(getApplicationContext(), DriverComing.class));
+                finish();
             }
         });
         recyclerView.setAdapter(myAdapter);
