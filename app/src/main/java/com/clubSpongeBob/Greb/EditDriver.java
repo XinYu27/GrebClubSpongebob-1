@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RatingBar;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -17,6 +18,7 @@ public class EditDriver extends AppCompatActivity {
 
     // variable for Edittext view.
     private EditText driver_Name2,car_Model2,car_Plate2,car_Colour2,car_Capacity2,driver_Location2;
+    private RatingBar ratingBar;
     private Driver selectedDriver = CommonUtils.getSelectedDriver();
     Button saveButton,deleteButton;
 
@@ -35,6 +37,7 @@ public class EditDriver extends AppCompatActivity {
         driver_Location2 = findViewById(R.id.driver_Location2);
         saveButton = findViewById(R.id.saveButton);
         deleteButton = findViewById(R.id.deleteButton);
+        ratingBar = findViewById(R.id.ratingBar);
 
         driver_Name2.setText(selectedDriver.getName());
         car_Model2.setText(selectedDriver.getCarModel());
@@ -42,6 +45,7 @@ public class EditDriver extends AppCompatActivity {
         car_Colour2.setText(selectedDriver.getCarColour());
         car_Capacity2.setText(String.valueOf(selectedDriver.getCapacity()));
         car_Model2.setText(selectedDriver.getLocation());
+        ratingBar.setRating(selectedDriver.getRating());
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +71,8 @@ public class EditDriver extends AppCompatActivity {
         String driverlocation = driver_Location2.getText().toString();
         String carcolour = car_Colour2.getText().toString();
         String id = selectedDriver.getUid();
+        float rating = ratingBar.getRating();
+        System.out.println(rating);
 
         int carr_capacity = Integer.parseInt(carcapacity);
 
@@ -76,7 +82,7 @@ public class EditDriver extends AppCompatActivity {
         selectedDriver.setCarPlate(carplate);
         selectedDriver.setLocation(driverlocation);
         selectedDriver.setCapacity(carr_capacity);
-
+        selectedDriver.setRating((int) rating);
 
         FirebaseUtils.getDriverRef().child(id).setValue(selectedDriver)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
