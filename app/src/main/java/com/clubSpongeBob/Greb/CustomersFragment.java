@@ -53,6 +53,7 @@ public class CustomersFragment extends Fragment {
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                customerList.clear();
                 for(DataSnapshot snapshot:dataSnapshot.getChildren()){
                     System.out.println(snapshot);
                     Customer customer = snapshot.getValue(Customer.class);

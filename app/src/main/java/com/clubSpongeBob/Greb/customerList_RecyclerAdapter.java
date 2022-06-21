@@ -65,13 +65,6 @@ public class customerList_RecyclerAdapter extends RecyclerView.Adapter<customerL
         return cusList.size();
     }
 
-    public void setData(List<Customer> list) {
-        if (cusList != null) cusList.clear();
-        if (cusList == null) cusList = new ArrayList<>();
-        cusList.addAll(list);
-        notifyDataSetChanged();
-
-    }
 
 class MyViewHolder extends RecyclerView.ViewHolder {
     ImageView customerStatus;
