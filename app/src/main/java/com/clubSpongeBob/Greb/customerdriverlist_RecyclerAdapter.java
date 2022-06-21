@@ -22,11 +22,16 @@ public class customerdriverlist_RecyclerAdapter extends RecyclerView.Adapter<cus
     private ArrayList<Driver> dList;
     private String TAG = "CustomerDriverListRecyclerAdapter";
     private static FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private customerdriverlist_RecyclerAdapter.OnItemClickListener mListener;
 
+    public interface OnItemClickListener{
+        void onItemClick(int position);
+    }
 
-    public customerdriverlist_RecyclerAdapter(Context context, ArrayList<Driver> dList){
+    public customerdriverlist_RecyclerAdapter(Context context, ArrayList<Driver> dList, customerdriverlist_RecyclerAdapter.OnItemClickListener listener){
         this.context=context;
         this.dList=dList;
+        this.mListener = listener;
     }
 
     @NonNull
@@ -34,7 +39,7 @@ public class customerdriverlist_RecyclerAdapter extends RecyclerView.Adapter<cus
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
         LayoutInflater inflater= LayoutInflater.from(context);
         View view= inflater.inflate(R.layout.driver_list_customer,parent,false);
-        return new MyViewHolder(view);
+        return new MyViewHolder(view,mListener);
     }
 
     @Override
@@ -46,20 +51,6 @@ public class customerdriverlist_RecyclerAdapter extends RecyclerView.Adapter<cus
         holder.driverCar.setText(driver.getCarModel());
         holder.driverRating.setRating(driver.getRating());
         holder.driverEat.setText("Estimated Arrival Time: "+driver.getEat());
-        holder.itemView.setOnClickListener(new View.OnClickListener()
-        {
-
-            @Override
-            public void onClick(View v) {
-                CommonUtils.setSelectedDriver(driver);
-                FirebaseUtils.updateStatus(false,CommonUtils.getSelectedDriver().getUid(),0);
-//                String cusId=FirebaseUtils.getmAuth().getCurrentUser().getUid();
-//                FirebaseUtils.updateStatus(true, cusId, 2);
-
-                context.startActivity(new Intent(context,DriverComing.class));
-
-            }
-        });
     }
 
 
@@ -78,13 +69,23 @@ public class customerdriverlist_RecyclerAdapter extends RecyclerView.Adapter<cus
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         TextView driverName,driverPlate,driverCar,driverEat;
         RatingBar driverRating;
-        public MyViewHolder(@NonNull View itemView){
+        public MyViewHolder(@NonNull View itemView,OnItemClickListener listener){
             super(itemView);
             driverName=itemView.findViewById(R.id.driverName);
             driverPlate=itemView.findViewById(R.id.driverPlate);
             driverCar=itemView.findViewById(R.id.driverCar);
             driverRating=itemView.findViewById(R.id.driverRating);
             driverEat=itemView.findViewById(R.id.driverEat);
+
+            itemView.setOnClickListener(v->{
+                if (listener != null){
+                    int position = getBindingAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION){
+                        listener.onItemClick(position);
+                    }
+                }
+            });
+
         }
 
 

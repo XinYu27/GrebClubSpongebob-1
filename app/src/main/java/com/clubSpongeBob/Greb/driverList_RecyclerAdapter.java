@@ -50,10 +50,10 @@ public class driverList_RecyclerAdapter extends RecyclerView.Adapter<driverList_
         int status = model.getStatus();
         switch (status){
             case 0:
-                holder.driverStatus.setImageResource(R.drawable.ic_baseline_person_24_green);
+                holder.driverStatus.setImageResource(R.drawable.ic_baseline_person_off_24);
                 break;
             case 1:
-                holder.driverStatus.setImageResource(R.drawable.ic_baseline_person_off_24);
+                holder.driverStatus.setImageResource(R.drawable.ic_baseline_person_24_green);
                 break;
             default:
         }
