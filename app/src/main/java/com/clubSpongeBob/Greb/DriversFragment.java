@@ -39,6 +39,12 @@ public class DriversFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_drivers, container, false);
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         recyclerView = view.findViewById(R.id.driverRecyclerView);
         recyclerView.setHasFixedSize(true);
@@ -55,7 +61,7 @@ public class DriversFragment extends Fragment {
             }
         });
         recyclerView.setAdapter(drivAdapter);
-        Button rtn=(Button)view.findViewById(R.id.addDriverBtn);
+        Button rtn= view.findViewById(R.id.addDriverBtn);
         rtn.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -65,9 +71,7 @@ public class DriversFragment extends Fragment {
             }
         });
 
-
         getDriver();
-        return view;
     }
 
 
