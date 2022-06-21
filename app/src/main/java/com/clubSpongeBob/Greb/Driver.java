@@ -33,6 +33,7 @@ public class Driver extends Person implements Comparable<Driver> {
         this.carColour = carColour;
         this.rating = 3;
         this.numOfRating = 0;
+        this.setStatus(1);
         setUid();
     }
 

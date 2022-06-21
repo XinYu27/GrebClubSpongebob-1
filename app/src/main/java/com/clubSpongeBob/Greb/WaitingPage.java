@@ -9,9 +9,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.EventListener;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -19,21 +21,23 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 public class WaitingPage extends AppCompatActivity {
-//    private Handler mHandler= new Handler();
     private int noOfPassenger;
     private String eat;
     private String origin;
     private String destination;
     private final String TAG = "WaitingPage";
+    private Query query;
+    private ValueEventListener valueEventListener;
     Queue<Driver> dQueue;
     ArrayList<Driver> listDriver = new ArrayList<>();
+    Thread thread1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_waiting_page);
         Bundle extras = getIntent().getExtras();
-
+        Log.i(TAG, "oncreate");
         if(extras != null){
             noOfPassenger = extras.getInt("noOfPassenger");
             eat = extras.getString("eat");
@@ -42,15 +46,19 @@ public class WaitingPage extends AppCompatActivity {
         }
 
         List<Future<long[]>> list = new ArrayList<>();
-        Thread thread1 = new Thread(){
+        thread1 = new Thread(){
             @Override
             public void run(){
-            FirebaseUtils.getDriverRef().orderByChild("status").startAt(1).addValueEventListener(new ValueEventListener(){
+            query = FirebaseUtils.getDriverRef().orderByChild("status").startAt(1);
+            valueEventListener = new ValueEventListener(){
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot){
+                    if(!CommonUtils.isWaitingPageListening()){
+                        Log.i(TAG, "Removed listener");
+                        query.removeEventListener(this);
+                    }
                     listDriver.clear();
                     dQueue = new PriorityQueue<>();
-                    System.out.println("Enter here2");
                     for(DataSnapshot data: dataSnapshot.getChildren()) {
 
                         Driver driver = data.getValue(Driver.class);
@@ -122,15 +130,30 @@ public class WaitingPage extends AppCompatActivity {
                             }
                             CommonUtils.resetArrayList();
                             CommonUtils.setDriverArrayList(listDriver);
-                            try{
-                                DriverCustomerView.myAdapter.notifyDataSetChanged();
-                            } catch (Exception e){
-                                System.out.println("next");
-                            }
-                            System.out.println("list driver size: "+CommonUtils.getDriverArrayList().size());
+
                             Intent intent=new Intent(WaitingPage.this, DriverCustomerView.class);
-                            intent.putExtra("eat", noOfPassenger);
-                            startActivity(intent);
+
+                            Log.i(TAG, "list driver size: "+CommonUtils.getDriverArrayList().size());
+                            Log.i(TAG, "Data on change");
+
+                            if(CommonUtils.isFirstTimeWaiting()){
+                                startActivity(intent);
+                            } else {
+                                DriverCustomerView.myAdapter.notifyDataSetChanged();
+                            }
+
+
+//                            try{
+//                                DriverCustomerView.myAdapter.notifyDataSetChanged();
+//                                Log.i(TAG, "Data on change");
+//                                if(CommonUtils.isFirstTimeWaiting()){
+//                                    startActivity(intent);
+//                                }
+//                            } catch (Exception e){
+//                                Log.i(TAG, "next");
+//                                Log.i(TAG, "list driver size: "+CommonUtils.getDriverArrayList().size());
+//                                startActivity(intent);
+//                            }
                             break;
                         }
                     }
@@ -140,10 +163,12 @@ public class WaitingPage extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError error){
                     Log.d(TAG,"Unavailable to retrieve data");
                 }
-            });
+            };
+            query.addValueEventListener(valueEventListener);
             }
         };
         thread1.start();
     }
+
 }
 

@@ -12,6 +12,24 @@ public class CommonUtils {
     private static int eat;
     private static Customer self;
     private static ArrayList<Driver> driverArrayList;
+    private static boolean waitingPageListening = true;
+    private static boolean firstTimeWaiting = true;
+
+    public static boolean isFirstTimeWaiting() {
+        return firstTimeWaiting;
+    }
+
+    public static void setFirstTimeWaiting(boolean firstTimeWaiting) {
+        CommonUtils.firstTimeWaiting = firstTimeWaiting;
+    }
+
+    public static boolean isWaitingPageListening() {
+        return waitingPageListening;
+    }
+
+    public static void setWaitingPageListening(boolean waitingPageListening) {
+        CommonUtils.waitingPageListening = waitingPageListening;
+    }
 
     public static Application getsApplication() {
         assert sApplication != null : "Application in Common Utils is null";

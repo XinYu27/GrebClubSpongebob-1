@@ -55,4 +55,11 @@ public class Customer extends Person{
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public void clearCustomerOrder(){
+        this.setDestination("");
+        this.setLocation("");
+        this.setEat("");
+        this.setStatus(0);
+    }
 }

@@ -29,8 +29,6 @@ public class MapService {
         Log.i(TAG, "Url: "+url);
 
         OkHttpClient client = new OkHttpClient();
-        MediaType mediaType = MediaType.parse("text/plain");
-        RequestBody body = RequestBody.create(mediaType,"");
         Request request = new Request.Builder()
                 .url(url)
                 .build();
@@ -64,6 +62,7 @@ public class MapService {
             } catch (Exception e){
                 System.out.println("Error in Matrix API");
                 e.printStackTrace();
+                return null;
             }
             return new long[] {distance,time};
         });
