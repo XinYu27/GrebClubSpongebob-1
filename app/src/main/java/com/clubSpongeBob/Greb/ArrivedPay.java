@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ArrivedPay extends AppCompatActivity {
 
@@ -34,7 +35,7 @@ public class ArrivedPay extends AppCompatActivity {
         }
 
         TextView amountView = this.findViewById(R.id.amountTextView);
-        amountView.setText(String.format("RM%.2f", 5 + CommonUtils.getSelectedDriver().getTotalDistance()/1000 ));
+        amountView.setText(String.format("RM%.2f", (float)(5 + CommonUtils.getSelectedDriver().getTotalDistance()/1000) ));
 
         this.findViewById(R.id.payButton).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,9 +43,14 @@ public class ArrivedPay extends AppCompatActivity {
                 CommonUtils.getSelectedDriver().setTotalDistance(0);
                 CommonUtils.getSelectedDriver().setTotalDuration(0);
                 CommonUtils.getSelf().setStatus(0);
-                FirebaseUtils.updateCustomer(CommonUtils.getSelf());
+                FirebaseUtils.updateCustomer(CommonUtils.getSelf(), "Pay Successfully. Thank you!", "Unable to pay");
                 startActivity(new Intent(view.getContext(), ThankYou.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(getApplicationContext(),"Please pay", Toast.LENGTH_LONG).show();
     }
 }

@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -94,10 +95,10 @@ public class DriverComing extends AppCompatActivity {
                                         name.setText("On the Way");
 
                                         customer.setStatus(3);
-                                        FirebaseUtils.updateCustomer(customer);
+                                        FirebaseUtils.updateCustomer(customer, null, null);
 
                                         driver.setLocation(CommonUtils.getSelf().getLocation());
-                                        FirebaseUtils.updateDriver(driver);
+                                        FirebaseUtils.updateDriver(driver, "Driver's Arrived to Your Place",null);
                                     }
                                 }
                             });
@@ -109,11 +110,11 @@ public class DriverComing extends AppCompatActivity {
                     Log.i(TAG, "REACHED");
 
                     customer.setStatus(4);
-                    FirebaseUtils.updateCustomer(customer);
+                    FirebaseUtils.updateCustomer(customer, null, null);
 
                     driver.resetOrder();
                     driver.setLocation(customer.getDestination());
-                    FirebaseUtils.updateDriver(driver);
+                    FirebaseUtils.updateDriver(driver, "Destination Reached", null);
                     startActivity(new Intent(getApplicationContext(), ArrivedPay.class));
                     finish();
                 }
@@ -125,6 +126,11 @@ public class DriverComing extends AppCompatActivity {
     public void sendEmergency(View v){
         Customer self = CommonUtils.getSelf();
         EmailService.sendEmail(self.getEmergencyContact(),self.getLocation(), self.getDestination(), CommonUtils.getSelectedDriver());
+    }
+
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(getApplicationContext(),"Please wait until request is finish", Toast.LENGTH_LONG).show();
     }
 
 }

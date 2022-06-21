@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,9 +19,10 @@ import java.util.ArrayList;
 
 public class DriverCustomerView extends AppCompatActivity {
     private static String TAG = "DriverCustomerView";
-    private ArrayList<Driver> dList = CommonUtils.getDriverArrayList();
+    private static ArrayList<Driver> dList = CommonUtils.getDriverArrayList();
     public static customerdriverlist_RecyclerAdapter myAdapter;
     RecyclerView recyclerView;
+
     public DriverCustomerView() {
         //Required empty public constructor
     }
@@ -29,7 +31,13 @@ public class DriverCustomerView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_customer_view);
 
-        CommonUtils.setFirstTimeWaiting(false);
+        if (dList.isEmpty()){
+            CommonUtils.setWaitingPageListening(false);
+            Toast.makeText(getApplicationContext(), "Unable to find driver", Toast.LENGTH_LONG).show();
+            finish();
+            startActivity(new Intent(this, CustomerLanding.class));
+        }
+
 
         this.getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
@@ -44,7 +52,7 @@ public class DriverCustomerView extends AppCompatActivity {
                 CommonUtils.getSelf().clearCustomerOrder();
                 FirebaseUtils.resetCustomer();
                 CommonUtils.setWaitingPageListening(false);
-                startActivity(new Intent(view.getContext(), CustomerLanding.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                startActivity(new Intent(view.getContext(), CustomerLanding.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });
 
@@ -59,7 +67,7 @@ public class DriverCustomerView extends AppCompatActivity {
                 CommonUtils.getSelf().setStatus(0);
                 Driver driver = dList.get(0);
                 driver.setCustomer("");
-                FirebaseUtils.updateDriver(driver);
+                FirebaseUtils.updateDriver(driver, "Refresh", "Unable to Refresh");
             }
         });
 
@@ -79,8 +87,9 @@ public class DriverCustomerView extends AppCompatActivity {
                 customer.setStatus(2);
                 customer.setEat(driver.getEat());
                 CommonUtils.setSelectedDriver(driver);
-                FirebaseUtils.updateCustomer(customer);
-                FirebaseUtils.updateDriver(driver);
+                FirebaseUtils.updateCustomer(customer, null,null);
+                FirebaseUtils.updateDriver(driver,"Successfully pick driver","Unable to pick driver");
+                CommonUtils.setWaitingPageListening(false);
                 startActivity(new Intent(getApplicationContext(), DriverComing.class));
                 finish();
             }
@@ -89,7 +98,13 @@ public class DriverCustomerView extends AppCompatActivity {
         recyclerView.setAdapter(myAdapter);
     }
 
-
+    @Override
+    public void onBackPressed() {
+        CommonUtils.getSelf().clearCustomerOrder();
+        FirebaseUtils.resetCustomer();
+        CommonUtils.setWaitingPageListening(false);
+        startActivity(new Intent(this.getApplicationContext(), CustomerLanding.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+    }
 }
 
 

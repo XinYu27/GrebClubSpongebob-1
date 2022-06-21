@@ -1,5 +1,6 @@
 package com.clubSpongeBob.Greb;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -22,6 +24,20 @@ public class ThankYou extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thank_you);
+
+        this.getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setCustomView(R.layout.custom_action_bar);
+
+        View view = getSupportActionBar().getCustomView();
+        ImageView imageView = view.findViewById(R.id.backNavigation);
+
+        imageView.setVisibility(View.GONE);
+
+        TextView name = view.findViewById(R.id.name);
+        name.setText("Thank you");
+
+
         driverNameText = this.findViewById(R.id.driverNameText);
         carPlateText = this.findViewById(R.id.carPlateText);
         carModelText = this.findViewById(R.id.carModelText);

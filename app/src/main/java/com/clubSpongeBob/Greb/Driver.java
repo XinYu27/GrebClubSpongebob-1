@@ -131,6 +131,7 @@ public class Driver extends Person implements Comparable<Driver> {
     }
 
     public void resetOrder(){
+        setEat("");
         eatArr.clear();
         customer = null;
         setStatus(1);

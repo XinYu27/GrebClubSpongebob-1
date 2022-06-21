@@ -122,31 +122,33 @@ public class FirebaseUtils {
         Toast.makeText(CommonUtils.getSContext(), "Sign out", Toast.LENGTH_LONG).show();
     }
 
-    public static void updateDriver(Driver driver){
+    public static void updateDriver(Driver driver, String toastMessage, String failedToastMessage){
         DatabaseReference ref = driverRef.child(driver.getUid());
         ref.setValue(driver).addOnCompleteListener(new OnCompleteListener<Void>(){
 
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(CommonUtils.getSContext(), "Updated Driver", Toast.LENGTH_LONG).show();
+                if(task.isSuccessful() && toastMessage != null){
+                    Toast.makeText(CommonUtils.getSContext(), toastMessage, Toast.LENGTH_LONG).show();
                 }else{
-                    Toast.makeText(CommonUtils.getSContext(), "Failed to update driver", Toast.LENGTH_LONG).show();
+                    if(failedToastMessage != null)
+                        Toast.makeText(CommonUtils.getSContext(), "Failed to update driver", Toast.LENGTH_LONG).show();
                 }
             }
         });
     }
 
-    public static void updateCustomer(Customer customer){
+    public static void updateCustomer(Customer customer, String toastMessage, String failedToastMessage){
         DatabaseReference ref = customerRef.child(mAuth.getUid());
         ref.setValue(customer).addOnCompleteListener(new OnCompleteListener<Void>(){
 
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(CommonUtils.getSContext(), "Updated Driver", Toast.LENGTH_LONG).show();
+                if(task.isSuccessful() && toastMessage != null){
+                    Toast.makeText(CommonUtils.getSContext(), toastMessage, Toast.LENGTH_LONG).show();
                 }else{
-                    Toast.makeText(CommonUtils.getSContext(), "Failed to update driver", Toast.LENGTH_LONG).show();
+                    if(failedToastMessage != null)
+                        Toast.makeText(CommonUtils.getSContext(), "Failed to update driver", Toast.LENGTH_LONG).show();
                 }
             }
         });
