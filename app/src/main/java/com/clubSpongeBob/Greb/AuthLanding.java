@@ -1,10 +1,13 @@
 package com.clubSpongeBob.Greb;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 public class AuthLanding extends AppCompatActivity{
 
@@ -12,6 +15,8 @@ public class AuthLanding extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth_landing);
+
+        this.getSupportActionBar().hide();
     }
 
     public void signUp(View v){

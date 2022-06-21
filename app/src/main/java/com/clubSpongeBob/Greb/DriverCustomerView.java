@@ -1,5 +1,6 @@
 package com.clubSpongeBob.Greb;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -103,7 +105,7 @@ public class DriverCustomerView extends AppCompatActivity {
         CommonUtils.getSelf().clearCustomerOrder();
         FirebaseUtils.resetCustomer();
         CommonUtils.setWaitingPageListening(false);
-        startActivity(new Intent(this.getApplicationContext(), CustomerLanding.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+        startActivity(new Intent(this.getApplicationContext(), CustomerLanding.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
     }
 }
 

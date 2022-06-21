@@ -6,11 +6,12 @@
     android:layout_height="match_parent"
     android:background="#EEF7FF"
     tools:context=".SignIn">
+
     <Button
         android:id="@+id/signUpBtn"
         android:layout_width="107dp"
         android:layout_height="48dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:backgroundTint="#FAF5D0"
         android:text="SIGN UP"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,9 +22,9 @@
         android:id="@+id/imageView"
         android:layout_width="189dp"
         android:layout_height="197dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="72dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.471"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/openeye" />
@@ -33,8 +34,9 @@
         android:layout_width="186dp"
         android:layout_height="87dp"
         android:text="LOGIN"
+        android:textAlignment="center"
         android:textColor="@color/dark_blue"
-        android:textSize="64dp"
+        android:textSize="52sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />

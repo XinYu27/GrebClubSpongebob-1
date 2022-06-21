@@ -1,5 +1,6 @@
 package com.clubSpongeBob.Greb;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -7,6 +8,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.progressindicator.CircularProgressIndicator;
@@ -23,6 +26,9 @@ public class SignUp extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+
+        this.getSupportActionBar().hide();
+
         editTextEmail = this.findViewById(R.id.editTextEmail);
         editTextPassword = this.findViewById(R.id.editTextPassword);
         editTextEmergencyEmail = this.findViewById(R.id.editTextEmergencyEmail);
