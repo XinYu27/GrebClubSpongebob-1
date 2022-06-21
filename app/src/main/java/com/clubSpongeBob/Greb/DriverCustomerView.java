@@ -2,6 +2,7 @@ package com.clubSpongeBob.Greb;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -36,6 +37,7 @@ public class DriverCustomerView extends AppCompatActivity {
         View view = getSupportActionBar().getCustomView();
         ImageView imageView = view.findViewById(R.id.backNavigation);
         imageView.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 CommonUtils.getSelf().clearCustomerOrder();
@@ -57,12 +59,15 @@ public class DriverCustomerView extends AppCompatActivity {
             @Override
             public void onItemClick(int position) {
                 Driver driver = dList.get(position);
+                Customer customer = CommonUtils.getSelf();
                 Log.i(TAG, "Clicked: "+driver.getName());
-                driver.setCustomer(CommonUtils.getSelf().getName());
+                driver.setCustomer(customer.getName());
                 driver.setStatus(0);
+                customer.setStatus(2);
                 CommonUtils.setSelectedDriver(driver);
+                FirebaseUtils.updateCustomer(customer);
                 FirebaseUtils.updateDriver(driver);
-                startActivity(new Intent(context, DriverComing.class));
+                startActivity(new Intent(getApplicationContext(), DriverComing.class));
             }
         });
         recyclerView.setAdapter(myAdapter);
