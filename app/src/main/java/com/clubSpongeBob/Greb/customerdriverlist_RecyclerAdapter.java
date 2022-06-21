@@ -1,6 +1,8 @@
 package com.clubSpongeBob.Greb;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,18 +12,22 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.ArrayList;
+
 
 public class customerdriverlist_RecyclerAdapter extends RecyclerView.Adapter<customerdriverlist_RecyclerAdapter.MyViewHolder>{
     private Context context;
     private ArrayList<Driver> dList;
+    private String TAG = "CustomerDriverListRecyclerAdapter";
+    private static FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
 
     public customerdriverlist_RecyclerAdapter(Context context, ArrayList<Driver> dList){
         this.context=context;
         this.dList=dList;
     }
-
-
 
     @NonNull
     @Override
@@ -33,13 +39,28 @@ public class customerdriverlist_RecyclerAdapter extends RecyclerView.Adapter<cus
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder,int position) {
-            Driver driver=dList.get(position);
-            holder.driverName.setText("Name: "+driver.getName());
-            holder.driverPlate.setText("Plate: "+driver.getCarPlate());
-            holder.driverCar.setText("Car: "+driver.getCarModel());
-            holder.driverRating.setRating(driver.getRating());
-            holder.driverEat.setText("Estimated Arrival Time: "+driver.getEat());
-        }
+        Driver driver=dList.get(position);
+        Log.i(TAG, "Driver: "+driver.getName());
+        holder.driverName.setText(driver.getName());
+        holder.driverPlate.setText(driver.getCarPlate());
+        holder.driverCar.setText(driver.getCarModel());
+        holder.driverRating.setRating(driver.getRating());
+        holder.driverEat.setText("Estimated Arrival Time: "+driver.getEat());
+        holder.itemView.setOnClickListener(new View.OnClickListener()
+        {
+
+            @Override
+            public void onClick(View v) {
+                CommonUtils.setSelectedDriver(driver);
+                FirebaseUtils.updateStatus(false,CommonUtils.getSelectedDriver().getUid(),0);
+//                String cusId=FirebaseUtils.getmAuth().getCurrentUser().getUid();
+//                FirebaseUtils.updateStatus(true, cusId, 2);
+
+                context.startActivity(new Intent(context,DriverComing.class));
+
+            }
+        });
+    }
 
 
     @Override
