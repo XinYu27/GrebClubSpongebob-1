@@ -96,16 +96,17 @@ public class WaitingPage extends AppCompatActivity {
                                         time[2] = TimeHelper.calculateEAT( durations[2], true);
                                         Log.i(TAG, "Time[2]: "+String.format("%04d", time[2]));
                                         Log.i(TAG, "EAT: "+ Long.parseLong(eat));
-                                        if (time[2] >= Long.parseLong(eat)) ;
-                                        driver.setEat(String.format("%04d", time[2]));
-                                        List<String> temp = new LinkedList<>();
+                                        if (!(time[2] >= Long.parseLong(eat))){
+                                            driver.setEat(String.format("%04d", time[2]));
+                                            List<String> temp = new LinkedList<>();
 
-                                        for (int i = 0; i<time.length; i++){
-                                            temp.add(String.format("%04d", time[i]));
+                                            for (int i = 0; i<time.length; i++){
+                                                temp.add(String.format("%04d", time[i]));
+                                            }
+                                            driver.setEatArr(temp);
+                                            dQueue.add(driver);
+                                            driver.setTotalDuration(durations[2]);
                                         }
-                                        driver.setTotalDuration(durations[2]);
-                                        driver.setEatArr(temp);
-                                        dQueue.add(driver);
                                     }
 
                                 } catch (ExecutionException | InterruptedException e) {
@@ -144,18 +145,6 @@ public class WaitingPage extends AppCompatActivity {
                                 DriverCustomerView.myAdapter.notifyDataSetChanged();
                             }
 
-
-//                            try{
-//                                DriverCustomerView.myAdapter.notifyDataSetChanged();
-//                                Log.i(TAG, "Data on change");
-//                                if(CommonUtils.isFirstTimeWaiting()){
-//                                    startActivity(intent);
-//                                }
-//                            } catch (Exception e){
-//                                Log.i(TAG, "next");
-//                                Log.i(TAG, "list driver size: "+CommonUtils.getDriverArrayList().size());
-//                                startActivity(intent);
-//                            }
                             break;
                         }
                     }
