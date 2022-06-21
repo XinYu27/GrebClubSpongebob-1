@@ -1,11 +1,12 @@
 package com.clubSpongeBob.Greb;
 
+import java.util.List;
 import java.util.UUID;
 
 public class Driver extends Person implements Comparable<Driver> {
     private String carPlate, carModel, carColour;
     private int rating, numOfRating;
-    private String[] eatArr;
+    private List<String> eatArr;
     private long totalDuration = 0;
     private String uid, customer;
     // status 0: unavailable, 1: available
@@ -110,11 +111,11 @@ public class Driver extends Person implements Comparable<Driver> {
         this.numOfRating = numOfRating;
     }
 
-    public String[] getEatArr() {
+    public List<String> getEatArr() {
         return eatArr;
     }
 
-    public void setEatArr(String[] eatArr) {
+    public void setEatArr(List<String> eatArr) {
         this.eatArr = eatArr;
     }
 

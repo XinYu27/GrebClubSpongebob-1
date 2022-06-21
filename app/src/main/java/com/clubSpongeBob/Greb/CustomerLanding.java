@@ -2,7 +2,6 @@ package com.clubSpongeBob.Greb;
 
 
 import static com.clubSpongeBob.Greb.FirebaseUtils.addOrder;
-import static com.clubSpongeBob.Greb.FirebaseUtils.getmAuth;
 
 import android.content.Intent;
 import android.os.Build;
@@ -107,7 +106,6 @@ public class CustomerLanding extends AppCompatActivity {
                 intent.putExtra("noOfPassenger", noOfPassenger);
                 intent.putExtra("origin", cLocation);
                 intent.putExtra("destination",dLocation);
-                FirebaseUtils.updateStatus(true, getmAuth().getUid(), 1);
                 startActivity(intent);
 
 
