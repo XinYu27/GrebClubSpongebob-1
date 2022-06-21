@@ -125,9 +125,20 @@
                         android:layout_height="65dp"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="12dp"
+                        android:elevation="10dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:srcCompat="@drawable/driver_icon" />
+
+                    <ImageView
+                        android:id="@+id/imageView12"
+                        android:layout_width="81dp"
+                        android:layout_height="78dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="4dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/image_prev_ui" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
