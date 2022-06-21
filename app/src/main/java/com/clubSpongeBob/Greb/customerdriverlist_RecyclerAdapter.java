@@ -13,9 +13,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
+
 
 public class customerdriverlist_RecyclerAdapter extends RecyclerView.Adapter<customerdriverlist_RecyclerAdapter.MyViewHolder>{
     private Context context;
@@ -41,9 +41,9 @@ public class customerdriverlist_RecyclerAdapter extends RecyclerView.Adapter<cus
     public void onBindViewHolder(@NonNull MyViewHolder holder,int position) {
         Driver driver=dList.get(position);
         Log.i(TAG, "Driver: "+driver.getName());
-        holder.driverName.setText("Name: "+driver.getName());
-        holder.driverPlate.setText("Plate: "+driver.getCarPlate());
-        holder.driverCar.setText("Car: "+driver.getCarModel());
+        holder.driverName.setText(driver.getName());
+        holder.driverPlate.setText(driver.getCarPlate());
+        holder.driverCar.setText(driver.getCarModel());
         holder.driverRating.setRating(driver.getRating());
         holder.driverEat.setText("Estimated Arrival Time: "+driver.getEat());
         holder.itemView.setOnClickListener(new View.OnClickListener()
@@ -52,11 +52,10 @@ public class customerdriverlist_RecyclerAdapter extends RecyclerView.Adapter<cus
             @Override
             public void onClick(View v) {
                 CommonUtils.setSelectedDriver(driver);
-                FirebaseUtils.updateStatus(false,driver.getUid(),0);
-                final FirebaseUser mFirebaseUser=mAuth.getCurrentUser();
-                if(mFirebaseUser!=null) {
-                    FirebaseUtils.updateStatus(true, mAuth.getCurrentUser().getUid(), 2);
-                }
+                FirebaseUtils.updateStatus(false,CommonUtils.getSelectedDriver().getUid(),0);
+//                String cusId=FirebaseUtils.getmAuth().getCurrentUser().getUid();
+//                FirebaseUtils.updateStatus(true, cusId, 2);
+
                 context.startActivity(new Intent(context,DriverComing.class));
 
             }
@@ -68,6 +67,13 @@ public class customerdriverlist_RecyclerAdapter extends RecyclerView.Adapter<cus
     public int getItemCount(){
         System.out.println(dList.size()+"abcdefg");
         return dList.size();}
+
+    public void setData(ArrayList<Driver>list){
+        if(dList!=null) dList.clear();
+        if(dList==null) dList=new ArrayList<>();
+        dList.addAll(list);
+        notifyDataSetChanged();
+    }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         TextView driverName,driverPlate,driverCar,driverEat;
