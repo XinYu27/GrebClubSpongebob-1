@@ -88,7 +88,7 @@ public class WaitingPage extends AppCompatActivity {
                                     durations[2] += cusToDest.get()[1];
 
                                     if (cusToDest.isDone()){
-                                        time[1] = TimeHelper.calculateEAT(durations[0], false);
+                                        time[1] = TimeHelper.calculateEAT(durations[1], false);
                                     }
 
                                     if (driverToCus.isDone() && cusToDest.isDone()){
@@ -96,7 +96,7 @@ public class WaitingPage extends AppCompatActivity {
                                         time[2] = TimeHelper.calculateEAT( durations[2], true);
                                         Log.i(TAG, "Time[2]: "+String.format("%04d", time[2]));
                                         Log.i(TAG, "EAT: "+ Long.parseLong(eat));
-                                        if (time[2] >= Long.parseLong(eat)) return;
+                                        if (time[2] >= Long.parseLong(eat)) ;
                                         driver.setEat(String.format("%04d", time[2]));
                                         List<String> temp = new LinkedList<>();
 
