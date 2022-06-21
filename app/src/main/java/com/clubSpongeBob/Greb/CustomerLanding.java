@@ -27,6 +27,7 @@ public class CustomerLanding extends AppCompatActivity {
     private Handler mHandler= new Handler();
     private int noOfPassenger;
     private String eat;
+    Customer customer = CommonUtils.getSelf();
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -87,6 +88,13 @@ public class CustomerLanding extends AppCompatActivity {
                 noOfPassenger= Integer.parseInt(passN);
 
                 eat=mTime.getText().toString();
+
+                Customer customer = CommonUtils.getSelf();
+                CommonUtils.getSelf().setLocation(cLocation);
+                customer.setLocation(cLocation);
+                customer.setDestination(dLocation);
+                customer.setStatus(1);
+                customer.setEat(eat);
 
                 addOrder(cLocation,dLocation,noOfPassenger,eat);
 
