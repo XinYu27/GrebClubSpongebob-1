@@ -56,8 +56,9 @@ public class customerdriverlist_RecyclerAdapter extends RecyclerView.Adapter<cus
 
     @Override
     public int getItemCount(){
-        System.out.println(dList.size()+"abcdefg");
-        return dList.size();}
+        Log.i(TAG,"ListSize: "+dList.size());
+        return dList.size();
+    }
 
     public void setData(ArrayList<Driver>list){
         if(dList!=null) dList.clear();

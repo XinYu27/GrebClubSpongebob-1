@@ -3,9 +3,12 @@ package com.clubSpongeBob.Greb;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DataSnapshot;
@@ -28,8 +31,8 @@ public class WaitingPage extends AppCompatActivity {
     private final String TAG = "WaitingPage";
     private Query query;
     private ValueEventListener valueEventListener;
-    Queue<Driver> dQueue;
-    ArrayList<Driver> listDriver = new ArrayList<>();
+    private Queue<Driver> dQueue;
+    private static ArrayList<Driver> listDriver = new ArrayList<>();
     Thread thread1;
 
     @Override
@@ -37,13 +40,25 @@ public class WaitingPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_waiting_page);
         Bundle extras = getIntent().getExtras();
-        Log.i(TAG, "oncreate");
+
         if(extras != null){
             noOfPassenger = extras.getInt("noOfPassenger");
             eat = extras.getString("eat");
             origin = extras.getString("origin");
             destination = extras.getString("destination");
         }
+
+        this.getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setCustomView(R.layout.custom_action_bar);
+
+        View view = getSupportActionBar().getCustomView();
+        ImageView imageView = view.findViewById(R.id.backNavigation);
+
+        imageView.setVisibility(View.GONE);
+
+        TextView name = view.findViewById(R.id.name);
+        name.setText("Finding Drivers");
 
         List<Future<long[]>> list = new ArrayList<>();
         thread1 = new Thread(){
@@ -57,7 +72,7 @@ public class WaitingPage extends AppCompatActivity {
                         Log.i(TAG, "Removed listener");
                         query.removeEventListener(this);
                     }
-                    listDriver.clear();
+                    listDriver=new ArrayList<>();
                     dQueue = new PriorityQueue<>();
                     for(DataSnapshot data: dataSnapshot.getChildren()) {
 
@@ -143,18 +158,13 @@ public class WaitingPage extends AppCompatActivity {
                             Log.i(TAG, "Data on change");
 
                             if(CommonUtils.isFirstTimeWaiting()){
+                                CommonUtils.setFirstTimeWaiting(false);
                                 startActivity(intent);
                             } else {
+                                System.out.println("notify");
                                 DriverCustomerView.myAdapter.notifyDataSetChanged();
                             }
 
-
-                            if (listDriver.isEmpty()){
-                                Toast.makeText(getApplicationContext(), "Unable to find driver",Toast.LENGTH_LONG).show();
-                                query.removeEventListener(valueEventListener);
-                                finish();
-                                startActivity(new Intent(WaitingPage.this, CustomerLanding.class));
-                            }
                             break;
                         }
                     }

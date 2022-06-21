@@ -95,8 +95,7 @@ public class CommonUtils {
     }
 
     public static void setDriverArrayList(ArrayList<Driver> driverArrayList) {
-        CommonUtils.driverArrayList = driverArrayList;
-
+        CommonUtils.driverArrayList.addAll(driverArrayList);
     }
 
     public static void resetArrayList(){
