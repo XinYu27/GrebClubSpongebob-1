@@ -104,6 +104,7 @@ public class WaitingPage extends AppCompatActivity {
                                                 temp.add(String.format("%04d", time[i]));
                                             }
                                             driver.setTotalDistance(distance[2]);
+                                            driver.setTotalDuration(durations[2]);
                                             driver.setEatArr(temp);
                                             dQueue.add(driver);
                                         }

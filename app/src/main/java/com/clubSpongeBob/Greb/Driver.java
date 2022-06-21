@@ -11,6 +11,7 @@ public class Driver extends Person implements Comparable<Driver> {
     private List<String> eatArr = new ArrayList<>();
     private String uid, customer;
     private long totalDistance = 0;
+    private long totalDuration = 0;
     // status 0: unavailable, 1: available
 
     Driver() {
@@ -39,6 +40,14 @@ public class Driver extends Person implements Comparable<Driver> {
         this.numOfRating = 1;
         this.setStatus(1);
         setUid();
+    }
+
+    public long getTotalDuration() {
+        return totalDuration;
+    }
+
+    public void setTotalDuration(long totalDuration) {
+        this.totalDuration = totalDuration;
     }
 
     public long getTotalDistance() {
