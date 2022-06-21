@@ -10,7 +10,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
         android:layout_width="397dp"
-        android:layout_height="401dp"
+        android:layout_height="350dp"
         android:layout_margin="0dp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="20dp"
@@ -21,7 +21,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" >
+        app:layout_constraintTop_toBottomOf="@+id/imageView2">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -29,11 +29,13 @@
 
             <Button
                 android:id="@+id/payButton"
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="60dp"
+                android:layout_marginBottom="20dp"
+                android:backgroundTint="@color/dark_blue"
                 android:text="PAY"
-                app:circularflow_radiusInDP="20dp"
+                android:textColor="@color/white"
+                app:cornerRadius="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
@@ -78,7 +80,7 @@
                 android:id="@+id/cardView3"
                 android:layout_width="300dp"
                 android:layout_height="100dp"
-                android:layout_marginBottom="50dp"
+                android:layout_marginBottom="30dp"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="15dp"
                 app:layout_constraintBottom_toTopOf="@+id/payButton"

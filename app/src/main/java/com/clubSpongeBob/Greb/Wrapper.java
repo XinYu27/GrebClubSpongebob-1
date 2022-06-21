@@ -17,6 +17,9 @@ public class Wrapper extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         CommonUtils.setsApplication(getApplication());
+
+        this.getSupportActionBar().hide();
+
         new EmailService();
 
         if(FirebaseUtils.isLogin()){

@@ -48,17 +48,7 @@ public class WaitingPage extends AppCompatActivity {
             destination = extras.getString("destination");
         }
 
-        this.getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setDisplayShowCustomEnabled(true);
-        getSupportActionBar().setCustomView(R.layout.custom_action_bar);
-
-        View view = getSupportActionBar().getCustomView();
-        ImageView imageView = view.findViewById(R.id.backNavigation);
-
-        imageView.setVisibility(View.GONE);
-
-        TextView name = view.findViewById(R.id.name);
-        name.setText("Finding Drivers");
+        this.getSupportActionBar().hide();
 
         List<Future<long[]>> list = new ArrayList<>();
         thread1 = new Thread(){
