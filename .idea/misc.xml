@@ -4,15 +4,36 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.129" />
+        <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/drawable/box.xml" value="0.149" />
+        <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/drawable/ic_baseline_access_time_filled_24.xml" value="0.103" />
+        <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.149" />
         <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/drawable/ic_baseline_directions_car_24.xml" value="0.129" />
         <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/drawable/ic_baseline_edit_24.xml" value="0.129" />
         <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.129" />
         <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/drawable/ic_launcher_background.xml" value="0.129" />
+        <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/drawable/rounded_corner.xml" value="0.2555" />
+        <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/drawable/yellowbox.xml" value="0.2555" />
+        <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/layout/activity_add_driver.xml" value="0.4" />
         <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/layout/activity_admin_landing.xml" value="0.136" />
+        <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/layout/activity_arrived_pay.xml" value="0.1" />
         <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/layout/activity_auth_landing.xml" value="0.264" />
+        <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/layout/activity_customer_landing.xml" value="0.1" />
+        <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/layout/activity_driver_coming.xml" value="0.6" />
+        <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/layout/activity_driver_customer_view.xml" value="0.16621376811594202" />
+        <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/layout/activity_driver_status.xml" value="0.12158054711246201" />
+        <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/layout/activity_edit_driver.xml" value="0.4" />
+        <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/layout/activity_emergency.xml" value="0.1" />
+        <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/layout/activity_sign_in.xml" value="0.2" />
         <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/layout/activity_sign_up.xml" value="0.2" />
+        <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/layout/activity_thank_you.xml" value="0.536" />
+        <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/layout/activity_waiting_page.xml" value="0.136" />
         <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/layout/activity_wrapper.xml" value="0.136" />
+        <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/layout/custom_action_bar.xml" value="0.11574074074074074" />
+        <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/layout/customer_list.xml" value="0.11574074074074074" />
+        <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/layout/driver_frame.xml" value="0.11574074074074074" />
+        <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/layout/driver_list.xml" value="0.16621376811594202" />
+        <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/layout/driver_list_customer.xml" value="0.4" />
         <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/layout/fragment_customers.xml" value="0.264" />
         <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/layout/fragment_drivers.xml" value="0.11822916666666666" />
         <entry key="..\:/Users/Asus/Desktop/DS A/GrebClubSpongebob/app/src/main/res/menu/bottom_nav_menu.xml" value="0.264" />
