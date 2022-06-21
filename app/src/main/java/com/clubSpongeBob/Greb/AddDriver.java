@@ -18,7 +18,6 @@ import com.google.firebase.database.FirebaseDatabase;
 public class AddDriver extends AppCompatActivity {
     Button addButton;
     EditText driver_Name, car_Modal,car_Capacity,car_Plate,car_Colour,driver_Location;
-    DatabaseReference databaseadddrivers;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,7 +32,6 @@ public class AddDriver extends AppCompatActivity {
         car_Plate = findViewById(R.id.car_Plate);
         driver_Location = findViewById(R.id.driver_Location);
         car_Colour = findViewById(R.id.car_Colour);
-        databaseadddrivers = FirebaseDatabase.getInstance().getReference();
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,12 +49,10 @@ public class AddDriver extends AppCompatActivity {
         String carplate = car_Plate.getText().toString();
         String driverlocation = driver_Location.getText().toString();
         String carcolour = car_Colour.getText().toString();
-        String id = databaseadddrivers.push().getKey();
-
         int carr_capacity = Integer.parseInt(carcapacity);
 
         Driver driver = new Driver(drivername,carmodal,carplate,carcolour,carr_capacity,driverlocation);
-        databaseadddrivers.child("drivers").child(id).setValue(driver)
+        FirebaseUtils.getDriverRef().child(driver.getUid()).setValue(driver)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
