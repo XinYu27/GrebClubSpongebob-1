@@ -34,6 +34,7 @@ public class ArrivedPay extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 CommonUtils.getSelectedDriver().setTotalDistance(0);
+                CommonUtils.getSelectedDriver().setTotalDuration(0);
                 CommonUtils.getSelf().setStatus(0);
                 FirebaseUtils.updateCustomer(CommonUtils.getSelf());
                 startActivity(new Intent(view.getContext(), ThankYou.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
