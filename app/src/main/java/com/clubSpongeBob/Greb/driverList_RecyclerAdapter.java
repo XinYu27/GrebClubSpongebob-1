@@ -17,13 +17,16 @@ import java.util.List;
 public class driverList_RecyclerAdapter extends RecyclerView.Adapter<driverList_RecyclerAdapter.MyViewHolder> {
     private Context context;
     private ArrayList<Driver> drivList ;
+    private OnItemClickListener mListener;
 
-    int index = -1;
+    public interface OnItemClickListener{
+        void onItemClick(int position);
+    }
 
-    public driverList_RecyclerAdapter(Context context, ArrayList<Driver> drivList){
+    public driverList_RecyclerAdapter(Context context, ArrayList<Driver> drivList, OnItemClickListener listener){
         this.context = context;
         this.drivList = drivList;
-
+        this.mListener = listener;
     }
 
 
@@ -32,12 +35,13 @@ public class driverList_RecyclerAdapter extends RecyclerView.Adapter<driverList_
     public driverList_RecyclerAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.driver_list,parent,false);
-        return new driverList_RecyclerAdapter.MyViewHolder(view) ;
+        return new driverList_RecyclerAdapter.MyViewHolder(view, mListener) ;
     }
 
     @Override
     public void onBindViewHolder(@NonNull driverList_RecyclerAdapter.MyViewHolder holder, int position) {
         Driver model = drivList.get(position);
+
         holder.name.setText(model.getName());
         holder.capacity.setText("Capacity: "+String.valueOf(model.getCapacity()));
         //holder.customer.setText("Customer: "+m);
@@ -64,23 +68,14 @@ public class driverList_RecyclerAdapter extends RecyclerView.Adapter<driverList_
 
     @Override
     public int getItemCount() {
-        System.out.println(drivList.size());
         return drivList.size();
-    }
-
-    public void setData(List<Driver> list) {
-        if (drivList != null) drivList.clear();
-        if (drivList == null) drivList = new ArrayList<>();
-        drivList.addAll(list);
-        notifyDataSetChanged();
-
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView driverStatus;
         TextView name,carinfo,customer,capacity,location;
 
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
 
             driverStatus = itemView.findViewById((R.id.driverStatus));
@@ -90,7 +85,16 @@ public class driverList_RecyclerAdapter extends RecyclerView.Adapter<driverList_
             capacity = itemView.findViewById((R.id.driverCapacity));
             location = itemView.findViewById((R.id.location));
 
+            itemView.setOnClickListener(v->{
+                if (listener != null){
+                    int position = getBindingAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION){
+                        listener.onItemClick(position);
+                    }
+                }
+            });
         }
+
     }
 
 }

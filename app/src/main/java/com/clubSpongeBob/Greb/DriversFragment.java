@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ public class DriversFragment extends Fragment {
     private ArrayList<Driver> driverList;
     RecyclerView recyclerView;
     driverList_RecyclerAdapter drivAdapter;
+    private static String TAG = "DriversFragment";
 
     public DriversFragment() {
         // Required empty public constructor
@@ -43,9 +45,16 @@ public class DriversFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
         driverList = new ArrayList<>();
-        drivAdapter = new driverList_RecyclerAdapter(this.getContext(), driverList);
+        drivAdapter = new driverList_RecyclerAdapter(this.getContext(), driverList, new driverList_RecyclerAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Driver driver = driverList.get(position);
+                Log.i(TAG, "Clicked: "+driver.getName());
+                CommonUtils.setSelectedDriver(driver);
+                startActivity(new Intent(view.getContext(), EditDriver.class));
+            }
+        });
         recyclerView.setAdapter(drivAdapter);
-
         Button rtn=(Button)view.findViewById(R.id.addDriverBtn);
         rtn.setOnClickListener(new View.OnClickListener() {
 
@@ -67,8 +76,8 @@ public class DriversFragment extends Fragment {
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                driverList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    System.out.println(snapshot);
                     Driver driver = snapshot.getValue(Driver.class);
                     driverList.add(driver);
                 }
