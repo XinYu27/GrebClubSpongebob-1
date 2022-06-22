@@ -1,12 +1,7 @@
 package com.clubSpongeBob.Greb;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -15,11 +10,10 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import org.joda.time.DateTime;
-
-import java.util.ArrayList;
 
 public class DriverComing extends AppCompatActivity {
     final String TAG = "DriverComing";
@@ -33,6 +27,7 @@ public class DriverComing extends AppCompatActivity {
     private TextView eatDriverComing;
     private RatingBar ratingBar;
     private FloatingActionButton emergencyDriverComingBtn;
+    private Button cancelBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +56,8 @@ public class DriverComing extends AppCompatActivity {
         emergencyDriverComingBtn = this.findViewById(R.id.emergencyDriverComingBtn);
         eatDriverComing = this.findViewById(R.id.eatDriverComing);
 
+        cancelBtn = this.findViewById(R.id.cancelBtn);
+
         driverNameText.setText(driver.getName());
         carPlateText.setText(driver.getCarPlate());
         carModelText.setText(driver.getCarModel());
@@ -81,6 +78,16 @@ public class DriverComing extends AppCompatActivity {
                             idx += 1;
 
                             if (idx == 2) {
+                                Log.i(TAG, "REACHED");
+
+                                customer.setStatus(4);
+                                FirebaseUtils.updateCustomer(customer, null, null);
+
+                                driver.resetOrder();
+                                driver.setLocation(customer.getDestination());
+                                FirebaseUtils.updateDriver(driver, "Destination Reached", null);
+                                startActivity(new Intent(getApplicationContext(), ArrivedPay.class));
+                                finish();
                                 throw new InterruptedException("Reached");
                             }
 
@@ -103,24 +110,32 @@ public class DriverComing extends AppCompatActivity {
                                 }
                             });
                         }
-                }
+                    }
 
-            } catch (InterruptedException e) {
+                } catch (InterruptedException e) {
                     e.printStackTrace();
-                    Log.i(TAG, "REACHED");
-
-                    customer.setStatus(4);
-                    FirebaseUtils.updateCustomer(customer, null, null);
-
-                    driver.resetOrder();
-                    driver.setLocation(customer.getDestination());
-                    FirebaseUtils.updateDriver(driver, "Destination Reached", null);
-                    startActivity(new Intent(getApplicationContext(), ArrivedPay.class));
-                    finish();
                 }
             }
         };
         thread.start();
+
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                thread.interrupt();
+
+                Customer customer = CommonUtils.getSelf();
+                customer.clearCustomerOrder();
+                FirebaseUtils.updateCustomer(customer, "Cancelled order", "Cancel failed");
+
+                Driver driver = CommonUtils.getSelectedDriver();
+                driver.resetOrder();
+                FirebaseUtils.updateDriver(driver, null, null);
+
+                startActivity(new Intent(getApplicationContext(), CustomerLanding.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                finish();
+            }
+        });
     }
 
     public void sendEmergency(View v){
