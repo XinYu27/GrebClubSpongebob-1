@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/homeBtn"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EDF6FE"
@@ -13,11 +12,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:backgroundTint="@color/dark_blue"
+        android:backgroundTint="@color/common_google_signin_btn_text_dark"
         android:paddingStart="50dp"
         android:paddingEnd="50dp"
         android:text="HOME"
-        android:textColor="#FFFFFF"
         app:cornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -97,20 +95,25 @@
                         android:id="@+id/driverNameText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="19dp"
                         android:layout_marginTop="15dp"
+                        android:layout_marginEnd="90dp"
                         android:text="Ali bin Ahmad"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:layout_editor_absoluteX="102dp" />
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/imageView8"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/carPlateText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
+                        android:layout_marginEnd="100dp"
                         android:text="PPP1111"
                         android:textAllCaps="true"
-                        app:layout_constraintTop_toBottomOf="@+id/driverNameText"
-                        tools:layout_editor_absoluteX="102dp" />
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/imageView8"
+                        app:layout_constraintTop_toBottomOf="@+id/driverNameText" />
 
                     <TextView
                         android:id="@+id/carModelText"

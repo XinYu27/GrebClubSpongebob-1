@@ -1,7 +1,11 @@
 package com.clubSpongeBob.Greb;
 
+import android.content.Intent;
 import android.os.StrictMode;
 import android.util.Log;
+import android.widget.Toast;
+
+import com.google.android.gms.common.internal.service.Common;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -54,6 +58,8 @@ public class EmailService {
                     location, destination,driver.getName(),driver.getCarModel(), driver.getCarColour(), driver.getCarPlate()));
             Transport.send(message);
             Log.i(TAG, "Email is sent successfully");
+            Toast.makeText(CommonUtils.getSContext(), "Email Sent Successfully.", Toast.LENGTH_LONG).show();
+
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }

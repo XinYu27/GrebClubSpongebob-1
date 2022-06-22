@@ -45,15 +45,15 @@
             android:layout_marginLeft="10dp"/>
 
         <TextView
+            android:id="@+id/carplate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/carplate"
-            android:text="Car Plate"
-            android:textStyle="italic"
-            android:textSize="25sp"
-            android:textColor="#000"
             android:layout_below="@+id/carmodel"
-            android:layout_marginLeft="10dp"/>
+            android:layout_marginLeft="10dp"
+            android:text="Car Plate"
+            android:textColor="#000"
+            android:textSize="25sp"
+            android:textStyle="italic" />
 
         <TextView
             android:layout_width="match_parent"

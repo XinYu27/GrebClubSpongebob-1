@@ -51,23 +51,26 @@ public class ThankYou extends AppCompatActivity {
         this.findViewById(R.id.homeButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplication(), CustomerLanding.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                CommonUtils.reset();
-                finish();
+                update(false);
             }
         });
         this.findViewById(R.id.rateBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try{
-                    if(CommonUtils.orderIsEmpty()) throw new Exception("Driver is not set in CommonUtils");
-                    FirebaseUtils.updateRating(CommonUtils.getSelectedDriver(), (int)ratingBar.getRating());
-                    CommonUtils.reset();
-                    startActivity(new Intent(getApplication(), CustomerLanding.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                } catch (Exception e){
-                    Log.e(TAG, e.getMessage());
-                }
+                update(true);
             }
         });
+    }
+
+    private void update(boolean rate){
+        try{
+            if(CommonUtils.orderIsEmpty()) throw new Exception("Driver is not set in CommonUtils");
+            if(true)
+                FirebaseUtils.updateRating(CommonUtils.getSelectedDriver(), ratingBar.getRating());
+            CommonUtils.reset();
+            startActivity(new Intent(getApplication(), CustomerLanding.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+        } catch (Exception e){
+            Log.e(TAG, e.getMessage());
+        }
     }
 }

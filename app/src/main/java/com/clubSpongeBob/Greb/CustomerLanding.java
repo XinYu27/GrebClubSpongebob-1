@@ -76,6 +76,14 @@ public class CustomerLanding extends AppCompatActivity {
         EditText mPassenger=(EditText)findViewById(R.id.numPassengers);
         EditText mTime=(EditText) findViewById(R.id.inputEAT);
 
+        this.findViewById(R.id.signOutBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseUtils.signOutUser();
+                startActivity(new Intent(getApplicationContext(), AuthLanding.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                finish();
+            }
+        });
 
         //Get input value from customer
         rtn.setOnClickListener(new View.OnClickListener(){

@@ -42,7 +42,7 @@ public class ArrivedPay extends AppCompatActivity {
             public void onClick(View view) {
                 CommonUtils.getSelectedDriver().setTotalDistance(0);
                 CommonUtils.getSelectedDriver().setTotalDuration(0);
-                CommonUtils.getSelf().setStatus(0);
+                CommonUtils.getSelf().clearCustomerOrder();
                 FirebaseUtils.updateCustomer(CommonUtils.getSelf(), "Pay Successfully. Thank you!", "Unable to pay");
                 startActivity(new Intent(view.getContext(), ThankYou.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }

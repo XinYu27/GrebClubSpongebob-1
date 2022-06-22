@@ -35,7 +35,7 @@ public class Wrapper extends AppCompatActivity{
                                 CommonUtils.setSelf(c);
                                 Log.d(TAG, "Successfully get data from user: " + c.getName());
                                 if(c.isAdmin()){
-                                    startActivity(new Intent(getApplication(), CustomerLanding.class));
+                                    startActivity(new Intent(getApplication(), AdminLanding.class));
                                     finish();
                                 }
                                 else{

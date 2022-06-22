@@ -119,7 +119,7 @@ public class FirebaseUtils {
 
     public static void signOutUser(){
         mAuth.signOut();
-        Toast.makeText(CommonUtils.getSContext(), "Sign out", Toast.LENGTH_LONG).show();
+        Toast.makeText(CommonUtils.getSContext(), "Sign out", Toast.LENGTH_SHORT).show();
     }
 
     public static void updateDriver(Driver driver, String toastMessage, String failedToastMessage){
@@ -189,7 +189,7 @@ public class FirebaseUtils {
 
     }
 
-    public static void updateRating(Driver driver, int rate){
+    public static void updateRating(Driver driver, float rate){
         Map<String, Object> values = new HashMap<>();
         values.put("rating", (rate + driver.getRating()) / (driver.getNumOfRating() + 1));
         values.put("numOfRating", driver.getNumOfRating()+1);
